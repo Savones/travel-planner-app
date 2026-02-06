@@ -4,9 +4,9 @@ const TripList = ({ trips }) => {
   return (
     <div>
       {trips.map(trip => (
-        <p key={trip.id}>
+        <h3 key={trip.id}>
           <Link to={`/trips/${trip.id}`}>{trip.country}</Link>
-        </p>
+        </h3>
       ))}
     </div>
   )

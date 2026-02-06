@@ -3,9 +3,10 @@ import tripService from './services/trips'
 import Trip from './components/Trip'
 import TripList from './components/TripList'
 import TripForm from './components/TripForm'
+import Menu from './components/Menu'
 import {
   BrowserRouter as Router,
-  Routes, Route
+  Routes, Route, Link
 } from 'react-router-dom'
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
   return (
     <Router>
       <div>
+        <Menu />
         <h1>Travel planner</h1>
         <Routes>
           <Route path="/trips/:id" element={<Trip trips={trips} />} />
