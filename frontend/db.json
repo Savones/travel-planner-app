@@ -1,0 +1,16 @@
+{
+  "trips": [
+    {
+      "id": "1",
+      "country": "Japan"
+    },
+    {
+      "id": "2",
+      "country": "Sweden"
+    },
+    {
+      "id": "3",
+      "country": "New Zealand"
+    }
+  ]
+}
