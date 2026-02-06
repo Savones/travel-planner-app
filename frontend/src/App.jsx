@@ -1,25 +1,36 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import tripService from './services/trips'
+import Trip from './components/Trip'
 
 const App = () => {
   const [trips, setTrips] = useState([])
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/trips')
-      .then(response => {
-        console.log('promise fulfilled')
-        setTrips(response.data)
-      })
+    const fetchTrips = async () => {
+      try {
+        const response = await tripService.getAll()
+        setTrips(response)
+      } catch (error) {
+        console.error('Error fetching trips:', error)
+      }
+    }
+
+    fetchTrips()
   }, [])
 
   return (
     <div>
       <h1>Travel planner</h1>
-      {trips.map(trip => <h3>{trip.country}</h3>)}
+      {trips.map(trip => (
+        <Trip
+          key={trip.id}
+          country={trip.country}
+          startDate={trip.startDate}
+          endDate={trip.endDate} />
+      ))}
     </div>
   )
 }
 
 export default App
+

@@ -2,15 +2,21 @@
   "trips": [
     {
       "id": "1",
-      "country": "Japan"
+      "country": "Japan",
+      "startDate": "6.6.2025",
+      "endDate": "10.6.2025"
     },
     {
       "id": "2",
-      "country": "Sweden"
+      "country": "Sweden",
+      "startDate": "10.10.2025",
+      "endDate": "29.11.2025"
     },
     {
       "id": "3",
-      "country": "New Zealand"
+      "country": "New Zealand",
+      "startDate": "1.3.2026",
+      "endDate": "17.4.2026"
     }
   ]
 }
