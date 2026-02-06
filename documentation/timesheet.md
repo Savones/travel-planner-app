@@ -1,5 +1,7 @@
 # Timesheet
 
-| päivä | aika | mitä tein  |
+| date | time | description  |
 | :----:|:-----| :-----|
-| sum | 0    |  |
+| 6.2. | 2    |  | Initialized frontend
+| 6.2. | 2    |  | Added home page and create trip form
+| sum | 4    |  |
