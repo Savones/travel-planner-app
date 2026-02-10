@@ -26,7 +26,6 @@ const App = () => {
   }, [])
 
   const addNew = (trip) => {
-    trip.id = Math.round(Math.random() * 10000)
     tripService
       .create(trip)
       .then(returnedTrip => {
