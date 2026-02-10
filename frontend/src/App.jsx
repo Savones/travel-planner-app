@@ -25,13 +25,12 @@ const App = () => {
     fetchTrips()
   }, [])
 
-  const addNew = (trip) => {
-    tripService
-      .create(trip)
-      .then(returnedTrip => {
-        setTrips(trips.concat(returnedTrip))
-      })
+  const addNew = async (trip) => {
+    const returnedTrip = await tripService.create(trip)
+    setTrips(trips.concat(returnedTrip))
+    return returnedTrip
   }
+
 
   const addNewLocation = (trip) => {
     tripService

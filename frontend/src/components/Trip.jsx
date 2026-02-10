@@ -35,7 +35,7 @@ const Trip = ({ trips, addNewLocation }) => {
       </button>
       {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} />}
       {trip.locations && trip.locations.map(location => (
-        <div>
+        <div key={location.location_id}>
           <h3>{location.location}</h3>
           <p>From: {location.startDate}</p>
           <p>To: {location.endDate}</p>

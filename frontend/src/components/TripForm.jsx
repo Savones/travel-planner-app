@@ -6,14 +6,14 @@ const TripForm = ({ addNew }) => {
 
   const title = useField('text')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const id = Math.round(Math.random() * 10000)
-    addNew({
-      title: title.value,
-      id: id
+
+    const createdTrip = await addNew({
+      title: title.value
     })
-    navigate(`/trips/${id}`)
+
+    navigate(`/trips/${createdTrip.id}`)
   }
 
   return (
