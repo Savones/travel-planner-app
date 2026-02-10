@@ -33,13 +33,23 @@ const App = () => {
       })
   }
 
+  const addNewLocation = (trip) => {
+    tripService
+      .update(trip)
+      .then(returnedTrip => {
+        setTrips(trips.map(t =>
+          t.id === returnedTrip.id ? returnedTrip : t
+        ))
+      })
+  }
+
   return (
     <Router>
       <div>
         <Menu />
         <h1>Travel planner</h1>
         <Routes>
-          <Route path="/trips/:id" element={<Trip trips={trips} />} />
+          <Route path="/trips/:id" element={<Trip addNewLocation={addNewLocation} trips={trips} />} />
           <Route path="/" element={<TripList trips={trips} />} />
           <Route path="/create" element={<TripForm addNew={addNew} />} />
         </Routes>

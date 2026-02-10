@@ -4,19 +4,20 @@ import { useNavigate } from 'react-router-dom'
 const LocationForm = ({ addNew }) => {
   const navigate = useNavigate()
 
-  const title = useField('text')
-  const country = useField('text')
+  const location = useField('text')
   const startDate = useField('date')
   const endDate = useField('date')
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    const location_id = Math.round(Math.random() * 10000)
     addNew({
-      country: country.value,
+      location_id: location_id,
+      location: location.value,
       startDate: startDate.value,
       endDate: endDate.value
     })
-    navigate('/')
+    navigate(`/`)
   }
 
   return (
@@ -24,12 +25,8 @@ const LocationForm = ({ addNew }) => {
       <h3>Add new location</h3>
       <form onSubmit={handleSubmit}>
         <div>
-          Title
-          <input {...title} />
-        </div>
-        <div>
-          Country
-          <input {...country} />
+          Location
+          <input {...location} />
         </div>
         <div>
           Start date
@@ -39,7 +36,7 @@ const LocationForm = ({ addNew }) => {
           End date
           <input {...endDate} />
         </div>
-        <input type='submit' value='Create' />
+        <input type='submit' value='Add' />
       </form>
     </div>
   )
