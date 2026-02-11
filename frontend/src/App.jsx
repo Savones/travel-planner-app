@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 
 const App = () => {
+  const [user, setUser] = useState(null)
   const [trips, setTrips] = useState([])
 
   useEffect(() => {
@@ -22,8 +23,14 @@ const App = () => {
         console.error('Error fetching trips:', error)
       }
     }
-
     fetchTrips()
+  }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = localStorage.getItem("loggedUser")
+    if (loggedUserJSON) {
+      setUser(JSON.parse(loggedUserJSON))
+    }
   }, [])
 
   const addNew = async (trip) => {
@@ -48,8 +55,9 @@ const App = () => {
       <div>
         <Menu />
         <h1>Travel planner</h1>
+        {user ?? <div>{user}</div>}
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/trips/:id" element={<Trip addNewLocation={addNewLocation} trips={trips} />} />
           <Route path="/" element={<TripList trips={trips} />} />
           <Route path="/create" element={<TripForm addNew={addNew} />} />
