@@ -1,6 +1,6 @@
 import { useField } from '../hooks'
 
-const LocationForm = ({ addNew }) => {
+const LocationForm = ({ addNew, handleCancel }) => {
 
   const location = useField('text')
   const startDate = useField('date')
@@ -33,6 +33,7 @@ const LocationForm = ({ addNew }) => {
           End date
           <input {...endDate} />
         </div>
+        <input type='button' value='Cancel' onClick={handleCancel} />
         <input type='submit' value='Add' />
       </form>
     </div>

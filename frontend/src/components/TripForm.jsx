@@ -17,6 +17,11 @@ const TripForm = ({ user, addNew }) => {
     navigate(`/trips/${createdTrip.id}`)
   }
 
+  const handleCancellation = (event) => {
+    event.preventDefault()
+    navigate('/')
+  }
+
   return (
     <div>
       <h2>Add a new trip</h2>
@@ -25,6 +30,7 @@ const TripForm = ({ user, addNew }) => {
           Title
           <input {...title} />
         </div>
+        <input type='button' value='Cancel' onClick={handleCancellation} />
         <input type='submit' value='Create' />
       </form>
     </div>

@@ -11,7 +11,7 @@ const Trip = ({ trips, addNewLocation }) => {
   const trip = trips.find(n => n.id == id)
   if (!trip) return <p>Trip not found</p>
 
-  const addLocationClick = (event) => {
+  const changeFormVisibility = (event) => {
     event.preventDefault()
     showLocationForm ? setShowLocationForm(false) : setShowLocationForm(true)
   }
@@ -30,10 +30,11 @@ const Trip = ({ trips, addNewLocation }) => {
   return (
     <div>
       <h2>{trip.title}</h2>
-      <button type="button" onClick={addLocationClick}>
-        Add location
-      </button>
-      {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} />}
+      {!showLocationForm &&
+        <button type="button" onClick={changeFormVisibility}>
+          Add location
+        </button>}
+      {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
       {trip.locations && trip.locations.map(location => (
         <div key={location.location_id}>
           <h3>{location.location}</h3>
