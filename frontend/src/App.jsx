@@ -4,6 +4,7 @@ import Trip from './components/Trip'
 import TripList from './components/TripList'
 import TripForm from './components/TripForm'
 import Menu from './components/Menu'
+import LoginForm from './components/LoginForm'
 import {
   BrowserRouter as Router,
   Routes, Route, Link
@@ -48,6 +49,7 @@ const App = () => {
         <Menu />
         <h1>Travel planner</h1>
         <Routes>
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/trips/:id" element={<Trip addNewLocation={addNewLocation} trips={trips} />} />
           <Route path="/" element={<TripList trips={trips} />} />
           <Route path="/create" element={<TripForm addNew={addNew} />} />
