@@ -17,13 +17,13 @@ const Trip = ({ trips, addNewLocation }) => {
   }
 
   const handleAddLocation = (location) => {
+    showLocationForm ? setShowLocationForm(false) : setShowLocationForm(true)
     const updatedTrip = {
       ...trip,
       locations: trip.locations
         ? trip.locations.concat(location)
         : [location]
     }
-
     addNewLocation(updatedTrip)
   }
 

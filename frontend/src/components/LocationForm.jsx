@@ -1,8 +1,6 @@
 import { useField } from '../hooks'
-import { useNavigate } from 'react-router-dom'
 
 const LocationForm = ({ addNew }) => {
-  const navigate = useNavigate()
 
   const location = useField('text')
   const startDate = useField('date')
@@ -17,7 +15,6 @@ const LocationForm = ({ addNew }) => {
       startDate: startDate.value,
       endDate: endDate.value
     })
-    navigate(`/`)
   }
 
   return (
