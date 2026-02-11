@@ -18,8 +18,8 @@ const LoginForm = ({ setUser }) => {
     )
     if (user) {
       console.log("Login successful:", user)
-      window.localStorage.setItem("loggedUser", JSON.stringify(user.username))
-      setUser(user.username)
+      window.localStorage.setItem("loggedUser", JSON.stringify(user))
+      setUser(user)
       navigator('/')
     } else {
       console.log("Wrong credentials")

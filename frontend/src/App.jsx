@@ -39,6 +39,10 @@ const App = () => {
     return returnedTrip
   }
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("loggedUser")
+    setUser(null)
+  }
 
   const addNewLocation = (trip) => {
     tripService
@@ -53,9 +57,9 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Menu />
+        {user && <Menu handleLogout={handleLogout} />}
         <h1>Travel planner</h1>
-        {user ?? <div>{user}</div>}
+        {user && <p>{user.username} is logged in.</p>}
         <Routes>
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/trips/:id" element={<Trip addNewLocation={addNewLocation} trips={trips} />} />
