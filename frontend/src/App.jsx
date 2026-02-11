@@ -58,13 +58,13 @@ const App = () => {
     <Router>
       <div>
         {user && <Menu handleLogout={handleLogout} />}
-        <h1>Travel planner</h1>
         {user && <p>{user.username} is logged in.</p>}
+        <h1>Travel planner</h1>
         <Routes>
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/trips/:id" element={<Trip addNewLocation={addNewLocation} trips={trips} />} />
-          <Route path="/" element={<TripList trips={trips} />} />
-          <Route path="/create" element={<TripForm addNew={addNew} />} />
+          <Route path="/" element={<TripList user={user} trips={trips} />} />
+          <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
         </Routes>
       </div>
     </Router>

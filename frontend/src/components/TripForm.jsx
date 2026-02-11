@@ -1,7 +1,7 @@
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 
-const TripForm = ({ addNew }) => {
+const TripForm = ({ user, addNew }) => {
   const navigate = useNavigate()
 
   const title = useField('text')
@@ -10,7 +10,8 @@ const TripForm = ({ addNew }) => {
     event.preventDefault()
 
     const createdTrip = await addNew({
-      title: title.value
+      title: title.value,
+      user: user
     })
 
     navigate(`/trips/${createdTrip.id}`)
