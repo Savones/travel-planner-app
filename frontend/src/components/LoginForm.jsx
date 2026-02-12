@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 import loginService from '../services/users'
 
@@ -7,8 +7,8 @@ import loginService from '../services/users'
 const LoginForm = ({ setUser }) => {
   const navigate = useNavigate()
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
 
   const changeView = (event) => {
     event.preventDefault()
@@ -19,7 +19,7 @@ const LoginForm = ({ setUser }) => {
     event.preventDefault()
     const users = await loginService.getAll()
     const user = users.find(
-      u => u.username === username && u.password === password
+      u => u.username === username.value && u.password === password.value
     )
     if (user) {
       console.log("Login successful:", user)
@@ -37,21 +37,13 @@ const LoginForm = ({ setUser }) => {
         <div>
           <label>
             Username
-            <input
-              type="text"
-              value={username}
-              onChange={({ target }) => setUsername(target.value)}
-            />
+            <input {...username} />
           </label>
         </div>
         <div>
           <label>
             Password
-            <input
-              type="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
+            <input {...password} />
           </label>
         </div>
         <button type="submit">Login</button>

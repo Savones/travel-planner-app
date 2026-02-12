@@ -1,19 +1,19 @@
-import { useState } from 'react'
+import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 import userService from '../services/users'
 
 const SignUpForm = () => {
   const navigate = useNavigate()
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
 
   const createUser = (event) => {
     event.preventDefault()
     userService
       .create({
-        username: username,
-        password: password
+        username: username.value,
+        password: password.value
       })
     navigate('/login')
   }
@@ -30,21 +30,13 @@ const SignUpForm = () => {
         <div>
           <label>
             Username
-            <input
-              type="text"
-              value={username}
-              onChange={({ target }) => setUsername(target.value)}
-            />
+            <input {...username} />
           </label>
         </div>
         <div>
           <label>
             Password
-            <input
-              type="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
+            <input {...password} />
           </label>
         </div>
         <button onClick={cancel}>Cancel</button>
