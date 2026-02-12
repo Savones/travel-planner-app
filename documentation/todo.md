@@ -3,6 +3,7 @@
 ## Frontend
 ### My trips (home page)
 - [x] Show all trips
+- [x] Only show logged in users trips
 - [ ] Style UI 
 
 ### Create trip
