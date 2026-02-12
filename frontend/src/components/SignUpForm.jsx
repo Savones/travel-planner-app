@@ -1,39 +1,32 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import loginService from '../services/users'
+import userService from '../services/users'
 
-// To-do: Make login the correct way using login service not users
-
-const LoginForm = ({ setUser }) => {
+const SignUpForm = () => {
   const navigate = useNavigate()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const changeView = (event) => {
+  const createUser = (event) => {
     event.preventDefault()
-    navigate('/signup')
+    userService
+      .create({
+        username: username,
+        password: password
+      })
+    navigate('/login')
   }
 
-  const handleLogin = async event => {
+  const cancel = (event) => {
     event.preventDefault()
-    const users = await loginService.getAll()
-    const user = users.find(
-      u => u.username === username && u.password === password
-    )
-    if (user) {
-      console.log("Login successful:", user)
-      window.localStorage.setItem("loggedUser", JSON.stringify(user))
-      setUser(user)
-      navigate('/')
-    } else {
-      console.log("Wrong credentials")
-    }
+    navigate('/login')
   }
+
   return (
     <div>
-      <h2>Log in</h2>
-      <form onSubmit={handleLogin}>
+      <h2>Sign Up</h2>
+      <form onSubmit={createUser}>
         <div>
           <label>
             Username
@@ -54,12 +47,12 @@ const LoginForm = ({ setUser }) => {
             />
           </label>
         </div>
-        <button type="submit">Login</button>
-        <button onClick={changeView}>Sign up</button>
+        <button onClick={cancel}>Cancel</button>
+        <button type="submit">Create</button>
       </form>
     </div>
   )
 }
 
 
-export default LoginForm
+export default SignUpForm
