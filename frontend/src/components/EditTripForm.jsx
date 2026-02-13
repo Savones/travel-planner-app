@@ -32,21 +32,51 @@ const EditTripForm = ({ trips, updateTrip }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type={title.type}
-        value={title.value}
-        onChange={title.onChange}
-      />
+      <div>
+        <label>Title</label>
+        <input
+          type={title.type}
+          value={title.value}
+          onChange={title.onChange}
+        />
+      </div>
       {locations.map((location, locationIndex) => (
         <div key={location.location_id}>
-          <input
-            value={location.location}
-            onChange={(event) => {
-              const newLocations = [...locations]
-              newLocations[locationIndex].location = event.target.value
-              setLocations(newLocations)
-            }}
-          />
+          <div>
+            <label>Location</label>
+            <input
+              value={location.location}
+              onChange={(event) => {
+                const newLocations = [...locations]
+                newLocations[locationIndex].location = event.target.value
+                setLocations(newLocations)
+              }}
+            />
+          </div>
+          <div>
+            <label>Start Date</label>
+            <input
+              type="date"
+              value={location.startDate}
+              onChange={(event) => {
+                const newLocations = [...locations]
+                newLocations[locationIndex].startDate = event.target.value
+                setLocations(newLocations)
+              }}
+            />
+          </div>
+          <div>
+            <label>End Date</label>
+            <input
+              type="date"
+              value={location.endDate}
+              onChange={(event) => {
+                const newLocations = [...locations]
+                newLocations[locationIndex].endDate = event.target.value
+                setLocations(newLocations)
+              }}
+            />
+          </div>
         </div>
       ))}
       <button type="submit">Save</button>
