@@ -30,6 +30,11 @@ const EditTripForm = ({ trips, updateTrip }) => {
     navigate(`/trips/${trip.id}`)
   }
 
+  const cancel = (event) => {
+    event.preventDefault()
+    navigate(`/trips/${trip.id}`)
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -79,6 +84,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
           </div>
         </div>
       ))}
+      <button onClick={cancel}>Cancel</button>
       <button type="submit">Save</button>
     </form>
   )
