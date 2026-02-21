@@ -1,13 +1,7 @@
 const mongoose = require('mongoose')
 
 const tripSchema = mongoose.Schema({
-  title: String,
-  location: Array,
-  user:
-  {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  title: String
 })
 
 tripSchema.set('toJSON', {
