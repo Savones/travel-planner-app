@@ -17,16 +17,17 @@ const LoginForm = ({ setUser }) => {
 
   const handleLogin = async event => {
     event.preventDefault()
-    const users = await loginService.getAll()
-    const user = users.find(
-      u => u.username === username.value && u.password === password.value
-    )
-    if (user) {
+
+    try {
+      const user = await loginService.login({
+        username: username.value,
+        password: password.value
+      })
       console.log("Login successful:", user)
       window.localStorage.setItem("loggedUser", JSON.stringify(user))
       setUser(user)
       navigate('/')
-    } else {
+    } catch {
       console.log("Wrong credentials")
     }
   }
