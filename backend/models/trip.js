@@ -1,7 +1,22 @@
 const mongoose = require('mongoose')
 
-const tripSchema = mongoose.Schema({
-  title: String
+const locationSchema = new mongoose.Schema({
+  location: String,
+  startDate: Date,
+  endDate: Date
+})
+
+const tripSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  locations: [locationSchema]
 })
 
 tripSchema.set('toJSON', {
