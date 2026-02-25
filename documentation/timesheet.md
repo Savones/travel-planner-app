@@ -11,4 +11,5 @@
 | 13.2. | 1    | Initialized backend | 
 | 21.2. | 2    | Connected to MongoDB and added user and trip models/controllers | 
 | 21.2. | 1    | Did frontend-backend integration and fixed login | 
-| sum | 17    |  |
+| 25.2. | 1    | Fixed trip and location creating and editing | 
+| sum | 18    |  |
