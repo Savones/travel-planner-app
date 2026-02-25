@@ -11,7 +11,7 @@ const TripForm = ({ user, addNew }) => {
 
     const createdTrip = await addNew({
       title: title.value,
-      user: user
+      userId: user.id
     })
 
     navigate(`/trips/${createdTrip.id}`)

@@ -12,7 +12,7 @@ tripsRouter.get('/', async (request, response) => {
 })
 
 tripsRouter.post('/', async (request, response) => {
-  const { title, locations, userId } = request.body
+  const { title, userId } = request.body
 
   const user = await User.findById(userId)
 
@@ -22,7 +22,6 @@ tripsRouter.post('/', async (request, response) => {
 
   const trip = new Trip({
     title,
-    locations,
     user: user._id
   })
 
