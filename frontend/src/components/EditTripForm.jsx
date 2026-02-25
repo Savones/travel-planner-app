@@ -62,7 +62,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
             <label>Start Date</label>
             <input
               type="date"
-              value={location.startDate}
+              value={location.startDate.substring(0, 10)}
               onChange={(event) => {
                 const newLocations = [...locations]
                 newLocations[locationIndex].startDate = event.target.value
@@ -74,7 +74,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
             <label>End Date</label>
             <input
               type="date"
-              value={location.endDate}
+              value={location.endDate.substring(0, 10)}
               onChange={(event) => {
                 const newLocations = [...locations]
                 newLocations[locationIndex].endDate = event.target.value
