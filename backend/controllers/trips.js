@@ -33,5 +33,21 @@ tripsRouter.post('/', async (request, response) => {
   response.status(201).json(savedTrip)
 })
 
+tripsRouter.put('/:id', async (request, response) => {
+  const body = request.body
+  const trip = await Trip.findById(request.params.id)
+
+  trip.locations = body.locations
+
+  const savedTrip = await trip.save()
+
+  const populatedResult = await Trip
+    .findById(savedTrip._id)
+    .populate('user', { username: 1 })
+
+  response.json(populatedResult)
+})
+
+
 
 module.exports = tripsRouter
