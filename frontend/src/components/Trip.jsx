@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import LocationForm from './LocationForm'
 
-const Trip = ({ trips, addNewLocation }) => {
+const Trip = ({ trips, addNewLocation, deleteTrip }) => {
   const [showLocationForm, setShowLocationForm] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate()
@@ -33,6 +33,12 @@ const Trip = ({ trips, addNewLocation }) => {
     navigate(`/trips/${trip.id}/edit`)
   }
 
+  const handleDelete = (event) => {
+    event.preventDefault()
+    deleteTrip(id)
+    navigate(`/`)
+  }
+
   return (
     <div>
       <h2>{trip.title}</h2>
@@ -42,6 +48,9 @@ const Trip = ({ trips, addNewLocation }) => {
         </button>}
       <button type="button" onClick={editTrip}>
         Edit
+      </button>
+      <button type="button" onClick={handleDelete}>
+        Delete trip
       </button>
       {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
       {trip.locations && trip.locations.map(location => (

@@ -48,6 +48,12 @@ tripsRouter.put('/:id', async (request, response) => {
   response.json(populatedResult)
 })
 
+tripsRouter.delete('/:id', async (request, response) => {
+  console.log("hei")
+  const trip = await Trip.findById(request.params.id)
+  await trip.deleteOne()
 
+  response.status(204).end()
+})
 
 module.exports = tripsRouter

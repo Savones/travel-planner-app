@@ -7,6 +7,10 @@ const getAll = async () => {
   return response.data
 }
 
+const deleteTrip = async tripId => {
+  await axios.delete(`${baseUrl}/${tripId}`)
+}
+
 const create = async newObject => {
   const response = await axios.post(baseUrl, newObject)
   return response.data
@@ -19,4 +23,4 @@ const update = async updatedObject => {
   return response.data
 }
 
-export default { getAll, create, update }
+export default { getAll, create, update, deleteTrip }
