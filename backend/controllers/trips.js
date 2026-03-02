@@ -2,6 +2,15 @@ const tripsRouter = require('express').Router()
 const Trip = require('../models/trip')
 const User = require('../models/user')
 const { populate } = require('dotenv')
+const jwt = require('jsonwebtoken')
+
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
 
 tripsRouter.get('/', async (request, response) => {
   Trip.find({})
@@ -14,7 +23,11 @@ tripsRouter.get('/', async (request, response) => {
 tripsRouter.post('/', async (request, response) => {
   const { title, userId } = request.body
 
-  const user = await User.findById(userId)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+  const user = await User.findById(decodedToken.id)
 
   if (!user) {
     return response.status(400).json({ error: 'invalid user' })

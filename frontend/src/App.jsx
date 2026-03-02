@@ -31,7 +31,9 @@ const App = () => {
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem("loggedUser")
     if (loggedUserJSON) {
-      setUser(JSON.parse(loggedUserJSON))
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      tripService.setToken(user.token)
     }
   }, [])
 
