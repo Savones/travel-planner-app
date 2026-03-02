@@ -37,9 +37,14 @@ const App = () => {
 
   const addNew = async (trip) => {
     const returnedTrip = await tripService.create(trip)
-    setTrips(trips.concat(returnedTrip))
+
+    setTrips(prevTrips =>
+      prevTrips.concat(returnedTrip)
+    )
+
     return returnedTrip
   }
+
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedUser")
