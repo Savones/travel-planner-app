@@ -9,12 +9,10 @@ const Menu = ({ handleLogout }) => {
   }
 
   return (
-    <div>
+    <div className='menuButtonsDiv'>
       <Link to="/">My trips</Link>
-      &nbsp;&nbsp;
       <Link to="/create">Create</Link>
-      &nbsp;&nbsp;
-      <button onClick={logout} style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0, color: 'blue', textDecoration: 'underline' }}>
+      <button onClick={logout}>
         Logout
       </button>
     </div>

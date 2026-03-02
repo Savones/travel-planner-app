@@ -7,9 +7,11 @@ const TripList = ({ user, trips }) => {
   return (
     <div>
       {userTrips.map(trip => (
-        <h3 key={trip.id}>
-          <Link to={`/trips/${trip.id}`}>{trip.title} - {trip.user.username}</Link>
-        </h3>
+        <Link to={`/trips/${trip.id}`}>
+          <div key={trip.id} className='tripBannerDiv'>
+            {trip.title}
+          </div>
+        </Link>
       ))}
     </div>
   )

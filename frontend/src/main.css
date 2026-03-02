@@ -1,7 +1,68 @@
 button {
   cursor: pointer;
+  margin: 0px 0px 0px 3px;
 }
 
 div {
   padding: 5px 0px 5px 0px;
+}
+
+h1 {
+  color: #1D3124;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #F6F4E8;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.tripBannerDiv {
+  margin-bottom: 5px;
+  background-color: #BACEC1;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  color: #1D3124;
+  font-size: 20px;
+}
+
+.tripBannerDiv:hover {
+  background-color: #bacec17d;
+}
+
+.menuButtonsDiv {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.menuButtonsDiv a {
+  margin: 0px 3px 0px 3px;
+  text-decoration: none;
+  background-color: #E59560;
+  color: black;
+  padding: 10px;
+}
+
+.menuButtonsDiv a:hover {
+  background-color: #e59560a7;
+}
+
+.menuButtonsDiv button:hover {
+  background-color: #e59560a7;
+}
+
+.menuButtonsDiv button {
+  margin: 0px 3px 0px 3px;
+  background-color: #E59560;
+  border: none;
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
 }
