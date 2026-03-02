@@ -50,6 +50,7 @@ const App = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedUser")
+    tripService.setToken(null)
     setUser(null)
   }
 

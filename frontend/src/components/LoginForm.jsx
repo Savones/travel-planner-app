@@ -1,6 +1,7 @@
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 import loginService from '../services/users'
+import tripService from '../services/trips'
 
 // To-do: Make login the correct way using login service not users
 
@@ -26,6 +27,7 @@ const LoginForm = ({ setUser }) => {
       console.log("Login successful:", user)
       window.localStorage.setItem("loggedUser", JSON.stringify(user))
       setUser(user)
+      tripService.setToken(user.token)
       navigate('/')
     } catch {
       console.log("Wrong credentials")
