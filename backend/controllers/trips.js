@@ -21,7 +21,7 @@ tripsRouter.get('/', async (request, response) => {
 })
 
 tripsRouter.post('/', async (request, response) => {
-  const { title, userId } = request.body
+  const { title } = request.body
 
   const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
   if (!decodedToken.id) {
@@ -53,6 +53,12 @@ tripsRouter.post('/', async (request, response) => {
 
 tripsRouter.put('/:id', async (request, response) => {
   const body = request.body
+
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+
   const trip = await Trip.findById(request.params.id)
 
   trip.locations = body.locations
@@ -67,7 +73,11 @@ tripsRouter.put('/:id', async (request, response) => {
 })
 
 tripsRouter.delete('/:id', async (request, response) => {
-  console.log("hei")
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+
   const trip = await Trip.findById(request.params.id)
   await trip.deleteOne()
 

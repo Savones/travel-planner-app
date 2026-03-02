@@ -14,7 +14,10 @@ const getAll = async () => {
 }
 
 const deleteTrip = async tripId => {
-  await axios.delete(`${baseUrl}/${tripId}`)
+  const config = {
+    headers: { Authorization: token }
+  }
+  await axios.delete(`${baseUrl}/${tripId}`, config)
 }
 
 const create = async newObject => {
@@ -26,9 +29,12 @@ const create = async newObject => {
 }
 
 const update = async updatedObject => {
+  const config = {
+    headers: { Authorization: token }
+  }
   const id = updatedObject.id
 
-  const response = await axios.put(`${baseUrl}/${id}`, updatedObject)
+  const response = await axios.put(`${baseUrl}/${id}`, updatedObject, config)
   return response.data
 }
 
