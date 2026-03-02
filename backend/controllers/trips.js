@@ -61,6 +61,7 @@ tripsRouter.put('/:id', async (request, response) => {
 
   const trip = await Trip.findById(request.params.id)
 
+  trip.title = body.title
   trip.locations = body.locations
 
   const savedTrip = await trip.save()
