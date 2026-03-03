@@ -12,4 +12,6 @@
 | 21.2. | 2    | Connected to MongoDB and added user and trip models/controllers | 
 | 21.2. | 1    | Did frontend-backend integration and fixed login | 
 | 25.2. | 1    | Fixed trip and location creating and editing | 
-| sum | 18    |  |
+| 3.3. | 2    | Fixed small bugs and added intial middleware | 
+| 3.3. | 2    | Add css styling | 
+| sum | 22    |  |
