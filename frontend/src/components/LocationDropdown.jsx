@@ -1,29 +1,13 @@
-import { useEffect, useState } from 'react'
-import locationService from '../services/locations'
-
-const LocationDropdown = () => {
-  const [countries, setCountries] = useState([])
-  const [cities, setCities] = useState([])
-
-  const [selectedCountry, setSelectedCountry] = useState('')
-  const [selectedCity, setSelectedCity] = useState('')
-
-  useEffect(() => {
-    locationService.getCountries().then(data => {
-      setCountries(data)
-    })
-  }, [])
-
-  useEffect(() => {
-    if (selectedCountry) {
-      locationService.getCities(selectedCountry).then(data => {
-        setCities(data)
-      })
-    }
-  }, [selectedCountry])
-
+const LocationDropdown = ({
+  selectedCountry,
+  setSelectedCountry,
+  selectedCity,
+  setSelectedCity,
+  countries,
+  cities
+}) => {
   return (
-    <div>
+    <>
       <div>
         <select
           value={selectedCountry}
@@ -50,7 +34,7 @@ const LocationDropdown = () => {
           ))}
         </select>
       </div>
-    </div>
+    </>
   )
 }
 

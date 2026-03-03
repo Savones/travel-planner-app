@@ -56,6 +56,7 @@ const Trip = ({ trips, addNewLocation, deleteTrip }) => {
       {trip.locations && trip.locations.map(location => (
         <div key={location.location_id}>
           <h3>{location.location}</h3>
+          <p>{location.country}, {location.city}</p>
           <p>From: {location.startDate.substring(0, 10)}</p>
           <p>To: {location.endDate.substring(0, 10)}</p>
         </div>
