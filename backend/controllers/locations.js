@@ -15,26 +15,26 @@ locationsRouter.get('/countries', async (request, response) => {
   response.json(countries.data)
 })
 
-locationsRouter.get('/countries/:countryIso/states', async (request, response) => {
-  const { countryIso } = request.params
+locationsRouter.get('/countries/:countryIso/cities', async (request, response) => {
+  try {
+    const { countryIso } = request.params
 
-  const states = await axios.get(
-    `https://api.countrystatecity.in/v1/countries/${countryIso}/states`,
-    config
-  )
+    const cities = await axios.get(
+      `https://api.countrystatecity.in/v1/countries/${countryIso}/cities`,
+      {
+        headers: {
+          'X-CSCAPI-KEY': process.env.CSC_API_KEY
+        }
+      }
+    )
 
-  response.json(states.data)
+    response.json(cities.data)
+
+  } catch (error) {
+    console.error(error.message)
+    response.status(500).json({ error: 'Failed to fetch cities' })
+  }
 })
 
-locationsRouter.get('/countries/:countryIso/states/:stateIso/cities', async (request, response) => {
-  const { countryIso, stateIso } = request.params
-
-  const cities = await axios.get(
-    `https://api.countrystatecity.in/v1/countries/${countryIso}/states/${stateIso}/cities`,
-    config
-  )
-
-  response.json(cities.data)
-})
 
 module.exports = locationsRouter

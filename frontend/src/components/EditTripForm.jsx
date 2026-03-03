@@ -1,3 +1,4 @@
+import LocationDropdown from './LocationDropdown'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useField } from '../hooks'
@@ -47,6 +48,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
       </div>
       {locations.map((location, locationIndex) => (
         <div key={location.location_id}>
+          <LocationDropdown />
           <div>
             <label>Location</label>
             <input

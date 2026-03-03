@@ -1,3 +1,4 @@
+import LocationDropdown from './LocationDropdown'
 import { useField } from '../hooks'
 
 const LocationForm = ({ addNew, handleCancel }) => {
@@ -21,6 +22,7 @@ const LocationForm = ({ addNew, handleCancel }) => {
     <div>
       <h3>Add new location</h3>
       <form onSubmit={handleSubmit}>
+        <LocationDropdown />
         <div>
           Location
           <input {...location} />
