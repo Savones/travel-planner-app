@@ -11,7 +11,7 @@ const LocationForm = ({ addNew, handleCancel }) => {
   const [countries, setCountries] = useState([])
   const [cities, setCities] = useState([])
 
-  const [selectedCountry, setSelectedCountry] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState(null)
   const [selectedCity, setSelectedCity] = useState('')
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const LocationForm = ({ addNew, handleCancel }) => {
 
   useEffect(() => {
     if (selectedCountry) {
-      locationService.getCities(selectedCountry).then(data => {
+      locationService.getCities(selectedCountry.iso2).then(data => {
         setCities(data)
       })
     }
@@ -33,7 +33,7 @@ const LocationForm = ({ addNew, handleCancel }) => {
     const location_id = Math.round(Math.random() * 10000)
     addNew({
       location_id: location_id,
-      country: selectedCountry,
+      country: selectedCountry.name,
       city: selectedCity,
       location: location.value,
       startDate: startDate.value,

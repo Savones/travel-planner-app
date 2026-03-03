@@ -10,8 +10,11 @@ const LocationDropdown = ({
     <>
       <div>
         <select
-          value={selectedCountry}
-          onChange={(event) => setSelectedCountry(event.target.value)}
+          value={selectedCountry?.iso2 || ''}
+          onChange={(event) => {
+            const country = countries.find(c => c.iso2 === event.target.value)
+            setSelectedCountry(country)
+          }}
         >
           <option value="">Select country</option>
           {countries.map(country => (
@@ -20,6 +23,7 @@ const LocationDropdown = ({
             </option>
           ))}
         </select>
+
       </div>
       <div>
         <select
