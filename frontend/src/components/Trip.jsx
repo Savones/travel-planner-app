@@ -50,22 +50,23 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
   }
 
   return (
-    <div>
+    <div className='tripPageDiv'>
       <h2>{trip.title}</h2>
-      {!showLocationForm &&
-        <button type="button" onClick={changeFormVisibility}>
-          Add location
-        </button>}
-      <button type="button" onClick={editTrip}>
-        Edit
-      </button>
-      <button type="button" onClick={handleDeleteTrip}>
-        Delete trip
-      </button>
+      <div className='tripDetailsButtons'>
+        {!showLocationForm &&
+          <button type="button" onClick={changeFormVisibility}>
+            Add location
+          </button>}
+        <button type="button" onClick={editTrip}>
+          Edit
+        </button>
+        <button type="button" onClick={handleDeleteTrip}>
+          Delete trip
+        </button>
+      </div>
       {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
       {trip.locations && trip.locations.map(location => (
-        <div key={location.id}>
-          <p>{location.location_id}</p>
+        <div className='locationDiv' key={location.id}>
           <h3>{location.city}, {location.country}</h3>
           <p>{location.location}</p>
           <p>From: {location.startDate.substring(0, 10)}</p>
