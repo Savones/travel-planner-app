@@ -9,7 +9,7 @@ const Menu = ({ handleLogout }) => {
   }
 
   return (
-    <div className='menuButtonsDiv'>
+    <div>
       <Link to="/">My trips</Link>
       <Link to="/create">Create</Link>
       <button onClick={logout}>

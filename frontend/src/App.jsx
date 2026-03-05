@@ -74,10 +74,11 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        {user && <Menu handleLogout={handleLogout} />}
-        {user && <p>{user.username} is logged in.</p>}
-        <h1>Travel planner</h1>
+      <>
+        <div className='menuButtonsDiv'>
+          <div className='headerLogo'>Travel planner</div>
+          {user && <Menu handleLogout={handleLogout} />}
+        </div>
         <Routes>
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<SignUpForm />} />
@@ -86,7 +87,7 @@ const App = () => {
           <Route path="/" element={<TripList user={user} trips={trips} />} />
           <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
         </Routes>
-      </div>
+      </>
     </Router>
   )
 }

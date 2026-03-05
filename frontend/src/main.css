@@ -1,68 +1,110 @@
+/* UNIVERSAL */
+
+body {
+  background-color: #FFF;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: 0;
+}
+
 button {
   cursor: pointer;
   margin: 0px 0px 0px 3px;
 }
 
-div {
-  padding: 5px 0px 5px 0px;
+#root {
+  width: 100%;
 }
 
-h1 {
-  color: #1D3124;
+div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
 }
 
 a {
   text-decoration: none;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  background-color: #F6F4E8;
-  font-family: 'Times New Roman', Times, serif;
+/* TRIP LIST */
+
+.homePageDiv {
+  margin-top: 100px;
+
+}
+
+.tripListDiv {
+  flex-wrap: wrap;
 }
 
 .tripBannerDiv {
-  margin-bottom: 5px;
-  background-color: #BACEC1;
-  display: flex;
-  justify-content: center;
-  padding: 15px;
+  border: 1px grey solid;
   color: #1D3124;
-  font-size: 20px;
+  width: 600px;
+  height: 350px;
+  margin-bottom: 50px;
+  justify-content: flex-end;
+  background-color: #F3CFC6;
+
 }
 
 .tripBannerDiv:hover {
-  background-color: #bacec17d;
+  background-color: #f3cfc687;
 }
 
+.tripBannerDiv div {
+  background-color: #FFF;
+  align-items: center;
+  padding: 10px;
+}
+
+.tripTitleDiv {
+  font-size: 30px;
+}
+
+/* TRIP DETAILS */
+
+
+
+/* MENU */
+
 .menuButtonsDiv {
-  display: flex;
-  justify-content: center;
+  flex-direction: row;
   font-size: 18px;
+  width: 100%;
+  justify-content: space-between;
+  height: 50px;
+  border-bottom: 1px grey solid;
+}
+
+.menuButtonsDiv div {
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  padding: 0px 5px;
 }
 
 .menuButtonsDiv a {
   margin: 0px 3px 0px 3px;
   text-decoration: none;
-  background-color: #E59560;
+  background-color: #F3CFC6;
   color: black;
-  padding: 10px;
+  padding: 3px 10px;
 }
 
 .menuButtonsDiv a:hover {
-  background-color: #e59560a7;
+  background-color: #f3cfc687;
 }
 
 .menuButtonsDiv button:hover {
-  background-color: #e59560a7;
+  background-color: #f3cfc687;
 }
 
 .menuButtonsDiv button {
   margin: 0px 3px 0px 3px;
-  background-color: #E59560;
+  background-color: #F3CFC6;
   border: none;
   font-size: 18px;
-  font-family: 'Times New Roman', Times, serif;
-  padding: 10px;
+  padding: 3px 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

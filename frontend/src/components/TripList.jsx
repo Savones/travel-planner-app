@@ -5,14 +5,21 @@ const TripList = ({ user, trips }) => {
 
   const userTrips = trips.filter(trip => trip.user?.id === user.id)
   return (
-    <div>
-      {userTrips.map(trip => (
-        <Link to={`/trips/${trip.id}`}>
-          <div key={trip.id} className='tripBannerDiv'>
-            {trip.title}
-          </div>
-        </Link>
-      ))}
+    <div className='homePageDiv'>
+      <div className='tripListDiv'>
+        {userTrips.map(trip => (
+          <Link to={`/trips/${trip.id}`}>
+            <div key={trip.id} className='tripBannerDiv'>
+              <div className='tripTitleDiv'>
+                {trip.title}
+              </div>
+              <div className='tripDatesDiv'>
+                X.X.XXXX - Y.Y.YYYY
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
