@@ -31,8 +31,8 @@ const LocationDropdown = ({
           onChange={(event) => setSelectedCity(event.target.value)}
         >
           <option value="">Select city</option>
-          {cities.map(city => (
-            <option key={city.name} value={city.name}>
+          {cities.map((city, index) => (
+            <option key={`${city.name}-${index}`} value={city.name}>
               {city.name}
             </option>
           ))}
