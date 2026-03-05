@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import LocationForm from './LocationForm'
 
-const Trip = ({ trips, addNewLocation, deleteTrip }) => {
+const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
   const [showLocationForm, setShowLocationForm] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate()
@@ -33,10 +33,20 @@ const Trip = ({ trips, addNewLocation, deleteTrip }) => {
     navigate(`/trips/${trip.id}/edit`)
   }
 
-  const handleDelete = (event) => {
+  const handleDeleteTrip = (event) => {
     event.preventDefault()
     deleteTrip(id)
     navigate(`/`)
+  }
+
+  const handleDeleteLocation = (locationId) => {
+    const updatedTrip = {
+      ...trip,
+      locations: trip.locations.filter(
+        location => location.id !== locationId
+      )
+    }
+    deleteLocation(updatedTrip)
   }
 
   return (
@@ -49,16 +59,20 @@ const Trip = ({ trips, addNewLocation, deleteTrip }) => {
       <button type="button" onClick={editTrip}>
         Edit
       </button>
-      <button type="button" onClick={handleDelete}>
+      <button type="button" onClick={handleDeleteTrip}>
         Delete trip
       </button>
       {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
       {trip.locations && trip.locations.map(location => (
-        <div key={location.location_id}>
+        <div key={location.id}>
+          <p>{location.location_id}</p>
           <h3>{location.city}, {location.country}</h3>
           <p>{location.location}</p>
           <p>From: {location.startDate.substring(0, 10)}</p>
           <p>To: {location.endDate.substring(0, 10)}</p>
+          <button type='button' onClick={() => handleDeleteLocation(location.id)}>
+            Delete location
+          </button>
         </div>
       ))}
     </div>
