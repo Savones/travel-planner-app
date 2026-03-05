@@ -2,20 +2,50 @@ import LocationDropdown from './LocationDropdown'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useField } from '../hooks'
+import locationService from '../services/locations'
 
 const EditTripForm = ({ trips, updateTrip }) => {
   const title = useField('text')
   const [locations, setLocations] = useState([])
+  const [countries, setCountries] = useState([])
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const trip = trips.find(n => n.id == id)
+  const trip = trips.find(n => n.id === id)
+
   useEffect(() => {
-    if (trip) {
+    locationService.getCountries().then(setCountries)
+  }, [])
+
+  useEffect(() => {
+    if (trip && countries.length) {
+      const initialLocations = trip.locations.map((location) => {
+        const country = countries.find(c => c.name === location.country) || null
+        return {
+          ...location,
+          selectedCountry: country,
+          selectedCity: location.city || '',
+          cities: []
+        }
+      })
+      setLocations(initialLocations)
       title.setValue(trip.title)
-      setLocations(trip.locations || [])
     }
-  }, [trip])
+  }, [trip, countries])
+
+  useEffect(() => {
+    locations.forEach((location, locationIndex) => {
+      if (location.selectedCountry && location.cities.length === 0) {
+        locationService.getCities(location.selectedCountry.iso2).then(cities => {
+          setLocations(previousLocations => {
+            const newLocations = [...previousLocations]
+            newLocations[locationIndex].cities = cities
+            return newLocations
+          })
+        })
+      }
+    })
+  }, [locations.map(location => location.selectedCountry?.iso2).join()])
 
   if (!trip) {
     return <p>Loading trip...</p>
@@ -23,10 +53,15 @@ const EditTripForm = ({ trips, updateTrip }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    const updatedLocations = locations.map(location => ({
+      ...location,
+      country: location.selectedCountry?.name,
+      city: location.selectedCity
+    }))
     updateTrip({
       ...trip,
       title: title.value,
-      locations
+      locations: updatedLocations
     })
     navigate(`/trips/${trip.id}`)
   }
@@ -48,7 +83,25 @@ const EditTripForm = ({ trips, updateTrip }) => {
       </div>
       {locations.map((location, locationIndex) => (
         <div key={location.location_id}>
-          <LocationDropdown />
+          <LocationDropdown
+            selectedCountry={location.selectedCountry}
+            setSelectedCountry={(country) => {
+              const newLocations = [...locations]
+              newLocations[locationIndex].selectedCountry = country
+              newLocations[locationIndex].selectedCity = ''
+              newLocations[locationIndex].cities = []
+              setLocations(newLocations)
+            }}
+            selectedCity={location.selectedCity}
+            setSelectedCity={(city) => {
+              const newLocations = [...locations]
+              newLocations[locationIndex].selectedCity = city
+              setLocations(newLocations)
+            }}
+            countries={countries}
+            cities={location.cities}
+          />
+
           <div>
             <label>Location</label>
             <input
