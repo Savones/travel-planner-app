@@ -12,6 +12,10 @@
 | 21.2. | 2    | Connected to MongoDB and added user and trip models/controllers | 
 | 21.2. | 1    | Did frontend-backend integration and fixed login | 
 | 25.2. | 1    | Fixed trip and location creating and editing | 
-| 3.3. | 2    | Fixed small bugs and added intial middleware | 
-| 3.3. | 2    | Add css styling | 
-| sum | 22    |  |
+| 2.3. | 2    | Fixed small bugs and added intial middleware | 
+| 2.3. | 2    | Added css styling | 
+| 3.3. | 4    | Added location country and city dropdowns | 
+| 5.3. | 1    | Fixed trip editing | 
+| 5.3. | 1    | Added location deletion functionality | 
+| 5.3. | 2    | Updated css styling | 
+| sum | 30    |  |
