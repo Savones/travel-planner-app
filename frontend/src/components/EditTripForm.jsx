@@ -72,8 +72,8 @@ const EditTripForm = ({ trips, updateTrip }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className='editTripForm' onSubmit={handleSubmit}>
+      <div className='editTitleDiv'>
         <label>Title</label>
         <input
           type={title.type}
@@ -82,7 +82,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
         />
       </div>
       {locations.map((location, locationIndex) => (
-        <div key={location.location_id}>
+        <div className='editLocationDiv' key={location.location_id}>
           <LocationDropdown
             selectedCountry={location.selectedCountry}
             setSelectedCountry={(country) => {

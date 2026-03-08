@@ -23,15 +23,17 @@ const TripForm = ({ user, addNew }) => {
   }
 
   return (
-    <div>
+    <div className='createTripDiv'>
       <h2>Add a new trip</h2>
-      <form onSubmit={handleSubmit}>
+      <form className='createTripForm' onSubmit={handleSubmit}>
         <div>
-          Title
+          <label>Title</label>
           <input {...title} />
         </div>
-        <input type='button' value='Cancel' onClick={handleCancellation} />
-        <input type='submit' value='Create' />
+        <div className='createButtonsDiv'>
+          <input type='submit' value='Create' />
+          <input type='button' value='Cancel' onClick={handleCancellation} />
+        </div>
       </form>
     </div>
   )

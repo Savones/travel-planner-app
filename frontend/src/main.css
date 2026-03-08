@@ -1,5 +1,19 @@
 /* UNIVERSAL */
 
+label {
+  margin-right: 10px;
+}
+
+input {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 16px;
+}
+
+select {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 16px;
+}
+
 body {
   background-color: #FFF;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -8,7 +22,8 @@ body {
 
 button {
   cursor: pointer;
-  margin: 0px 0px 0px 3px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
 
 #root {
@@ -74,11 +89,102 @@ a {
   align-self: flex-start;
 }
 
+.tripDetailsButtons button {
+  margin: 0px 0px 0px 3px;
+}
+
 .locationDiv {
   border: 1px grey solid;
   padding: 10px;
   margin: 30px 0px;
   width: 500px;
+  align-items: flex-start;
+}
+
+.locationTitleDiv {
+  font-size: 20px;
+  padding: 10px;
+  align-self: center;
+}
+
+.locationDetailDiv {
+  padding: 5px 0;
+}
+
+.locationDiv button {
+  margin-top: 10px;
+}
+
+.newLocationDiv {
+  border: 1px grey solid;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.newLocationForm div {
+  flex-direction: row;
+  justify-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.newLocationForm input {
+  margin-right: 5px;
+}
+
+/* CREATE TRIP */
+
+.createTripDiv {
+  border: 1px grey solid;
+  margin-top: 100px;
+  flex-wrap: wrap;
+  width: 300px;
+  align-self: center;
+  padding: 10px;
+}
+
+.createTripForm div {
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.createButtonsDiv input {
+  margin: 5px;
+}
+
+/* EDIT TRIP */
+
+.editTripForm {
+  padding: 10px;
+  align-self: center;
+  margin-top: 100px;
+}
+
+.editTripForm div {
+  align-items: flex-start;
+}
+
+.editLocationDiv {
+  padding: 10px;
+  margin: 30px 0px;
+  border: 1px grey solid;
+}
+
+.editTitleDiv {
+  flex-direction: row;
+  justify-self: flex-start;
+  align-self: center;
+  justify-content: center;
+}
+
+.editTitleDiv label {
+  align-self: center;
+}
+
+.editLocationDiv div {
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 /* MENU */
@@ -122,4 +228,24 @@ a {
   font-size: 18px;
   padding: 3px 10px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* LOGIN */
+
+.loginDiv {
+  margin-top: 100px;
+  border: 1px grey solid;
+  flex-wrap: wrap;
+  width: 300px;
+  align-self: center;
+  padding: 10px;
+}
+
+.loginDiv div {
+  margin-top: 10px;
+}
+
+.loginButtons {
+  flex-direction: row;
+  margin-top: 10px;
 }

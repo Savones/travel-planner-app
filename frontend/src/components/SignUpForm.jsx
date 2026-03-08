@@ -24,9 +24,9 @@ const SignUpForm = () => {
   }
 
   return (
-    <div>
+    <div className='loginDiv'>
       <h2>Sign Up</h2>
-      <form onSubmit={createUser}>
+      <form className='loginForm' onSubmit={createUser}>
         <div>
           <label>
             Username
@@ -39,8 +39,10 @@ const SignUpForm = () => {
             <input {...password} />
           </label>
         </div>
-        <button onClick={cancel}>Cancel</button>
-        <button type="submit">Create</button>
+        <div className='loginButtons'>
+          <button onClick={cancel}>Cancel</button>
+          <button type="submit">Create</button>
+        </div>
       </form>
     </div>
   )

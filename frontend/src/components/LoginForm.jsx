@@ -34,9 +34,9 @@ const LoginForm = ({ setUser }) => {
     }
   }
   return (
-    <div>
+    <div className='loginDiv'>
       <h2>Log in</h2>
-      <form onSubmit={handleLogin}>
+      <form className='loginForm' onSubmit={handleLogin}>
         <div>
           <label>
             Username
@@ -49,8 +49,10 @@ const LoginForm = ({ setUser }) => {
             <input {...password} />
           </label>
         </div>
-        <button type="submit">Login</button>
-        <button onClick={changeView}>Sign up</button>
+        <div className='loginButtons'>
+          <button type="submit">Login</button>
+          <button onClick={changeView}>Sign up</button>
+        </div>
       </form>
     </div>
   )

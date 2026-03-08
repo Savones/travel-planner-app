@@ -42,9 +42,9 @@ const LocationForm = ({ addNew, handleCancel }) => {
   }
 
   return (
-    <div>
+    <div className='newLocationDiv'>
       <h3>Add new location</h3>
-      <form onSubmit={handleSubmit}>
+      <form className='newLocationForm' onSubmit={handleSubmit}>
         <LocationDropdown
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
@@ -54,19 +54,19 @@ const LocationForm = ({ addNew, handleCancel }) => {
           cities={cities}
         />
         <div>
-          Location
+          <label>Location</label>
           <input {...location} />
         </div>
         <div>
-          Start date
+          <label>Start date</label>
           <input {...startDate} />
         </div>
         <div>
-          End date
+          <label>End date</label>
           <input {...endDate} />
         </div>
-        <input type='button' value='Cancel' onClick={handleCancel} />
         <input type='submit' value='Add' />
+        <input type='button' value='Cancel' onClick={handleCancel} />
       </form>
     </div>
   )

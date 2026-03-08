@@ -67,10 +67,10 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
       {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
       {trip.locations && trip.locations.map(location => (
         <div className='locationDiv' key={location.id}>
-          <h3>{location.city}, {location.country}</h3>
-          <p>{location.location}</p>
-          <p>From: {location.startDate.substring(0, 10)}</p>
-          <p>To: {location.endDate.substring(0, 10)}</p>
+          <div className='locationTitleDiv'>{location.city}, {location.country}</div>
+          <div className='locationDetailDiv'>{location.location}</div>
+          <div className='locationDetailDiv'>From: {location.startDate.substring(0, 10)}</div>
+          <div className='locationDetailDiv'>To: {location.endDate.substring(0, 10)}</div>
           <button type='button' onClick={() => handleDeleteLocation(location.id)}>
             Delete location
           </button>
