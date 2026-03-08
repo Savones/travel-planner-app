@@ -63,6 +63,7 @@ tripsRouter.put('/:id', async (request, response) => {
 
   trip.title = body.title
   trip.locations = body.locations
+  trip.budget = body.budget
 
   const savedTrip = await trip.save()
 

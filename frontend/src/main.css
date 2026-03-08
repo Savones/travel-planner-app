@@ -258,3 +258,13 @@ a {
   flex-direction: row;
   margin-top: 10px;
 }
+
+/* CREATE BUDGET */
+
+.createBudgetDiv {
+  width: 300px;
+  align-self: center;
+  flex-wrap: wrap;
+  border: 1px grey solid;
+  margin-top: 100px;
+}

@@ -18,7 +18,11 @@ const tripSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  locations: [locationSchema]
+  locations: [locationSchema],
+  budget: {
+    type: Number,
+    required: false
+  }
 })
 
 tripSchema.set('toJSON', {

@@ -40,6 +40,11 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
     navigate(`/`)
   }
 
+  const addBudget = (event) => {
+    event.preventDefault()
+    navigate(`/trips/${trip.id}/budget`)
+  }
+
   const handleDeleteLocation = (locationId) => {
     const updatedTrip = {
       ...trip,
@@ -58,6 +63,9 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
           <button type="button" onClick={changeFormVisibility}>
             Add location
           </button>}
+        {!trip.budget &&
+          <button type='button' onClick={addBudget}>Create budget</button>
+        }
         <button type="button" onClick={editTrip}>
           Edit
         </button>

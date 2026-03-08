@@ -7,6 +7,7 @@ import Menu from './components/Menu'
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import EditTripForm from './components/EditTripForm'
+import BudgetForm from './components/BudgetForm'
 import {
   BrowserRouter as Router,
   Routes, Route, Link
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/trips/:id/edit" element={<EditTripForm trips={trips} updateTrip={updateTrip} />} />
           <Route path="/" element={<TripList user={user} trips={trips} />} />
           <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
+          <Route path="/trips/:id/budget" element={<BudgetForm updateTrip={updateTrip} trips={trips} />} />
         </Routes>
       </>
     </Router>
