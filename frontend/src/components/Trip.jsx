@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import LocationForm from './LocationForm'
+import TripBudget from './TripBudget'
 
 const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
   const [showLocationForm, setShowLocationForm] = useState(false)
@@ -65,17 +66,20 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
         </button>
       </div>
       {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
-      {trip.locations && trip.locations.map(location => (
-        <div className='locationDiv' key={location.id}>
-          <div className='locationTitleDiv'>{location.city}, {location.country}</div>
-          <div className='locationDetailDiv'>{location.location}</div>
-          <div className='locationDetailDiv'>From: {location.startDate.substring(0, 10)}</div>
-          <div className='locationDetailDiv'>To: {location.endDate.substring(0, 10)}</div>
-          <button type='button' onClick={() => handleDeleteLocation(location.id)}>
-            Delete location
-          </button>
-        </div>
-      ))}
+      <div className='locationsDiv'>
+        {trip.locations && trip.locations.map(location => (
+          <div className='locationDiv' key={location.id}>
+            <div className='locationTitleDiv'>{location.city}, {location.country}</div>
+            <div className='locationDetailDiv'>{location.location}</div>
+            <div className='locationDetailDiv'>From: {location.startDate.substring(0, 10)}</div>
+            <div className='locationDetailDiv'>To: {location.endDate.substring(0, 10)}</div>
+            <button type='button' onClick={() => handleDeleteLocation(location.id)}>
+              Delete location
+            </button>
+          </div>
+        ))}
+      </div>
+      <TripBudget trip={trip} />
     </div>
   )
 }

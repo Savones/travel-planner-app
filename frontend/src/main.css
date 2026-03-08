@@ -93,10 +93,14 @@ a {
   margin: 0px 0px 0px 3px;
 }
 
+.locationsDiv {
+  margin-top: 50px;
+}
+
 .locationDiv {
   border: 1px grey solid;
   padding: 10px;
-  margin: 30px 0px;
+  margin: 10px 0px;
   width: 500px;
   align-items: flex-start;
 }
@@ -129,6 +133,11 @@ a {
 
 .newLocationForm input {
   margin-right: 5px;
+}
+
+.budgetDiv {
+  background-color: rgb(228, 243, 206);
+  padding: 10px;
 }
 
 /* CREATE TRIP */
