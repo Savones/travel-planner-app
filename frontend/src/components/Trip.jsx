@@ -1,13 +1,23 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import TripBudget from './TripBudget'
+import tripService from '../services/trips'
+import { useState, useEffect } from 'react'
 
-const Trip = ({ trips, deleteTrip }) => {
+const Trip = ({ deleteTrip }) => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  if (!trips.length) return <p>Loading trip...</p>
+  const [trip, setTrip] = useState(null)
 
-  const trip = trips.find(n => n.id == id)
+  useEffect(() => {
+    const fetchTrip = async () => {
+      const returnedTrip = await tripService.getById(id)
+      setTrip(returnedTrip)
+    }
+
+    fetchTrip()
+  }, [id])
+
   if (!trip) return <p>Trip not found</p>
 
   const editTrip = (event) => {

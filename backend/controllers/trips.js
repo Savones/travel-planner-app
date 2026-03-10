@@ -20,6 +20,17 @@ tripsRouter.get('/', async (request, response) => {
     })
 })
 
+tripsRouter.get('/:id', async (request, response) => {
+  const trip = await Trip.findById(request.params.id)
+    .populate('user', { username: 1 })
+
+  trip.locations.sort(
+    (a, b) => new Date(a.startDate) - new Date(b.startDate)
+  )
+
+  response.json(trip)
+})
+
 tripsRouter.post('/', async (request, response) => {
   const { title } = request.body
 

@@ -83,7 +83,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/trips/:id" element={<Trip deleteTrip={deleteTrip} trips={trips} />} />
+          <Route path="/trips/:id" element={<Trip deleteTrip={deleteTrip} />} />
           <Route path="/trips/:id/edit" element={<EditTripForm trips={trips} updateTrip={updateTrip} />} />
           <Route path="/" element={<TripList user={user} trips={trips} />} />
           <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
