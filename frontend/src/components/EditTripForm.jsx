@@ -53,6 +53,11 @@ const EditTripForm = ({ trips, updateTrip }) => {
     return <p>Loading trip...</p>
   }
 
+  const handleAddLocation = (event) => {
+    event.preventDefault()
+    navigate(`/trips/${trip.id}/addLocation`)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     const updatedLocations = locations.map(location => ({
@@ -84,74 +89,83 @@ const EditTripForm = ({ trips, updateTrip }) => {
           onChange={title.onChange}
         />
       </div>
-      {locations.map((location, locationIndex) => (
-        <div className='editLocationDiv' key={location.location_id}>
-          <LocationDropdown
-            selectedCountry={location.selectedCountry}
-            setSelectedCountry={(country) => {
-              const newLocations = [...locations]
-              newLocations[locationIndex].selectedCountry = country
-              newLocations[locationIndex].selectedCity = ''
-              newLocations[locationIndex].cities = []
-              setLocations(newLocations)
-            }}
-            selectedCity={location.selectedCity}
-            setSelectedCity={(city) => {
-              const newLocations = [...locations]
-              newLocations[locationIndex].selectedCity = city
-              setLocations(newLocations)
-            }}
-            countries={countries}
-            cities={location.cities}
-          />
+      <div className='editLocationsDiv'>
+        <h3>Locations</h3>
+        <button onClick={handleAddLocation}>Add location</button>
+        {locations.map((location, locationIndex) => (
+          <div className='editLocationDiv' key={location.location_id}>
+            <LocationDropdown
+              selectedCountry={location.selectedCountry}
+              setSelectedCountry={(country) => {
+                const newLocations = [...locations]
+                newLocations[locationIndex].selectedCountry = country
+                newLocations[locationIndex].selectedCity = ''
+                newLocations[locationIndex].cities = []
+                setLocations(newLocations)
+              }}
+              selectedCity={location.selectedCity}
+              setSelectedCity={(city) => {
+                const newLocations = [...locations]
+                newLocations[locationIndex].selectedCity = city
+                setLocations(newLocations)
+              }}
+              countries={countries}
+              cities={location.cities}
+            />
 
-          <div>
-            <label>Location</label>
-            <input
-              value={location.location}
-              onChange={(event) => {
-                const newLocations = [...locations]
-                newLocations[locationIndex].location = event.target.value
-                setLocations(newLocations)
-              }}
-            />
+            <div>
+              <label>Location</label>
+              <input
+                value={location.location}
+                onChange={(event) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].location = event.target.value
+                  setLocations(newLocations)
+                }}
+              />
+            </div>
+            <div>
+              <label>Start Date</label>
+              <input
+                type="date"
+                value={location.startDate.substring(0, 10)}
+                onChange={(event) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].startDate = event.target.value
+                  setLocations(newLocations)
+                }}
+              />
+            </div>
+            <div>
+              <label>End Date</label>
+              <input
+                type="date"
+                value={location.endDate.substring(0, 10)}
+                onChange={(event) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].endDate = event.target.value
+                  setLocations(newLocations)
+                }}
+              />
+            </div>
+            <button>Delete</button>
           </div>
-          <div>
-            <label>Start Date</label>
-            <input
-              type="date"
-              value={location.startDate.substring(0, 10)}
-              onChange={(event) => {
-                const newLocations = [...locations]
-                newLocations[locationIndex].startDate = event.target.value
-                setLocations(newLocations)
-              }}
-            />
-          </div>
-          <div>
-            <label>End Date</label>
-            <input
-              type="date"
-              value={location.endDate.substring(0, 10)}
-              onChange={(event) => {
-                const newLocations = [...locations]
-                newLocations[locationIndex].endDate = event.target.value
-                setLocations(newLocations)
-              }}
-            />
-          </div>
-        </div>
-      ))}
-      <div className='editTitleDiv'>
-        <label>Total budget</label>
-        <input
-          type={budget.type}
-          value={budget.value}
-          onChange={budget.onChange}
-        />
+        ))}
       </div>
-      <button onClick={cancel}>Cancel</button>
+      <div className='editBudgetDiv'>
+        <h3>Budget</h3>
+        <button>Add cost</button>
+        <div className='editcostDiv'>
+          <label>Total budget</label>
+          <input
+            type={budget.type}
+            value={budget.value}
+            onChange={budget.onChange}
+          />
+        </div>
+      </div>
       <button type="submit">Save</button>
+      <button onClick={cancel}>Cancel</button>
     </form>
   )
 }

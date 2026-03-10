@@ -1,9 +1,14 @@
 import LocationDropdown from './LocationDropdown'
 import { useField } from '../hooks'
 import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import locationService from '../services/locations'
 
-const LocationForm = ({ addNew, handleCancel }) => {
+const LocationForm = ({ updateTrip, trips }) => {
+  const { id } = useParams()
+  const trip = trips.find(n => n.id == id)
+  const navigate = useNavigate()
+
   const location = useField('text')
   const startDate = useField('date')
   const endDate = useField('date')
@@ -29,16 +34,29 @@ const LocationForm = ({ addNew, handleCancel }) => {
   }, [selectedCountry])
 
   const handleSubmit = (event) => {
+    console.log("submit")
     event.preventDefault()
     const location_id = Math.round(Math.random() * 10000)
-    addNew({
+    const newLocation = {
       location_id: location_id,
       country: selectedCountry.name,
       city: selectedCity,
       location: location.value,
       startDate: startDate.value,
       endDate: endDate.value
+    }
+    updateTrip({
+      ...trip,
+      locations: trip.locations
+        ? trip.locations.concat(newLocation)
+        : [newLocation]
     })
+    navigate(`/trips/${trip.id}`)
+  }
+
+  const handleCancel = (event) => {
+    event.preventDefault()
+    navigate(`/trips/${trip.id}`)
   }
 
   return (

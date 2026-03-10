@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import EditTripForm from './components/EditTripForm'
 import BudgetForm from './components/BudgetForm'
+import LocationForm from './components/LocationForm'
 import {
   BrowserRouter as Router,
   Routes, Route, Link
@@ -56,6 +57,8 @@ const App = () => {
   }
 
   const updateTrip = (trip) => {
+    console.log("submit2")
+    console.log(trip)
     tripService
       .update(trip)
       .then(returnedTrip => {
@@ -83,11 +86,12 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/trips/:id" element={<Trip deleteLocation={updateTrip} deleteTrip={deleteTrip} addNewLocation={updateTrip} trips={trips} />} />
+          <Route path="/trips/:id" element={<Trip deleteLocation={updateTrip} deleteTrip={deleteTrip} trips={trips} />} />
           <Route path="/trips/:id/edit" element={<EditTripForm trips={trips} updateTrip={updateTrip} />} />
           <Route path="/" element={<TripList user={user} trips={trips} />} />
           <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
           <Route path="/trips/:id/budget" element={<BudgetForm updateTrip={updateTrip} trips={trips} />} />
+          <Route path="/trips/:id/addLocation" element={<LocationForm updateTrip={updateTrip} trips={trips} />} />
         </Routes>
       </>
     </Router>

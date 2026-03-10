@@ -1,10 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 import LocationForm from './LocationForm'
 import TripBudget from './TripBudget'
 
-const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
-  const [showLocationForm, setShowLocationForm] = useState(false)
+const Trip = ({ trips, deleteTrip, deleteLocation }) => {
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -12,22 +10,6 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
 
   const trip = trips.find(n => n.id == id)
   if (!trip) return <p>Trip not found</p>
-
-  const changeFormVisibility = (event) => {
-    event.preventDefault()
-    showLocationForm ? setShowLocationForm(false) : setShowLocationForm(true)
-  }
-
-  const handleAddLocation = (location) => {
-    showLocationForm ? setShowLocationForm(false) : setShowLocationForm(true)
-    const updatedTrip = {
-      ...trip,
-      locations: trip.locations
-        ? trip.locations.concat(location)
-        : [location]
-    }
-    addNewLocation(updatedTrip)
-  }
 
   const editTrip = (event) => {
     event.preventDefault()
@@ -59,10 +41,6 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
     <div className='tripPageDiv'>
       <h2>{trip.title}</h2>
       <div className='tripDetailsButtons'>
-        {!showLocationForm &&
-          <button type="button" onClick={changeFormVisibility}>
-            Add location
-          </button>}
         {!trip.budget &&
           <button type='button' onClick={addBudget}>Create budget</button>
         }
@@ -73,7 +51,6 @@ const Trip = ({ trips, addNewLocation, deleteTrip, deleteLocation }) => {
           Delete trip
         </button>
       </div>
-      {showLocationForm && <LocationForm id={id} addNew={handleAddLocation} handleCancel={changeFormVisibility} />}
       <div className='locationsDiv'>
         {trip.locations && trip.locations.map(location => (
           <div className='locationDiv' key={location.id}>
