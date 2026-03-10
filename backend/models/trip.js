@@ -5,7 +5,11 @@ const locationSchema = new mongoose.Schema({
   city: String,
   location: String,
   startDate: Date,
-  endDate: Date
+  endDate: Date,
+  backgroundColor: {
+    type: String,
+    default: '#ffffff'
+  }
 })
 
 const tripSchema = new mongoose.Schema({

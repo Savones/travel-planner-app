@@ -7,8 +7,10 @@ import locationService from '../services/locations'
 const EditTripForm = ({ trips, updateTrip }) => {
   const title = useField('text')
   const budget = useField('number')
+
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
+
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -155,6 +157,18 @@ const EditTripForm = ({ trips, updateTrip }) => {
                 onChange={(event) => {
                   const newLocations = [...locations]
                   newLocations[locationIndex].endDate = event.target.value
+                  setLocations(newLocations)
+                }}
+              />
+            </div>
+            <div>
+              <label>Background color</label>
+              <input
+                type='color'
+                value={location.backgroundColor}
+                onChange={(event) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].backgroundColor = event.target.value
                   setLocations(newLocations)
                 }}
               />

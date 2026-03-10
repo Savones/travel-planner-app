@@ -12,6 +12,7 @@ const LocationForm = ({ updateTrip, trips }) => {
   const location = useField('text')
   const startDate = useField('date')
   const endDate = useField('date')
+  const backgroundColor = useField('color')
 
   const [countries, setCountries] = useState([])
   const [cities, setCities] = useState([])
@@ -43,7 +44,8 @@ const LocationForm = ({ updateTrip, trips }) => {
       city: selectedCity,
       location: location.value,
       startDate: startDate.value,
-      endDate: endDate.value
+      endDate: endDate.value,
+      backgroundColor: backgroundColor.value
     }
     updateTrip({
       ...trip,
@@ -82,6 +84,10 @@ const LocationForm = ({ updateTrip, trips }) => {
         <div>
           <label>End date</label>
           <input {...endDate} />
+        </div>
+        <div>
+          <label>Background color</label>
+          <input {...backgroundColor} />
         </div>
         <input type='submit' value='Add' />
         <input type='button' value='Cancel' onClick={handleCancel} />

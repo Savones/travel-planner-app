@@ -21,11 +21,6 @@ const Trip = ({ trips, deleteTrip }) => {
     navigate(`/`)
   }
 
-  const addBudget = (event) => {
-    event.preventDefault()
-    navigate(`/trips/${trip.id}/budget`)
-  }
-
   return (
     <div className='tripPageDiv'>
       <h2>{trip.title}</h2>
@@ -39,7 +34,7 @@ const Trip = ({ trips, deleteTrip }) => {
       </div>
       <div className='locationsDiv'>
         {trip.locations && trip.locations.map(location => (
-          <div className='locationDiv' key={location.id}>
+          <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
             <div className='locationTitleDiv'>{location.city}, {location.country}</div>
             <div className='locationDetailDiv'>{location.location}</div>
             <div className='locationDetailDiv'>From: {location.startDate.substring(0, 10)}</div>
