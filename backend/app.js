@@ -13,7 +13,8 @@ app.use(cors())
 
 mongoose.connect(config.MONGODB_URI, { family: 4 })
 
-app.use(express.json())
+app.use(express.json({ limit: '10mb' }))
+app.use(express.urlencoded({ limit: '10mb', extended: true }))
 app.use('/api/trips', tripsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)

@@ -6,6 +6,7 @@ import locationService from '../services/locations'
 
 const EditTripForm = ({ trips, updateTrip }) => {
   const title = useField('text')
+  const budget = useField('number')
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
   const { id } = useParams()
@@ -30,6 +31,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
       })
       setLocations(initialLocations)
       title.setValue(trip.title)
+      budget.setValue(trip.budget)
     }
   }, [trip, countries])
 
@@ -61,6 +63,7 @@ const EditTripForm = ({ trips, updateTrip }) => {
     updateTrip({
       ...trip,
       title: title.value,
+      budget: budget.value,
       locations: updatedLocations
     })
     navigate(`/trips/${trip.id}`)
@@ -139,6 +142,14 @@ const EditTripForm = ({ trips, updateTrip }) => {
           </div>
         </div>
       ))}
+      <div className='editTitleDiv'>
+        <label>Total budget</label>
+        <input
+          type={budget.type}
+          value={budget.value}
+          onChange={budget.onChange}
+        />
+      </div>
       <button onClick={cancel}>Cancel</button>
       <button type="submit">Save</button>
     </form>
