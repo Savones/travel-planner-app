@@ -20,4 +20,6 @@
 | 5.3. | 2    | Updated css styling | 
 | 8.3. | 2    | Updated css styling | 
 | 8.3. | 1    | Added initial budgeting funtionality | 
-| sum | 33    |  |
+| 11.3. | 3    | Added budget editing, notes and background color picker | 
+| 11.3. | 2    | Fixed routing, moved location creating and deleting to edit page | 
+| sum | 38    |  |
