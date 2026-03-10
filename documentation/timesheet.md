@@ -18,4 +18,6 @@
 | 5.3. | 1    | Fixed trip editing | 
 | 5.3. | 1    | Added location deletion functionality | 
 | 5.3. | 2    | Updated css styling | 
-| sum | 30    |  |
+| 8.3. | 2    | Updated css styling | 
+| 8.3. | 1    | Added initial budgeting funtionality | 
+| sum | 33    |  |
