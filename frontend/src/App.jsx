@@ -7,7 +7,6 @@ import Menu from './components/Menu'
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import EditTripForm from './components/EditTripForm'
-import BudgetForm from './components/BudgetForm'
 import LocationForm from './components/LocationForm'
 import {
   BrowserRouter as Router,
@@ -88,7 +87,6 @@ const App = () => {
           <Route path="/trips/:id/edit" element={<EditTripForm trips={trips} updateTrip={updateTrip} />} />
           <Route path="/" element={<TripList user={user} trips={trips} />} />
           <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
-          <Route path="/trips/:id/budget" element={<BudgetForm updateTrip={updateTrip} trips={trips} />} />
           <Route path="/trips/:id/addLocation" element={<LocationForm updateTrip={updateTrip} trips={trips} />} />
         </Routes>
       </>

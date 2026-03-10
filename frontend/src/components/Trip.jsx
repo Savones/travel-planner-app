@@ -30,9 +30,6 @@ const Trip = ({ trips, deleteTrip }) => {
     <div className='tripPageDiv'>
       <h2>{trip.title}</h2>
       <div className='tripDetailsButtons'>
-        {!trip.budget &&
-          <button type='button' onClick={addBudget}>Create budget</button>
-        }
         <button type="button" onClick={editTrip}>
           Edit
         </button>
