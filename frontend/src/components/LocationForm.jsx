@@ -9,7 +9,7 @@ const LocationForm = ({ updateTrip, trips }) => {
   const trip = trips.find(n => n.id == id)
   const navigate = useNavigate()
 
-  const location = useField('text')
+  const notes = useField('text')
   const startDate = useField('date')
   const endDate = useField('date')
   const backgroundColor = useField('color')
@@ -42,7 +42,7 @@ const LocationForm = ({ updateTrip, trips }) => {
       location_id: location_id,
       country: selectedCountry.name,
       city: selectedCity,
-      location: location.value,
+      notes: notes.value,
       startDate: startDate.value,
       endDate: endDate.value,
       backgroundColor: backgroundColor.value
@@ -74,8 +74,8 @@ const LocationForm = ({ updateTrip, trips }) => {
           cities={cities}
         />
         <div>
-          <label>Location</label>
-          <input {...location} />
+          <label>Notes</label>
+          <input {...notes} />
         </div>
         <div>
           <label>Start date</label>

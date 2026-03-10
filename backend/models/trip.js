@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const locationSchema = new mongoose.Schema({
   country: String,
   city: String,
-  location: String,
+  notes: String,
   startDate: Date,
   endDate: Date,
   backgroundColor: {

@@ -127,12 +127,12 @@ const EditTripForm = ({ trips, updateTrip }) => {
             />
 
             <div>
-              <label>Location</label>
+              <label>Notes</label>
               <input
-                value={location.location}
+                value={location.notes}
                 onChange={(event) => {
                   const newLocations = [...locations]
-                  newLocations[locationIndex].location = event.target.value
+                  newLocations[locationIndex].notes = event.target.value
                   setLocations(newLocations)
                 }}
               />
