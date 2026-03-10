@@ -1,8 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import LocationForm from './LocationForm'
 import TripBudget from './TripBudget'
 
-const Trip = ({ trips, deleteTrip, deleteLocation }) => {
+const Trip = ({ trips, deleteTrip }) => {
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -27,16 +26,6 @@ const Trip = ({ trips, deleteTrip, deleteLocation }) => {
     navigate(`/trips/${trip.id}/budget`)
   }
 
-  const handleDeleteLocation = (locationId) => {
-    const updatedTrip = {
-      ...trip,
-      locations: trip.locations.filter(
-        location => location.id !== locationId
-      )
-    }
-    deleteLocation(updatedTrip)
-  }
-
   return (
     <div className='tripPageDiv'>
       <h2>{trip.title}</h2>
@@ -58,9 +47,6 @@ const Trip = ({ trips, deleteTrip, deleteLocation }) => {
             <div className='locationDetailDiv'>{location.location}</div>
             <div className='locationDetailDiv'>From: {location.startDate.substring(0, 10)}</div>
             <div className='locationDetailDiv'>To: {location.endDate.substring(0, 10)}</div>
-            <button type='button' onClick={() => handleDeleteLocation(location.id)}>
-              Delete location
-            </button>
           </div>
         ))}
       </div>

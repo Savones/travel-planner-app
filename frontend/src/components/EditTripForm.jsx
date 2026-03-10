@@ -79,6 +79,17 @@ const EditTripForm = ({ trips, updateTrip }) => {
     navigate(`/trips/${trip.id}`)
   }
 
+  const handleDeleteLocation = (locationId) => {
+    const updatedTrip = {
+      ...trip,
+      locations: trip.locations.filter(
+        location => location.id !== locationId
+      )
+    }
+    updateTrip(updatedTrip)
+    navigate(`/trips/${trip.id}`)
+  }
+
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
       <div className='editTitleDiv'>
@@ -148,7 +159,9 @@ const EditTripForm = ({ trips, updateTrip }) => {
                 }}
               />
             </div>
-            <button>Delete</button>
+            <button type='button' onClick={() => handleDeleteLocation(location.id)}>
+              Delete location
+            </button>
           </div>
         ))}
       </div>
