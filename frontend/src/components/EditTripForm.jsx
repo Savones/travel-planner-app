@@ -3,18 +3,27 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useField } from '../hooks'
 import locationService from '../services/locations'
+import tripService from '../services/trips'
 
-const EditTripForm = ({ trips, updateTrip }) => {
+const EditTripForm = ({ updateTrip }) => {
   const title = useField('text')
   const budget = useField('number')
 
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
+  const [trip, setTrip] = useState(null)
 
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const trip = trips.find(n => n.id === id)
+  useEffect(() => {
+    const fetchTrip = async () => {
+      const returnedTrip = await tripService.getById(id)
+      setTrip(returnedTrip)
+    }
+
+    fetchTrip()
+  }, [id])
 
   useEffect(() => {
     locationService.getCountries().then(setCountries)

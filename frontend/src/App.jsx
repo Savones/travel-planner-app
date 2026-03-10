@@ -84,10 +84,10 @@ const App = () => {
           <Route path="/login" element={<LoginForm setUser={setUser} />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/trips/:id" element={<Trip deleteTrip={deleteTrip} />} />
-          <Route path="/trips/:id/edit" element={<EditTripForm trips={trips} updateTrip={updateTrip} />} />
+          <Route path="/trips/:id/edit" element={<EditTripForm updateTrip={updateTrip} />} />
           <Route path="/" element={<TripList user={user} trips={trips} />} />
           <Route path="/create" element={<TripForm user={user} addNew={addNew} />} />
-          <Route path="/trips/:id/addLocation" element={<LocationForm updateTrip={updateTrip} trips={trips} />} />
+          <Route path="/trips/:id/addLocation" element={<LocationForm updateTrip={updateTrip} />} />
         </Routes>
       </>
     </Router>

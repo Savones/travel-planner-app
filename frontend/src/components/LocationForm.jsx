@@ -3,10 +3,21 @@ import { useField } from '../hooks'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import locationService from '../services/locations'
+import tripService from '../services/trips'
 
-const LocationForm = ({ updateTrip, trips }) => {
+const LocationForm = ({ updateTrip }) => {
   const { id } = useParams()
-  const trip = trips.find(n => n.id == id)
+  const [trip, setTrip] = useState(null)
+
+  useEffect(() => {
+    const fetchTrip = async () => {
+      const returnedTrip = await tripService.getById(id)
+      setTrip(returnedTrip)
+    }
+
+    fetchTrip()
+  }, [id])
+
   const navigate = useNavigate()
 
   const notes = useField('text')
@@ -35,7 +46,6 @@ const LocationForm = ({ updateTrip, trips }) => {
   }, [selectedCountry])
 
   const handleSubmit = (event) => {
-    console.log("submit")
     event.preventDefault()
     const location_id = Math.round(Math.random() * 10000)
     const newLocation = {
