@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import tripUtils from '../utils/tripUtils'
 
 const TripList = ({ user, trips }) => {
   if (!user) return
@@ -8,13 +9,13 @@ const TripList = ({ user, trips }) => {
     <div className='homePageDiv'>
       <div className='tripListDiv'>
         {userTrips.map(trip => (
-          <Link to={`/trips/${trip.id}`}>
-            <div key={trip.id} className='tripBannerDiv'>
+          <Link key={trip.id} to={`/trips/${trip.id}`}>
+            <div className='tripBannerDiv'>
               <div className='tripTitleDiv'>
                 {trip.title}
               </div>
               <div className='tripDatesDiv'>
-                X.X.XXXX - Y.Y.YYYY
+                {tripUtils.getTripDateRange(trip.locations)}
               </div>
             </div>
           </Link>
