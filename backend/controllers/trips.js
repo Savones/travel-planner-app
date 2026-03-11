@@ -14,7 +14,7 @@ const getTokenFrom = request => {
 
 tripsRouter.get('/', async (request, response) => {
   Trip.find({})
-    .populate('user', { username: 1 })
+    .populate('user', { locations: 0 })
     .then((trips) => {
       response.json(trips)
     })

@@ -47,8 +47,8 @@ const Trip = ({ deleteTrip }) => {
           <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
             <div className='locationTitleDiv'>{location.city}, {location.country}</div>
             <div className='locationDetailDiv'>Notes: {location.notes}</div>
-            <div className='locationDetailDiv'>From: {location.startDate.substring(0, 10)}</div>
-            <div className='locationDetailDiv'>To: {location.endDate.substring(0, 10)}</div>
+            <div className='locationDetailDiv'>From: {new Date(location.startDate).toLocaleDateString('fi-FI')}</div>
+            <div className='locationDetailDiv'>To: {new Date(location.endDate).toLocaleDateString('fi-FI')}</div>
           </div>
         ))}
       </div>
