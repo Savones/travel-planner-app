@@ -135,9 +135,14 @@ a {
   margin-right: 5px;
 }
 
-.budgetDiv {
-  background-color: rgb(228, 243, 206);
+.tripSummaryDiv {
   padding: 10px;
+  border: 1px grey solid;
+  margin-top: 20px;
+}
+
+.tripSummaryDiv div {
+  margin-bottom: 10px;
 }
 
 /* CREATE TRIP */

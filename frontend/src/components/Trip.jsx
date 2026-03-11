@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import TripBudget from './TripBudget'
+import TripSummary from './TripSummary'
 import tripService from '../services/trips'
 import { useState, useEffect } from 'react'
 
@@ -42,6 +42,7 @@ const Trip = ({ deleteTrip }) => {
           Delete trip
         </button>
       </div>
+      <TripSummary trip={trip} />
       <div className='locationsDiv'>
         {trip.locations && trip.locations.map(location => (
           <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
@@ -52,7 +53,6 @@ const Trip = ({ deleteTrip }) => {
           </div>
         ))}
       </div>
-      <TripBudget trip={trip} />
     </div>
   )
 }
