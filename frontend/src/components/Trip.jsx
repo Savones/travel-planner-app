@@ -1,22 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import TripSummary from './TripSummary'
-import tripService from '../services/trips'
-import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 const Trip = ({ deleteTrip }) => {
   const { id } = useParams()
   const navigate = useNavigate()
-
-  const [trip, setTrip] = useState(null)
-
-  useEffect(() => {
-    const fetchTrip = async () => {
-      const returnedTrip = await tripService.getById(id)
-      setTrip(returnedTrip)
-    }
-
-    fetchTrip()
-  }, [id])
+  const trip = useSelector(state =>
+    state.trips.find(t => t.id === id)
+  )
 
   if (!trip) return <p>Trip not found</p>
 

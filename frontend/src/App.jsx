@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import tripService from './services/trips'
 import Trip from './components/Trip'
 import TripList from './components/TripList'
@@ -15,24 +15,15 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser, clearUser } from './reducers/userReducer'
+import { initializeTrips } from './reducers/tripReducer'
 
 const App = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
-  const [trips, setTrips] = useState([])
-
   useEffect(() => {
-    const fetchTrips = async () => {
-      try {
-        const response = await tripService.getAll()
-        setTrips(response)
-      } catch (error) {
-        console.error('Error fetching trips:', error)
-      }
-    }
-    fetchTrips()
-  }, [])
+    dispatch(initializeTrips())
+  }, [dispatch])
 
   useEffect(() => {
     const loggedUserJSON = localStorage.getItem("loggedUser")
@@ -42,17 +33,6 @@ const App = () => {
       tripService.setToken(user.token)
     }
   }, [dispatch])
-
-  const addNew = async (trip) => {
-    const returnedTrip = await tripService.create(trip)
-
-    setTrips(prevTrips =>
-      prevTrips.concat(returnedTrip)
-    )
-
-    return returnedTrip
-  }
-
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedUser")
@@ -90,8 +70,8 @@ const App = () => {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/trips/:id" element={<Trip deleteTrip={deleteTrip} />} />
           <Route path="/trips/:id/edit" element={<EditTripForm updateTrip={updateTrip} />} />
-          <Route path="/" element={<TripList trips={trips} />} />
-          <Route path="/create" element={<TripForm addNew={addNew} />} />
+          <Route path="/" element={<TripList />} />
+          <Route path="/create" element={<TripForm />} />
           <Route path="/trips/:id/addLocation" element={<LocationForm updateTrip={updateTrip} />} />
         </Routes>
       </>

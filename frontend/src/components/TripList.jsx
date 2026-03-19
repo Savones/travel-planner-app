@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import tripUtils from '../utils/tripUtils'
 import { useSelector } from 'react-redux'
 
-const TripList = ({ trips }) => {
+const TripList = () => {
   const user = useSelector(state => state.user)
+  const trips = useSelector(state => state.trips)
 
   if (!user) return
 

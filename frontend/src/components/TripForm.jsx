@@ -1,22 +1,25 @@
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addNewTrip } from '../reducers/tripReducer'
 
-const TripForm = ({ addNew }) => {
-  const user = useSelector(state => state.user)
+const TripForm = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const user = useSelector(state => state.user)
   const title = useField('text')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const createdTrip = await addNew({
+    const createdTrip = {
       title: title.value,
       userId: user.id
-    })
+    }
 
-    navigate(`/trips/${createdTrip.id}`)
+    const returnedTrip = await dispatch(addNewTrip(createdTrip))
+    navigate(`/trips/${returnedTrip.id}`)
   }
 
   const handleCancellation = (event) => {
