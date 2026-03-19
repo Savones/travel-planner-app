@@ -2,10 +2,11 @@ import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 import loginService from '../services/users'
 import tripService from '../services/trips'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../reducers/userReducer'
 
-// To-do: Make login the correct way using login service not users
-
-const LoginForm = ({ setUser }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const username = useField('text')
@@ -24,10 +25,10 @@ const LoginForm = ({ setUser }) => {
         username: username.value,
         password: password.value
       })
-      console.log("Login successful:", user)
       window.localStorage.setItem("loggedUser", JSON.stringify(user))
-      setUser(user)
+      dispatch(setUser(user))
       tripService.setToken(user.token)
+      console.log("Login successful:", user)
       navigate('/')
     } catch {
       console.log("Wrong credentials")

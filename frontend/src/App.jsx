@@ -13,8 +13,13 @@ import {
   Routes, Route, Link
 } from 'react-router-dom'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser, clearUser } from './reducers/userReducer'
+
 const App = () => {
-  const [user, setUser] = useState(null)
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
   const [trips, setTrips] = useState([])
 
   useEffect(() => {
@@ -33,10 +38,10 @@ const App = () => {
     const loggedUserJSON = localStorage.getItem("loggedUser")
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+      dispatch(setUser(user))
       tripService.setToken(user.token)
     }
-  }, [])
+  }, [dispatch])
 
   const addNew = async (trip) => {
     const returnedTrip = await tripService.create(trip)
@@ -52,7 +57,7 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("loggedUser")
     tripService.setToken(null)
-    setUser(null)
+    dispatch(clearUser())
   }
 
   const updateTrip = (trip) => {
@@ -81,7 +86,7 @@ const App = () => {
           {user && <Menu handleLogout={handleLogout} />}
         </div>
         <Routes>
-          <Route path="/login" element={<LoginForm setUser={setUser} />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/trips/:id" element={<Trip deleteTrip={deleteTrip} />} />
           <Route path="/trips/:id/edit" element={<EditTripForm updateTrip={updateTrip} />} />
