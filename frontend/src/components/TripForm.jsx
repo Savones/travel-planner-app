@@ -1,7 +1,9 @@
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const TripForm = ({ user, addNew }) => {
+const TripForm = ({ addNew }) => {
+  const user = useSelector(state => state.user)
   const navigate = useNavigate()
 
   const title = useField('text')
