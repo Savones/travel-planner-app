@@ -20,6 +20,10 @@
 | 5.3. | 2    | Updated css styling | 
 | 8.3. | 2    | Updated css styling | 
 | 8.3. | 1    | Added initial budgeting funtionality | 
-| 11.3. | 3    | Added budget editing, notes and background color picker | 
-| 11.3. | 2    | Fixed routing, moved location creating and deleting to edit page | 
-| sum | 38    |  |
+| 10.3. | 3    | Added budget editing, notes and background color picker | 
+| 10.3. | 2    | Fixed routing, moved location creating and deleting to edit page | 
+| 11.3. | 2    | Added trip summary | 
+| 19.3. | 3    | Started replacing local state with Redux | 
+| 20.3. | 2    | Continued local state with Redux | 
+| 20.3. | 2    | Added notification component and reducer | 
+| sum | 47    |  |
