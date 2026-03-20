@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import TripSummary from './TripSummary'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTrip } from '../reducers/tripReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
 const Trip = () => {
   const { id } = useParams()
@@ -21,6 +22,7 @@ const Trip = () => {
   const handleDeleteTrip = (event) => {
     event.preventDefault()
     dispatch(deleteTrip(id))
+    dispatch(showNotification(`Trip "${trip.title}" has been deleted.`, 5000))
     navigate(`/`)
   }
 

@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser, clearUser } from './reducers/userReducer'
 import { initializeTrips } from './reducers/tripReducer'
+import Notification from './components/Notification'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -47,6 +48,7 @@ const App = () => {
           <div className='headerLogo'>Travel planner</div>
           {user && <Menu handleLogout={handleLogout} />}
         </div>
+        <Notification />
         <Routes>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />

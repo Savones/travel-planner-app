@@ -16,7 +16,6 @@ const EditTripForm = () => {
 
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
-  //const [trip, setTrip] = useState(null)
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
