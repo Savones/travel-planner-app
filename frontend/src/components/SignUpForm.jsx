@@ -1,9 +1,12 @@
 import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 import userService from '../services/users'
+import { showNotification } from '../reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
 
 const SignUpForm = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const username = useField('text')
   const password = useField('password')
@@ -15,6 +18,7 @@ const SignUpForm = () => {
         username: username.value,
         password: password.value
       })
+    dispatch(showNotification(`Created user "${username.value}"`, 5000))
     navigate('/login')
   }
 

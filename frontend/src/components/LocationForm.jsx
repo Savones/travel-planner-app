@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import locationService from '../services/locations'
 import { useDispatch, useSelector } from 'react-redux'
 import { editTrip } from '../reducers/tripReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
 const LocationForm = () => {
   const { id } = useParams()
@@ -59,6 +60,7 @@ const LocationForm = () => {
         : [newLocation]
     }
     dispatch(editTrip(updatedTrip))
+    dispatch(showNotification(`Added location "${newLocation.city}"`, 5000))
     navigate(`/trips/${trip.id}`)
   }
 

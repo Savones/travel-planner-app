@@ -6,6 +6,7 @@ import locationService from '../services/locations'
 import { useDispatch } from 'react-redux'
 import { editTrip } from '../reducers/tripReducer'
 import { useSelector } from 'react-redux'
+import { showNotification } from '../reducers/notificationReducer'
 
 const EditTripForm = () => {
   const dispatch = useDispatch()
@@ -80,6 +81,7 @@ const EditTripForm = () => {
       locations: updatedLocations
     }
     dispatch(editTrip(updatedTrip))
+    dispatch(showNotification(`Edited trip "${trip.title}" successfully`, 5000))
     navigate(`/trips/${trip.id}`)
   }
 
@@ -88,7 +90,8 @@ const EditTripForm = () => {
     navigate(`/trips/${trip.id}`)
   }
 
-  const handleDeleteLocation = (locationId) => {
+  const handleDeleteLocation = (location) => {
+    const locationId = location.id
     const updatedTrip = {
       ...trip,
       locations: trip.locations.filter(
@@ -96,6 +99,7 @@ const EditTripForm = () => {
       )
     }
     dispatch(editTrip(updatedTrip))
+    dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000))
     navigate(`/trips/${trip.id}`)
   }
 
@@ -180,7 +184,7 @@ const EditTripForm = () => {
                 }}
               />
             </div>
-            <button type='button' onClick={() => handleDeleteLocation(location.id)}>
+            <button type='button' onClick={() => handleDeleteLocation(location)}>
               Delete location
             </button>
           </div>

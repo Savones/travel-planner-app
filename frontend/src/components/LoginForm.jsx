@@ -4,6 +4,7 @@ import loginService from '../services/users'
 import tripService from '../services/trips'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
@@ -28,10 +29,10 @@ const LoginForm = () => {
       window.localStorage.setItem("loggedUser", JSON.stringify(user))
       dispatch(setUser(user))
       tripService.setToken(user.token)
-      console.log("Login successful:", user)
+      dispatch(showNotification(`User "${user.username}" has logged in.`, 5000))
       navigate('/')
     } catch {
-      console.log("Wrong credentials")
+      dispatch(showNotification(`Username or password incorrect.`, 5000))
     }
   }
   return (

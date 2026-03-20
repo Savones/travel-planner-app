@@ -2,6 +2,7 @@ import { useField } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNewTrip } from '../reducers/tripReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
 const TripForm = () => {
   const dispatch = useDispatch()
@@ -19,6 +20,7 @@ const TripForm = () => {
     }
 
     const returnedTrip = await dispatch(addNewTrip(createdTrip))
+    dispatch(showNotification(`Created trip "${returnedTrip.title}"`, 5000))
     navigate(`/trips/${returnedTrip.id}`)
   }
 

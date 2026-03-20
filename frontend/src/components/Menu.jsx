@@ -1,10 +1,14 @@
 import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { showNotification } from '../reducers/notificationReducer'
 
 const Menu = ({ handleLogout }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const logout = () => {
     handleLogout()
+    dispatch(showNotification(`User has logged out.`, 5000))
     navigate('/login')
   }
 
