@@ -40,24 +40,6 @@ const App = () => {
     dispatch(clearUser())
   }
 
-  const updateTrip = (trip) => {
-    tripService
-      .update(trip)
-      .then(returnedTrip => {
-        setTrips(trips.map(t =>
-          t.id === returnedTrip.id ? returnedTrip : t
-        ))
-      })
-  }
-
-  const deleteTrip = (tripId) => {
-    tripService
-      .deleteTrip(tripId)
-      .then(() => {
-        setTrips(trips.filter(t => t.id !== tripId))
-      })
-  }
-
   return (
     <Router>
       <>
@@ -68,11 +50,11 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/trips/:id" element={<Trip deleteTrip={deleteTrip} />} />
-          <Route path="/trips/:id/edit" element={<EditTripForm updateTrip={updateTrip} />} />
+          <Route path="/trips/:id" element={<Trip />} />
+          <Route path="/trips/:id/edit" element={<EditTripForm />} />
           <Route path="/" element={<TripList />} />
           <Route path="/create" element={<TripForm />} />
-          <Route path="/trips/:id/addLocation" element={<LocationForm updateTrip={updateTrip} />} />
+          <Route path="/trips/:id/addLocation" element={<LocationForm />} />
         </Routes>
       </>
     </Router>

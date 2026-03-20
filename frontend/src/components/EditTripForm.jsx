@@ -3,27 +3,25 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useField } from '../hooks'
 import locationService from '../services/locations'
-import tripService from '../services/trips'
+import { useDispatch } from 'react-redux'
+import { editTrip } from '../reducers/tripReducer'
+import { useSelector } from 'react-redux'
 
-const EditTripForm = ({ updateTrip }) => {
+const EditTripForm = () => {
+  const dispatch = useDispatch()
+  const { id } = useParams()
+
   const title = useField('text')
   const budget = useField('number')
 
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
-  const [trip, setTrip] = useState(null)
+  //const [trip, setTrip] = useState(null)
+  const trip = useSelector(state =>
+    state.trips.find(t => t.id === id)
+  )
 
-  const { id } = useParams()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchTrip = async () => {
-      const returnedTrip = await tripService.getById(id)
-      setTrip(returnedTrip)
-    }
-
-    fetchTrip()
-  }, [id])
 
   useEffect(() => {
     locationService.getCountries().then(setCountries)
@@ -76,12 +74,13 @@ const EditTripForm = ({ updateTrip }) => {
       country: location.selectedCountry?.name,
       city: location.selectedCity
     }))
-    updateTrip({
+    const updatedTrip = {
       ...trip,
       title: title.value,
       budget: budget.value,
       locations: updatedLocations
-    })
+    }
+    dispatch(editTrip(updatedTrip))
     navigate(`/trips/${trip.id}`)
   }
 
@@ -97,7 +96,7 @@ const EditTripForm = ({ updateTrip }) => {
         location => location.id !== locationId
       )
     }
-    updateTrip(updatedTrip)
+    dispatch(editTrip(updatedTrip))
     navigate(`/trips/${trip.id}`)
   }
 

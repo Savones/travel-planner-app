@@ -3,21 +3,16 @@ import { useField } from '../hooks'
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import locationService from '../services/locations'
-import tripService from '../services/trips'
+import { useDispatch, useSelector } from 'react-redux'
+import { editTrip } from '../reducers/tripReducer'
 
-const LocationForm = ({ updateTrip }) => {
+const LocationForm = () => {
   const { id } = useParams()
-  const [trip, setTrip] = useState(null)
+  const trip = useSelector(state =>
+    state.trips.find(t => t.id === id)
+  )
 
-  useEffect(() => {
-    const fetchTrip = async () => {
-      const returnedTrip = await tripService.getById(id)
-      setTrip(returnedTrip)
-    }
-
-    fetchTrip()
-  }, [id])
-
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const notes = useField('text')
@@ -57,12 +52,13 @@ const LocationForm = ({ updateTrip }) => {
       endDate: endDate.value,
       backgroundColor: backgroundColor.value
     }
-    updateTrip({
+    const updatedTrip = {
       ...trip,
       locations: trip.locations
         ? trip.locations.concat(newLocation)
         : [newLocation]
-    })
+    }
+    dispatch(editTrip(updatedTrip))
     navigate(`/trips/${trip.id}`)
   }
 

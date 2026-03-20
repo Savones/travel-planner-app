@@ -1,10 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import TripSummary from './TripSummary'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteTrip } from '../reducers/tripReducer'
 
-const Trip = ({ deleteTrip }) => {
+const Trip = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
@@ -18,7 +20,7 @@ const Trip = ({ deleteTrip }) => {
 
   const handleDeleteTrip = (event) => {
     event.preventDefault()
-    deleteTrip(id)
+    dispatch(deleteTrip(id))
     navigate(`/`)
   }
 
