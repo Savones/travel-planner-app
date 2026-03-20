@@ -10,18 +10,33 @@ const TripForm = () => {
 
   const user = useSelector(state => state.user)
   const title = useField('text')
+  const { setValue, ...titleInput } = title
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const createdTrip = {
-      title: title.value,
-      userId: user.id
+    if (!title.value.trim()) {
+      dispatch(showNotification('Title is required.', 5000))
+      return
     }
 
-    const returnedTrip = await dispatch(addNewTrip(createdTrip))
-    dispatch(showNotification(`Created trip "${returnedTrip.title}"`, 5000))
-    navigate(`/trips/${returnedTrip.id}`)
+    if (title.value.length > 20) {
+      dispatch(showNotification('Title can have maximum 20 characters.', 5000))
+      return
+    }
+
+    try {
+      const createdTrip = {
+        title: title.value,
+        userId: user.id
+      }
+
+      const returnedTrip = await dispatch(addNewTrip(createdTrip))
+      dispatch(showNotification(`Created trip "${returnedTrip.title}"`, 5000))
+      navigate(`/trips/${returnedTrip.id}`)
+    } catch {
+      dispatch(showNotification(`Something went wrong.`, 5000))
+    }
   }
 
   const handleCancellation = (event) => {
@@ -31,11 +46,11 @@ const TripForm = () => {
 
   return (
     <div className='createTripDiv'>
-      <h2>Add a new trip</h2>
+      <h2>Create a trip</h2>
       <form className='createTripForm' onSubmit={handleSubmit}>
         <div>
           <label>Title</label>
-          <input {...title} />
+          <input {...titleInput} />
         </div>
         <div className='createButtonsDiv'>
           <input type='submit' value='Create' />

@@ -7,7 +7,7 @@ const Notification = () => {
     return <div></div>
   }
 
-  return <div class='notificationDiv'>{notification}</div>
+  return <div className='notificationDiv'>{notification}</div>
 }
 
 export default Notification
