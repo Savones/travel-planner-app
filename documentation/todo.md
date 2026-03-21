@@ -16,8 +16,7 @@
 - [x] Choose dates from a calender
 - [x] Edit locations and title
 - [x] Delete trip functionality
-- [ ] Delete location functionality
-- [ ] Add drop down to add different contents (including location)
+- [x] Delete location functionality
 
 ### Login
 - [x] Have a login form
@@ -30,9 +29,9 @@
 
 ### Create account
 - [x] Have a create account form and functionality
-- [ ] Add requirement for username and password 
+- [x] Add requirement for username and password 
 
 ### Other
 - [ ] E2E testing with Cypress
-- [ ] Implement redux for state management
+- [x] Implement redux for state management
 - [ ] Add error messages and handling

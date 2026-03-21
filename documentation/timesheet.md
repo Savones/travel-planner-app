@@ -26,4 +26,5 @@
 | 19.3. | 3    | Started replacing local state with Redux | 
 | 20.3. | 2    | Continued local state with Redux | 
 | 20.3. | 2    | Added notification component and reducer | 
-| sum | 47    |  |
+| 21.3. | 1    | Added error handling to signing up | 
+| sum | 48    |  |
