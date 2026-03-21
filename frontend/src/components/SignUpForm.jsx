@@ -37,11 +37,7 @@ const SignUpForm = () => {
       navigate('/login')
 
     } catch (error) {
-      if (error.response?.data?.error.includes('duplicate')) {
-        dispatch(showNotification('Username already exists', 5000))
-      } else {
-        dispatch(showNotification('Failed to create user', 5000))
-      }
+      dispatch(showNotification(`Error: ${error.response.data.error}`, 5000))
     }
   }
 
