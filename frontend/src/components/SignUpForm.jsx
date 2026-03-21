@@ -11,15 +11,38 @@ const SignUpForm = () => {
   const username = useField('text')
   const password = useField('password')
 
-  const createUser = (event) => {
+  const { setValue: setUsernameValue, ...usernameInput } = username
+  const { setValue: setPasswordValue, ...passwordInput } = password
+
+  const createUser = async (event) => {
     event.preventDefault()
-    userService
-      .create({
+
+    if (username.value.length < 3 || username.value.length > 20) {
+      dispatch(showNotification(`Username invalid. Username has to have 3-20 characters.`, 5000))
+      return
+    }
+
+    if (password.value.length < 8 || password.value.length > 15) {
+      dispatch(showNotification(`Password invalid. Password has to have 8-15 characters.`, 5000))
+      return
+    }
+
+    try {
+      await userService.create({
         username: username.value,
         password: password.value
       })
-    dispatch(showNotification(`Created user "${username.value}"`, 5000))
-    navigate('/login')
+
+      dispatch(showNotification(`Created user "${username.value}"`, 5000))
+      navigate('/login')
+
+    } catch (error) {
+      if (error.response?.data?.error.includes('duplicate')) {
+        dispatch(showNotification('Username already exists', 5000))
+      } else {
+        dispatch(showNotification('Failed to create user', 5000))
+      }
+    }
   }
 
   const cancel = (event) => {
@@ -34,13 +57,13 @@ const SignUpForm = () => {
         <div>
           <label>
             Username
-            <input {...username} />
+            <input {...usernameInput} />
           </label>
         </div>
         <div>
           <label>
             Password
-            <input {...password} />
+            <input {...passwordInput} />
           </label>
         </div>
         <div className='loginButtons'>
