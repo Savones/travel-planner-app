@@ -9,8 +9,9 @@ import { useSelector } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
 
 const EditTripForm = () => {
-  const dispatch = useDispatch()
   const { id } = useParams()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const title = useField('text')
   const budget = useField('number')
@@ -20,8 +21,6 @@ const EditTripForm = () => {
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     locationService.getCountries().then(setCountries)
@@ -69,20 +68,27 @@ const EditTripForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
     const updatedLocations = locations.map(location => ({
       ...location,
       country: location.selectedCountry?.name,
       city: location.selectedCity
     }))
+
     const updatedTrip = {
       ...trip,
       title: title.value,
       budget: budget.value,
       locations: updatedLocations
     }
-    dispatch(editTrip(updatedTrip))
-    dispatch(showNotification(`Edited trip "${trip.title}" successfully`, 5000))
-    navigate(`/trips/${trip.id}`)
+
+    try {
+      dispatch(editTrip(updatedTrip))
+      dispatch(showNotification(`Edited trip "${trip.title}" successfully`, 5000))
+      navigate(`/trips/${trip.id}`)
+    } catch (error) {
+      dispatch(showNotification(`Failed to edit trip "${trip.title}"`, 5000))
+    }
   }
 
   const cancel = (event) => {
@@ -98,9 +104,20 @@ const EditTripForm = () => {
         location => location.id !== locationId
       )
     }
-    dispatch(editTrip(updatedTrip))
-    dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000))
-    navigate(`/trips/${trip.id}`)
+
+    const confirmation = window.confirm(`Delete trip "${location.city}"?`)
+    if (!confirmation) {
+      return
+    }
+
+    try {
+      dispatch(editTrip(updatedTrip))
+      dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000))
+      navigate(`/trips/${trip.id}`)
+    } catch (error) {
+      dispatch(showNotification(`Failed to delete "${location.city}."`, 5000))
+
+    }
   }
 
   return (
@@ -117,7 +134,7 @@ const EditTripForm = () => {
         <h3>Locations</h3>
         <button onClick={handleAddLocation}>Add location</button>
         {locations.map((location, locationIndex) => (
-          <div className='editLocationDiv' key={location.location_id}>
+          <div className='editLocationDiv' key={location.id}>
             <LocationDropdown
               selectedCountry={location.selectedCountry}
               setSelectedCountry={(country) => {
@@ -176,7 +193,7 @@ const EditTripForm = () => {
               <label>Background color</label>
               <input
                 type='color'
-                value={location.backgroundColor}
+                value={location.backgroundColor || '#ffffff'}
                 onChange={(event) => {
                   const newLocations = [...locations]
                   newLocations[locationIndex].backgroundColor = event.target.value

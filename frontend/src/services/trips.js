@@ -22,7 +22,8 @@ const deleteTrip = async tripId => {
   const config = {
     headers: { Authorization: token }
   }
-  await axios.delete(`${baseUrl}/${tripId}`, config)
+  const response = await axios.delete(`${baseUrl}/${tripId}`, config)
+  return response.data
 }
 
 const create = async newObject => {
