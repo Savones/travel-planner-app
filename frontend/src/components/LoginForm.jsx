@@ -11,7 +11,10 @@ const LoginForm = () => {
   const navigate = useNavigate()
 
   const username = useField('text')
+  const { setValue: setUsername, ...usernameInput } = username
+
   const password = useField('password')
+  const { setValue: setPassword, ...passwordInput } = password
 
   const changeView = (event) => {
     event.preventDefault()
@@ -42,13 +45,13 @@ const LoginForm = () => {
         <div>
           <label>
             Username
-            <input {...username} />
+            <input {...usernameInput} />
           </label>
         </div>
         <div>
           <label>
             Password
-            <input {...password} />
+            <input {...passwordInput} />
           </label>
         </div>
         <div className='loginButtons'>

@@ -14,6 +14,14 @@ usersRouter.post('/', async (request, response, next) => {
       return response.status(400).json({
         error: 'password missing'
       })
+    } else if (password.length < 8 || password.length > 25) {
+      return response.status(400).json({
+        error: 'password has to have 8-25 characters'
+      })
+    } else if (username.length < 3 || username.length > 20) {
+      return response.status(400).json({
+        error: 'username has to have 3-20 characters'
+      })
     }
 
     const saltRounds = 10
