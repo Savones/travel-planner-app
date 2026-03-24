@@ -27,4 +27,5 @@
 | 20.3. | 2    | Continued local state with Redux | 
 | 20.3. | 2    | Added notification component and reducer | 
 | 21.3. | 1    | Added error handling to signing up | 
-| sum | 48    |  |
+| 24.3. | 4    | Improved front and backend error handling | 
+| sum | 52    |  |
