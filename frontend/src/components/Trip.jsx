@@ -60,7 +60,11 @@ const Trip = () => {
         {trip.locations && trip.locations.map(location => (
           <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
             <div className='locationTitleDiv'>{location.city}, {location.country}</div>
-            <div className='locationDetailDiv'>Notes: {location.notes}</div>
+            {location.notes && (
+              <div className='locationDetailDiv'>
+                Notes: {location.notes}
+              </div>
+            )}
             <div className='locationDetailDiv'>From: {formatDate(location.startDate)}</div>
             <div className='locationDetailDiv'>To: {formatDate(location.startDate)}</div>
           </div>

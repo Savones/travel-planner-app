@@ -157,7 +157,7 @@ const EditTripForm = () => {
             <div>
               <label>Notes</label>
               <input
-                value={location.notes}
+                value={location.notes || ''}
                 onChange={(event) => {
                   const newLocations = [...locations]
                   newLocations[locationIndex].notes = event.target.value

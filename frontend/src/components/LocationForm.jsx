@@ -83,7 +83,7 @@ const LocationForm = () => {
     const newLocation = {
       country: selectedCountry.name,
       city: selectedCity,
-      notes: notes.value,
+      notes: notes.value || '',
       startDate: startDate.value,
       endDate: endDate.value,
       backgroundColor: backgroundColor.value || '#ffffff'
