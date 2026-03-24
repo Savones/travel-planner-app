@@ -19,12 +19,25 @@ const Trip = () => {
     navigate(`/trips/${trip.id}/edit`)
   }
 
-  const handleDeleteTrip = (event) => {
+  const handleDeleteTrip = async (event) => {
     event.preventDefault()
-    dispatch(deleteTrip(id))
-    dispatch(showNotification(`Trip "${trip.title}" has been deleted.`, 5000))
-    navigate(`/`)
+    const confirmation = window.confirm(`Delete trip "${trip.title}"?`)
+    if (!confirmation) {
+      return
+    }
+
+    try {
+      await dispatch(deleteTrip(id))
+      dispatch(showNotification(`Trip "${trip.title}" has been deleted.`, 5000))
+      navigate(`/`)
+
+    } catch (error) {
+      dispatch(showNotification(`Failed to delete trip "${trip.title}". Error: ${error.response.data.error}`))
+    }
   }
+
+  const formatDate = (date) =>
+    new Date(date).toLocaleDateString('fi-FI')
 
   return (
     <div className='tripPageDiv'>
@@ -43,8 +56,8 @@ const Trip = () => {
           <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
             <div className='locationTitleDiv'>{location.city}, {location.country}</div>
             <div className='locationDetailDiv'>Notes: {location.notes}</div>
-            <div className='locationDetailDiv'>From: {new Date(location.startDate).toLocaleDateString('fi-FI')}</div>
-            <div className='locationDetailDiv'>To: {new Date(location.endDate).toLocaleDateString('fi-FI')}</div>
+            <div className='locationDetailDiv'>From: {formatDate(location.startDate)}</div>
+            <div className='locationDetailDiv'>To: {formatDate(location.startDate)}</div>
           </div>
         ))}
       </div>
