@@ -26,8 +26,8 @@ const LocationForm = () => {
   const { setValue: setEndDate, ...endDateInput } = endDate
   const { setValue: setColor, ...backgroundColorInput } = backgroundColor
 
-
   const [countries, setCountries] = useState([])
+  const [loadingCountries, setLoadingCountries] = useState(true)
   const [cities, setCities] = useState([])
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [selectedCity, setSelectedCity] = useState('')
@@ -38,7 +38,9 @@ const LocationForm = () => {
         const data = await locationService.getCountries()
         setCountries(data)
       } catch (error) {
-        dispatch(showNotification(`Failed to fetch countries. Error: ${error.response.data.error}`))
+        dispatch(showNotification('Failed to load countries', 5000))
+      } finally {
+        setLoadingCountries(false)
       }
     }
 
@@ -106,6 +108,10 @@ const LocationForm = () => {
   const handleCancel = (event) => {
     event.preventDefault()
     navigate(`/trips/${trip.id}`)
+  }
+
+  if (loadingCountries) {
+    return <p>Loading...</p>
   }
 
   return (
