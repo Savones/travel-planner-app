@@ -21,47 +21,86 @@ const LocationForm = () => {
   const endDate = useField('date')
   const backgroundColor = useField('color')
 
+  const { setValue: setNotes, ...notesInput } = notes
+  const { setValue: setStartDate, ...startDateInput } = startDate
+  const { setValue: setEndDate, ...endDateInput } = endDate
+  const { setValue: setColor, ...backgroundColorInput } = backgroundColor
+
+
   const [countries, setCountries] = useState([])
   const [cities, setCities] = useState([])
-
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [selectedCity, setSelectedCity] = useState('')
 
   useEffect(() => {
-    locationService.getCountries().then(data => {
-      setCountries(data)
-    })
-  }, [])
+    const fetchCountries = async () => {
+      try {
+        const data = await locationService.getCountries()
+        setCountries(data)
+      } catch (error) {
+        dispatch(showNotification(`Failed to fetch countries. Error: ${error.response.data.error}`))
+      }
+    }
+
+    fetchCountries()
+  }, [dispatch])
 
   useEffect(() => {
-    if (selectedCountry) {
-      locationService.getCities(selectedCountry.iso2).then(data => {
-        setCities(data)
-      })
-    }
-  }, [selectedCountry])
+    const fetchCities = async () => {
+      if (!selectedCountry) return
 
-  const handleSubmit = (event) => {
+      try {
+        const data = await locationService.getCities(selectedCountry.iso2)
+        setCities(data)
+      } catch (error) {
+        dispatch(showNotification(`Failed to fetch countries. Error: ${error.response.data.error}`))
+      }
+    }
+
+    fetchCities()
+  }, [selectedCountry, dispatch])
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const location_id = Math.round(Math.random() * 10000)
+
+    if (!selectedCountry || !selectedCity) {
+      dispatch(showNotification('Select country and city.', 5000))
+      return
+    }
+
+    if (!startDate.value || !endDate.value) {
+      dispatch(showNotification('Select start and end dates.', 5000))
+      return
+    }
+
+    if (new Date(startDate.value) > new Date(endDate.value)) {
+      dispatch(showNotification('Start date must be before end date.', 5000))
+      return
+    }
+
     const newLocation = {
-      location_id: location_id,
       country: selectedCountry.name,
       city: selectedCity,
       notes: notes.value,
       startDate: startDate.value,
       endDate: endDate.value,
-      backgroundColor: backgroundColor.value
+      backgroundColor: backgroundColor.value || '#ffffff'
     }
+
     const updatedTrip = {
       ...trip,
       locations: trip.locations
         ? trip.locations.concat(newLocation)
         : [newLocation]
     }
-    dispatch(editTrip(updatedTrip))
-    dispatch(showNotification(`Added location "${newLocation.city}"`, 5000))
-    navigate(`/trips/${trip.id}`)
+
+    try {
+      await dispatch(editTrip(updatedTrip))
+      dispatch(showNotification(`Added location "${newLocation.city}"`, 5000))
+      navigate(`/trips/${trip.id}`)
+    } catch (error) {
+      dispatch(showNotification(`Failed to add a location "${newLocation.city}". Error: ${error.response.data.error}`))
+    }
   }
 
   const handleCancel = (event) => {
@@ -72,6 +111,7 @@ const LocationForm = () => {
   return (
     <div className='newLocationDiv'>
       <h3>Add new location</h3>
+
       <form className='newLocationForm' onSubmit={handleSubmit}>
         <LocationDropdown
           selectedCountry={selectedCountry}
@@ -81,22 +121,30 @@ const LocationForm = () => {
           countries={countries}
           cities={cities}
         />
+
         <div>
           <label>Notes</label>
-          <input {...notes} />
+          <input {...notesInput} />
         </div>
+
         <div>
           <label>Start date</label>
-          <input {...startDate} />
+          <input {...startDateInput} />
         </div>
+
         <div>
           <label>End date</label>
-          <input {...endDate} />
+          <input {...endDateInput} />
         </div>
+
         <div>
           <label>Background color</label>
-          <input {...backgroundColor} />
+          <input
+            {...backgroundColorInput}
+            value={backgroundColor.value || '#ffffff'}
+          />
         </div>
+
         <input type='submit' value='Add' />
         <input type='button' value='Cancel' onClick={handleCancel} />
       </form>
