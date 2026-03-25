@@ -26,7 +26,13 @@ const tripSchema = new mongoose.Schema({
   budget: {
     type: Number,
     required: false
-  }
+  },
+  users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 })
 
 tripSchema.set('toJSON', {

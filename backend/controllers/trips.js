@@ -57,6 +57,7 @@ tripsRouter.post('/', async (request, response) => {
   const populatedTrip = await Trip
     .findById(savedTrip._id)
     .populate('user', { username: 1 })
+    .populate('users', { username: 1 })
 
   response.status(201).json(populatedTrip)
 })
@@ -81,6 +82,7 @@ tripsRouter.put('/:id', async (request, response) => {
   const populatedResult = await Trip
     .findById(savedTrip._id)
     .populate('user', { username: 1 })
+    .populate('users', { username: 1 })
 
   response.json(populatedResult)
 })

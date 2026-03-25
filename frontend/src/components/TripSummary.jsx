@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux"
+
 const TripSummary = ({ trip }) => {
   const locations = trip.locations || []
+  const user = useSelector(state => state.user)
 
   const getTripDuration = (locations) => {
     if (!locations.length) return 0
@@ -34,6 +37,7 @@ const TripSummary = ({ trip }) => {
       </div>
 
       <div>${trip.budget ?? 0} budget</div>
+      <div>Travellers: {user.username}</div>
     </div>
   )
 }

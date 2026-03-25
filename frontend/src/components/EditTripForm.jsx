@@ -130,6 +130,7 @@ const EditTripForm = () => {
           onChange={title.onChange}
         />
       </div>
+
       <div className='editLocationsDiv'>
         <h3>Locations</h3>
         <button onClick={handleAddLocation}>Add location</button>
@@ -207,6 +208,7 @@ const EditTripForm = () => {
           </div>
         ))}
       </div>
+
       <div className='editBudgetDiv'>
         <h3>Budget</h3>
         <button>Add cost</button>
@@ -218,6 +220,7 @@ const EditTripForm = () => {
             onChange={budget.onChange}
           />
         </div>
+
       </div>
       <button type="submit">Save</button>
       <button onClick={cancel}>Cancel</button>
