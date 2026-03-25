@@ -3,10 +3,14 @@ import TripSummary from './TripSummary'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTrip } from '../reducers/tripReducer'
 import { showNotification } from '../reducers/notificationReducer'
+import { useRef } from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const Trip = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const tripRef = useRef()
   const { id } = useParams()
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
@@ -36,13 +40,46 @@ const Trip = () => {
     }
   }
 
+  const handleDownload = async () => {
+    try {
+      const element = tripRef.current
+      const canvas = await html2canvas(element, {
+        scale: 2
+      })
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4')
+
+      const margin = 10
+      const imgWidth = 210 - margin * 2
+      const pageHeight = 295
+      const imgHeight = (canvas.height * imgWidth) / canvas.width
+
+      let heightLeft = imgHeight
+      let position = 0
+
+      pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight
+        pdf.addPage()
+        pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight)
+        heightLeft -= pageHeight
+      }
+
+      pdf.save(`${trip.title}.pdf`)
+
+    } catch (error) {
+      dispatch(showNotification(`Download failed.`, 5000))
+    }
+  }
+
+
   const formatDate = (date) =>
     new Date(date).toLocaleDateString('fi-FI')
 
   return (
     <div className='tripPageDiv'>
-
-      <h2>{trip.title}</h2>
 
       <div className='tripDetailsButtons'>
         <button type="button" onClick={editTrip}>
@@ -51,26 +88,32 @@ const Trip = () => {
         <button type="button" onClick={handleDeleteTrip}>
           Delete trip
         </button>
+        <button type="button" onClick={handleDownload}>
+          Download
+        </button>
       </div>
 
-      <TripSummary trip={trip} />
+      <div ref={tripRef}>
+        <h2>{trip.title}</h2>
 
-      <div className='locationsDiv'>
-        {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
-        {trip.locations && trip.locations.map(location => (
-          <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
-            <div className='locationTitleDiv'>{location.city}, {location.country}</div>
-            {location.notes && (
-              <div className='locationDetailDiv'>
-                Notes: {location.notes}
-              </div>
-            )}
-            <div className='locationDetailDiv'>From: {formatDate(location.startDate)}</div>
-            <div className='locationDetailDiv'>To: {formatDate(location.startDate)}</div>
-          </div>
-        ))}
+        <TripSummary trip={trip} />
+
+        <div className='locationsDiv'>
+          {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
+          {trip.locations && trip.locations.map(location => (
+            <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
+              <div className='locationTitleDiv'>{location.city}, {location.country}</div>
+              {location.notes && (
+                <div className='locationDetailDiv'>
+                  Notes: {location.notes}
+                </div>
+              )}
+              <div className='locationDetailDiv'>From: {formatDate(location.startDate)}</div>
+              <div className='locationDetailDiv'>To: {formatDate(location.startDate)}</div>
+            </div>
+          ))}
+        </div>
       </div>
-
     </div>
   )
 }
