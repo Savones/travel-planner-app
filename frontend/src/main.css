@@ -80,7 +80,7 @@ a {
 /* TRIP DETAILS */
 
 .tripPageDiv {
-  margin-top: 100px;
+  margin-top: 10px;
   flex-wrap: wrap;
 }
 
@@ -98,17 +98,19 @@ a {
 }
 
 .locationDiv {
-  border: 1px grey solid;
   padding: 10px;
-  margin: 10px 0px;
+  border-radius: 25px;
+  margin: 10px 10px;
   width: 500px;
   align-items: flex-start;
+  background-color: #FFF;
+  border: 5px solid;
 }
 
 .locationTitleDiv {
   font-size: 20px;
-  padding: 10px;
-  align-self: center;
+  margin: 20px 0px;
+  font-weight: bold;
 }
 
 .locationDetailDiv {

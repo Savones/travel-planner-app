@@ -74,7 +74,6 @@ const Trip = () => {
     }
   }
 
-
   const formatDate = (date) =>
     new Date(date).toLocaleDateString('fi-FI')
 
@@ -99,17 +98,17 @@ const Trip = () => {
         <TripSummary trip={trip} />
 
         <div className='locationsDiv'>
+          <h2>Itinerary</h2>
           {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
           {trip.locations && trip.locations.map(location => (
-            <div className='locationDiv' style={{ backgroundColor: location.backgroundColor }} key={location.id}>
+            <div className='locationDiv' style={{ borderColor: location.backgroundColor }} key={location.id}>
               <div className='locationTitleDiv'>{location.city}, {location.country}</div>
+              <div className='locationDetailDiv'>{formatDate(location.startDate)} - {formatDate(location.endDate)}</div>
               {location.notes && (
                 <div className='locationDetailDiv'>
                   Notes: {location.notes}
                 </div>
               )}
-              <div className='locationDetailDiv'>From: {formatDate(location.startDate)}</div>
-              <div className='locationDetailDiv'>To: {formatDate(location.startDate)}</div>
             </div>
           ))}
         </div>
