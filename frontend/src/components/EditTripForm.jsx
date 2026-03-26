@@ -16,11 +16,18 @@ const EditTripForm = () => {
   const title = useField('text')
   const budget = useField('number')
 
+  const [users, setUsers] = useState([])
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
+
+  useEffect(() => {
+    if (trip) {
+      setUsers(trip.users)
+    }
+  }, [trip])
 
   useEffect(() => {
     locationService.getCountries().then(setCountries)
@@ -79,7 +86,8 @@ const EditTripForm = () => {
       ...trip,
       title: title.value,
       budget: budget.value,
-      locations: updatedLocations
+      locations: updatedLocations,
+      users: users.map(u => typeof u === 'object' ? u.id : u)
     }
 
     try {
@@ -96,7 +104,7 @@ const EditTripForm = () => {
     navigate(`/trips/${trip.id}`)
   }
 
-  const handleDeleteLocation = (location) => {
+  const handleDeleteLocation = async (location) => {
     const locationId = location.id
     const updatedTrip = {
       ...trip,
@@ -111,7 +119,7 @@ const EditTripForm = () => {
     }
 
     try {
-      dispatch(editTrip(updatedTrip))
+      await dispatch(editTrip(updatedTrip))
       dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000))
       navigate(`/trips/${trip.id}`)
     } catch (error) {
@@ -119,6 +127,12 @@ const EditTripForm = () => {
 
     }
   }
+
+  const handleRemoveTraveller = (user) => {
+    const updatedUsers = users.filter(u => u.id !== user.id)
+    setUsers(updatedUsers)
+  }
+
 
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
@@ -129,6 +143,18 @@ const EditTripForm = () => {
           value={title.value}
           onChange={title.onChange}
         />
+      </div>
+
+      <div>
+        <button>Add traveller</button>
+        {users.map(u => (
+          <div key={u.id}>
+            {u.username}
+            <button type="button" onClick={() => handleRemoveTraveller(u)}>
+              Remove
+            </button>
+          </div>
+        ))}
       </div>
 
       <div className='editLocationsDiv'>
