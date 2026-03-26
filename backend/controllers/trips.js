@@ -15,6 +15,7 @@ const getTokenFrom = request => {
 tripsRouter.get('/', async (request, response) => {
   Trip.find({})
     .populate('user', { locations: 0 })
+    .populate('users', { username: 1 })
     .then((trips) => {
       response.json(trips)
     })
@@ -62,7 +63,6 @@ tripsRouter.post('/', async (request, response) => {
   response.status(201).json(populatedTrip)
 })
 
-
 tripsRouter.put('/:id', async (request, response) => {
   const body = request.body
 
@@ -73,9 +73,23 @@ tripsRouter.put('/:id', async (request, response) => {
 
   const trip = await Trip.findById(request.params.id)
 
-  trip.title = body.title
-  trip.locations = body.locations
-  trip.budget = body.budget
+  if (!trip) {
+    return response.status(404).json({ error: 'trip not found' })
+  }
+
+  if (trip.user.toString() !== decodedToken.id) {
+    return response.status(403).json({ error: 'not authorized' })
+  }
+
+  if (body.title !== undefined) trip.title = body.title
+  if (body.locations !== undefined) trip.locations = body.locations
+  if (body.budget !== undefined) trip.budget = body.budget
+
+  if (body.users) {
+    trip.users = body.users.map(u =>
+      typeof u === 'object' ? u.id || u._id : u
+    )
+  }
 
   const savedTrip = await trip.save()
 
