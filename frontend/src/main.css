@@ -45,36 +45,67 @@ a {
 
 .homePageDiv {
   margin-top: 100px;
-
 }
 
 .tripListDiv {
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  justify-items: center;
+  padding: 20px;
+  max-width: 1000px;
+  align-self: center;
 }
 
 .tripBannerDiv {
-  border: 1px grey solid;
-  color: #1D3124;
-  width: 600px;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
   height: 350px;
-  margin-bottom: 50px;
-  justify-content: flex-end;
+  overflow: hidden;
   background-color: #F3CFC6;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease
+}
 
+.tripBannerDiv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .tripBannerDiv:hover {
-  background-color: #f3cfc687;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
 
-.tripBannerDiv div {
-  background-color: #FFF;
-  align-items: center;
-  padding: 10px;
+.tripDetailsDiv {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 12px 12px;
+  box-sizing: border-box;
 }
 
 .tripTitleDiv {
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tripDatesDiv {
+  font-size: 14px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* TRIP DETAILS */
@@ -235,6 +266,9 @@ a {
   justify-content: space-between;
   height: 50px;
   border-bottom: 1px grey solid;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
 }
 
 .menuButtonsDiv div {
