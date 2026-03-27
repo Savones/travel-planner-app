@@ -48,7 +48,7 @@ export const deleteTrip = (tripId) => {
 export const editTrip = (trip) => {
   return async dispatch => {
     const returnedTrip = await tripService.update(trip)
-    dispatch(updateTrip(trip))
+    dispatch(updateTrip(returnedTrip))
     return returnedTrip
   }
 }

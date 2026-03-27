@@ -16,12 +16,12 @@ const EditTripForm = () => {
   const title = useField('text')
   const budget = useField('number')
 
-  const [users, setUsers] = useState([])
-  const [locations, setLocations] = useState([])
-  const [countries, setCountries] = useState([])
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
+  const [users, setUsers] = useState([])
+  const [locations, setLocations] = useState([])
+  const [countries, setCountries] = useState([])
 
   useEffect(() => {
     if (trip) {
@@ -132,7 +132,6 @@ const EditTripForm = () => {
     const updatedUsers = users.filter(u => u.id !== user.id)
     setUsers(updatedUsers)
   }
-
 
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>

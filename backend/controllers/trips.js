@@ -24,6 +24,7 @@ tripsRouter.get('/', async (request, response) => {
 tripsRouter.get('/:id', async (request, response) => {
   const trip = await Trip.findById(request.params.id)
     .populate('user', { username: 1 })
+    .populate('users', { username: 1 })
 
   trip.locations.sort(
     (a, b) => new Date(a.startDate) - new Date(b.startDate)
@@ -85,7 +86,7 @@ tripsRouter.put('/:id', async (request, response) => {
   if (body.locations !== undefined) trip.locations = body.locations
   if (body.budget !== undefined) trip.budget = body.budget
 
-  if (body.users) {
+  if (body.users !== undefined) {
     trip.users = body.users.map(u =>
       typeof u === 'object' ? u.id || u._id : u
     )
