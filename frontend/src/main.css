@@ -306,3 +306,21 @@ a {
   padding: 25px;
   align-items: center;
 }
+
+/* DROPDOWN */
+
+.dropdown {
+  border: 1px solid grey;
+  margin-top: 5px;
+  width: 200px;
+}
+
+.dropdownItem {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid grey;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+}

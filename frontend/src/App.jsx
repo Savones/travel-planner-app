@@ -10,11 +10,11 @@ import EditTripForm from './components/EditTripForm'
 import LocationForm from './components/LocationForm'
 import {
   BrowserRouter as Router,
-  Routes, Route, Link
+  Routes, Route
 } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser, clearUser } from './reducers/userReducer'
+import { setUser, clearUser, initializeUsers } from './reducers/userReducer'
 import { initializeTrips } from './reducers/tripReducer'
 import Notification from './components/Notification'
 
@@ -24,6 +24,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeTrips())
+    dispatch(initializeUsers())
   }, [dispatch])
 
   useEffect(() => {

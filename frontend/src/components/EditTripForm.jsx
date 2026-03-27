@@ -19,9 +19,13 @@ const EditTripForm = () => {
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
+  const allUsers = useSelector(state => state.user)
+
   const [users, setUsers] = useState([])
   const [locations, setLocations] = useState([])
   const [countries, setCountries] = useState([])
+
+  const [showDropdown, setShowDropdown] = useState(false)
 
   useEffect(() => {
     if (trip) {
@@ -133,6 +137,11 @@ const EditTripForm = () => {
     setUsers(updatedUsers)
   }
 
+  const handleAddTraveller = (user) => {
+    setUsers([...users, user])
+    setShowDropdown(false)
+  }
+
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
       <div className='editTitleDiv'>
@@ -145,11 +154,34 @@ const EditTripForm = () => {
       </div>
 
       <div>
-        <button>Add traveller</button>
+        <button
+          type="button"
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
+          Add traveller
+        </button>
+
+        {showDropdown && (
+          <div className="dropdown">
+            {allUsers.map(user => (
+              <div
+                key={user.id}
+                className="dropdownItem"
+                onClick={() => handleAddTraveller(user)}
+              >
+                {user.username}
+              </div>
+            ))}
+          </div>
+        )}
+
         {users.map(u => (
           <div key={u.id}>
             {u.username}
-            <button type="button" onClick={() => handleRemoveTraveller(u)}>
+            <button
+              type="button"
+              onClick={() => handleRemoveTraveller(u)}
+            >
               Remove
             </button>
           </div>
