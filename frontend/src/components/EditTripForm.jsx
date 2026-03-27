@@ -19,7 +19,8 @@ const EditTripForm = () => {
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
-  const allUsers = useSelector(state => state.user)
+  const allUsers = useSelector(state => state.users)
+  const currentUser = useSelector(state => state.user)
 
   const [users, setUsers] = useState([])
   const [locations, setLocations] = useState([])
@@ -142,6 +143,11 @@ const EditTripForm = () => {
     setShowDropdown(false)
   }
 
+  const availableUsers = allUsers.filter(u =>
+    u.id !== currentUser?.id &&
+    !users.some(selected => selected.id === u.id)
+  )
+
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
       <div className='editTitleDiv'>
@@ -163,7 +169,7 @@ const EditTripForm = () => {
 
         {showDropdown && (
           <div className="dropdown">
-            {allUsers.map(user => (
+            {availableUsers.map(user => (
               <div
                 key={user.id}
                 className="dropdownItem"

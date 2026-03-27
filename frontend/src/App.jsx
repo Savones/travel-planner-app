@@ -14,7 +14,8 @@ import {
 } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser, clearUser, initializeUsers } from './reducers/userReducer'
+import { setUser, clearUser } from './reducers/userReducer'
+import { initializeUsers } from './reducers/usersReducer'
 import { initializeTrips } from './reducers/tripReducer'
 import Notification from './components/Notification'
 
