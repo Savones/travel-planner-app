@@ -67,7 +67,7 @@ a {
   background-color: #F3CFC6;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tripBannerDiv img {
@@ -79,7 +79,7 @@ a {
 
 .tripBannerDiv:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
 }
 
 .tripDetailsDiv {
@@ -90,22 +90,50 @@ a {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: rgba(0, 0, 0, 0.5);
   border-radius: 0 0 12px 12px;
   box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .tripTitleDiv {
   font-size: 20px;
   font-weight: bold;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .tripDatesDiv {
   font-size: 14px;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.tripFiltersDiv {
+  display: flex;
+  align-self: center;
+  gap: 5px;
+  padding: 15px 20px;
+  margin: 20px 0px;
+  width: 400px;
+  flex-direction: row;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.tripFiltersDiv label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.tripFiltersDiv input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
 }
 
 /* TRIP DETAILS */
@@ -269,6 +297,7 @@ a {
   position: sticky;
   top: 0;
   background-color: #ffffff;
+  z-index: 1000;
 }
 
 .menuButtonsDiv div {
