@@ -37,7 +37,7 @@ const TripSummary = ({ trip }) => {
       </div>
 
       <div>${trip.budget ?? 0} budget</div>
-      <div>Travellers: {user.username}{trip.users.map(u => (<>, {u.username}</>))}</div>
+      <div>Travellers: {trip.user.username}{trip.users.map(u => (<>, {u.username}</>))}</div>
     </div>
   )
 }
