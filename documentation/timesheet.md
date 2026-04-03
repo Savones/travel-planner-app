@@ -28,4 +28,11 @@
 | 20.3. | 2    | Added notification component and reducer | 
 | 21.3. | 1    | Added error handling to signing up | 
 | 24.3. | 4    | Improved front and backend error handling | 
-| sum | 52    |  |
+| 25.3. | 1    | Added trip pdf download functionality | 
+| 25.3. | 2    | Improved trip ui and added trip users to db | 
+| 26.3. | 2    | Added updating and removing trip users functionality | 
+| 27.3. | 2    | Fixed trip user removing and added user adding | 
+| 27.3. | 2    | Added users reducer and improved trip list ui | 
+| 1.4. | 1    | Added trip filter for trip list | 
+
+| sum | 62    |  |
