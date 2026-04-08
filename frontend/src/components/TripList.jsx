@@ -26,6 +26,28 @@ const TripList = () => {
 
   const now = new Date()
 
+  const counts = {
+    upcoming: allTrips.filter(trip =>
+      trip.locations?.some(loc => new Date(loc.startDate) > now)
+    ).length,
+
+    ongoing: allTrips.filter(trip =>
+      trip.locations?.some(loc => {
+        const start = new Date(loc.startDate)
+        const end = new Date(loc.endDate)
+        return start <= now && end >= now
+      })
+    ).length,
+
+    past: allTrips.filter(trip =>
+      trip.locations?.some(loc => new Date(loc.endDate) < now)
+    ).length,
+
+    shared: allTrips.filter(trip =>
+      trip.user.id !== user.id
+    ).length
+  }
+
   const filteredTrips = allTrips.filter(trip => {
     const isShared = trip.user.id !== user.id
 
@@ -70,7 +92,7 @@ const TripList = () => {
             checked={filters.upcoming}
             onChange={() => handleFilterChange('upcoming')}
           />
-          Upcoming
+          Upcoming ({counts.upcoming})
         </label>
 
         <label>
@@ -79,7 +101,7 @@ const TripList = () => {
             checked={filters.ongoing}
             onChange={() => handleFilterChange('ongoing')}
           />
-          Ongoing
+          Ongoing ({counts.ongoing})
         </label>
 
         <label>
@@ -88,7 +110,7 @@ const TripList = () => {
             checked={filters.past}
             onChange={() => handleFilterChange('past')}
           />
-          Past trips
+          Past trips ({counts.past})
         </label>
 
         <label>
@@ -97,7 +119,7 @@ const TripList = () => {
             checked={filters.shared}
             onChange={() => handleFilterChange('shared')}
           />
-          Shared with me
+          Shared with me ({counts.shared})
         </label>
       </div>
       <div className='tripListDiv'>
