@@ -2,7 +2,6 @@ import { useSelector } from "react-redux"
 
 const TripSummary = ({ trip }) => {
   const locations = trip.locations || []
-  const user = useSelector(state => state.user)
 
   const getTripDuration = (locations) => {
     if (!locations.length) return 0
@@ -54,7 +53,7 @@ const TripSummary = ({ trip }) => {
       <div className="summaryTravellers">
         <span>Travellers</span>
         <strong>
-          {[trip.user.username, ...trip.users.map(u => u.username)].join(', ')}
+          {[trip.user.username, ...trip.users.map(u => u.user.username)].join(', ')}
         </strong>
       </div>
     </div>

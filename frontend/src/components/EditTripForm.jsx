@@ -94,7 +94,7 @@ const EditTripForm = () => {
       title: title.value,
       budget: { amount: budgetAmount.value, currency: budgetCurrency.value },
       locations: updatedLocations,
-      users: users.map(u => typeof u === 'object' ? u.id : u)
+      users
     }
 
     try {
@@ -135,19 +135,19 @@ const EditTripForm = () => {
     }
   }
 
-  const handleRemoveTraveller = (user) => {
-    const updatedUsers = users.filter(u => u.id !== user.id)
+  const handleRemoveTraveller = (userId) => {
+    const updatedUsers = users.filter(u => u.user.id !== userId)
     setUsers(updatedUsers)
   }
 
   const handleAddTraveller = (user) => {
-    setUsers([...users, user])
+    setUsers([...users, { user, role: 'reader' }])
     setShowDropdown(false)
   }
 
   const availableUsers = allUsers.filter(u =>
     u.id !== currentUser?.id &&
-    !users.some(selected => selected.id === u.id)
+    !users.some(selected => selected.user.id === u.id)
   )
 
   return (
@@ -184,11 +184,11 @@ const EditTripForm = () => {
         )}
 
         {users.map(u => (
-          <div key={u.id}>
-            {u.username}
+          <div key={u.user.id}>
+            {u.user.username}
             <button
               type="button"
-              onClick={() => handleRemoveTraveller(u)}
+              onClick={() => handleRemoveTraveller(u.user.id)}
             >
               Remove
             </button>

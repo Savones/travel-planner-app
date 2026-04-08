@@ -15,7 +15,7 @@ const getTokenFrom = request => {
 tripsRouter.get('/', async (request, response) => {
   Trip.find({})
     .populate('user', { locations: 0 })
-    .populate('users', { username: 1 })
+    .populate('users.user', { username: 1 })
     .then((trips) => {
       response.json(trips)
     })
@@ -24,7 +24,7 @@ tripsRouter.get('/', async (request, response) => {
 tripsRouter.get('/:id', async (request, response) => {
   const trip = await Trip.findById(request.params.id)
     .populate('user', { username: 1 })
-    .populate('users', { username: 1 })
+    .populate('users.user', { username: 1 })
 
   trip.locations.sort(
     (a, b) => new Date(a.startDate) - new Date(b.startDate)
@@ -59,7 +59,7 @@ tripsRouter.post('/', async (request, response) => {
   const populatedTrip = await Trip
     .findById(savedTrip._id)
     .populate('user', { username: 1 })
-    .populate('users', { username: 1 })
+    .populate('users.user', { username: 1 })
 
   response.status(201).json(populatedTrip)
 })
@@ -100,9 +100,10 @@ tripsRouter.put('/:id', async (request, response) => {
   }
 
   if (body.users !== undefined) {
-    trip.users = body.users.map(u =>
-      typeof u === 'object' ? u.id || u._id : u
-    )
+    trip.users = body.users.map(u => ({
+      user: typeof u.user === 'object' ? (u.user._id || u.user.id) : u.user,
+      role: u.role || 'reader'
+    }))
   }
 
   const savedTrip = await trip.save()
@@ -110,8 +111,7 @@ tripsRouter.put('/:id', async (request, response) => {
   const populatedResult = await Trip
     .findById(savedTrip._id)
     .populate('user', { username: 1 })
-    .populate('users', { username: 1 })
-
+    .populate('users.user', { username: 1 })
   response.json(populatedResult)
 })
 

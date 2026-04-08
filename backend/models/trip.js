@@ -30,12 +30,17 @@ const tripSchema = new mongoose.Schema({
       default: 'EUR'
     }
   },
-  users: [
-    {
+  users: [{
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
+    },
+    role: {
+      type: String,
+      enum: ['reader', 'editor'],
+      default: 'reader'
     }
-  ]
+  }]
 })
 
 tripSchema.set('toJSON', {
