@@ -18,7 +18,7 @@ const TripList = () => {
   const search = useField('search')
 
   const userTrips = trips.filter(trip => trip.user?.id === user.id)
-  const sharedTrips = trips.filter(trip => trip.users?.some(u => u.id === user.id))
+  const sharedTrips = trips.filter(trip => trip.users?.some(u => u.user?.id === user.id))
   const allTrips = [...userTrips, ...sharedTrips]
   const [filters, setFilters] = useState({
     upcoming: false, ongoing: false, shared: false, past: false
