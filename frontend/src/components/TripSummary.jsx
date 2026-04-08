@@ -24,20 +24,35 @@ const TripSummary = ({ trip }) => {
     <div className="tripSummaryDiv">
       <h3>Trip summary</h3>
 
-      <div>
+      <div className="summaryRoute">
         {locations.length
           ? locations.map(l => l.city).join(' → ')
-          : ''}
+          : '-'}
       </div>
 
-      <div>{duration} days</div>
+      <div className="summaryGrid">
+        <div className="summaryBox">
+          <span>Days</span>
+          <strong>{duration}</strong>
+        </div>
 
-      <div>
-        {locationCount} {locationCount === 1 ? 'location' : 'locations'}
+        <div className="summaryBox">
+          <span>Stops</span>
+          <strong>{locationCount}</strong>
+        </div>
+
+        <div className="summaryBox">
+          <span>Budget</span>
+          <strong>${trip.budget ?? 0}</strong>
+        </div>
       </div>
 
-      <div>${trip.budget ?? 0} budget</div>
-      <div>Travellers: {trip.user.username}{trip.users.map(u => (<>, {u.username}</>))}</div>
+      <div className="summaryTravellers">
+        <span>Travellers</span>
+        <strong>
+          {[trip.user.username, ...trip.users.map(u => u.username)].join(', ')}
+        </strong>
+      </div>
     </div>
   )
 }

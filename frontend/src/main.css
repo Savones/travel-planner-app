@@ -138,72 +138,172 @@ a {
 
 /* TRIP DETAILS */
 
-.tripPageDiv {
-  margin-top: 10px;
-  flex-wrap: wrap;
+.tripHeading {
+  position: relative;
+  width: 100vw;
+  height: 300px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin-left: calc(-50vw + 50%);
 }
 
-.tripDetailsButtons {
+.tripHeading img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tripOverlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.tripOverlay h1 {
+  margin: 0;
+  font-size: 32px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.tripButtons {
   flex-direction: row;
-  align-self: flex-start;
+  gap: 10px;
 }
 
-.tripDetailsButtons button {
-  margin: 0px 0px 0px 3px;
+.tripButtons button {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-.locationsDiv {
-  margin-top: 50px;
+.tripButtons button:hover {
+  background: white;
+}
+
+.tripContent {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.tripMain {
+  flex: 2;
 }
 
 .locationDiv {
-  padding: 10px;
-  border-radius: 25px;
-  margin: 10px 10px;
-  width: 500px;
-  align-items: flex-start;
-  background-color: #FFF;
-  border: 5px solid;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 12px 0;
+
+  background: #fff;
+  border-left: 6px solid;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .locationTitleDiv {
-  font-size: 20px;
-  margin: 20px 0px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .locationDetailDiv {
-  padding: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
 
-.locationDiv button {
-  margin-top: 10px;
+.tripSidebar {
+  flex: 1;
+  position: sticky;
+  top: 80px;
+  gap: 20px;
 }
 
-.newLocationDiv {
-  border: 1px grey solid;
-  padding: 10px;
-  margin-top: 20px;
-}
-
-.newLocationForm div {
-  flex-direction: row;
-  justify-self: flex-start;
-  margin-bottom: 10px;
-}
-
-.newLocationForm input {
-  margin-right: 5px;
+.tripPageDiv {
+  margin-top: 0px;
+  flex-wrap: wrap;
 }
 
 .tripSummaryDiv {
-  padding: 10px;
-  border: 1px grey solid;
-  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+  width: 400px;
 }
 
-.tripSummaryDiv div {
-  margin-bottom: 10px;
+.tripSummaryDiv h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.summaryRoute {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.summaryBox {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.summaryBox span {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.summaryBox strong {
+  font-size: 24px;
+}
+
+.summaryTravellers {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryTravellers span {
+  font-size: 12px;
+  color: #888;
+}
+
+.summaryTravellers strong {
+  font-size: 14px;
+}
+
+.locationsDiv {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  border-radius: 16px;
 }
 
 /* CREATE TRIP */

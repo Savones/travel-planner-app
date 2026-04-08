@@ -8,6 +8,8 @@ import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
 const Trip = () => {
+  const image = '/images/nz.jpg'
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const tripRef = useRef()
@@ -79,38 +81,41 @@ const Trip = () => {
 
   return (
     <div className='tripPageDiv'>
-
-      <div className='tripDetailsButtons'>
-        <button type="button" onClick={editTrip}>
-          Edit
-        </button>
-        <button type="button" onClick={handleDeleteTrip}>
-          Delete trip
-        </button>
-        <button type="button" onClick={handleDownload}>
-          Download
-        </button>
-      </div>
-
       <div ref={tripRef}>
-        <h2>{trip.title}</h2>
-
-        <TripSummary trip={trip} />
-
-        <div className='locationsDiv'>
-          <h2>Itinerary</h2>
-          {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
-          {trip.locations && trip.locations.map(location => (
-            <div className='locationDiv' style={{ borderColor: location.backgroundColor }} key={location.id}>
-              <div className='locationTitleDiv'>{location.city}, {location.country}</div>
-              <div className='locationDetailDiv'>{formatDate(location.startDate)} - {formatDate(location.endDate)}</div>
-              {location.notes && (
-                <div className='locationDetailDiv'>
-                  Notes: {location.notes}
-                </div>
-              )}
+        <div className="tripHeading">
+          <img src={image} alt={trip.title} />
+          <div className="tripOverlay">
+            <h1>{trip.title}</h1>
+            <div className="tripButtons">
+              <button onClick={editTrip}>Edit</button>
+              <button onClick={handleDeleteTrip}>Delete</button>
+              <button onClick={handleDownload}>Download</button>
             </div>
-          ))}
+          </div>
+        </div>
+
+        <div className='tripContent'>
+          <div className='tripMain'>
+            <div className='locationsDiv'>
+              <h2>Itinerary</h2>
+              {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
+              {trip.locations.map(location => (
+                <div className='locationDiv' key={location.id} style={{ borderColor: location.backgroundColor }}>
+                  <div className='locationTitleDiv'>{location.city}, {location.country}</div>
+                  <div className='locationDetailDiv'>
+                    {formatDate(location.startDate)} - {formatDate(location.endDate)}
+                  </div>
+                  {location.notes && (
+                    <div className='locationDetailDiv'>Notes: {location.notes}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className='tripSidebar'>
+            <TripSummary trip={trip} />
+          </div>
         </div>
       </div>
     </div>
