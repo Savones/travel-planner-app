@@ -14,7 +14,8 @@ const EditTripForm = () => {
   const dispatch = useDispatch()
 
   const title = useField('text')
-  const budget = useField('number')
+  const budgetAmount = useField('number')
+  const budgetCurrency = useField('text')
 
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
@@ -51,7 +52,8 @@ const EditTripForm = () => {
       })
       setLocations(initialLocations)
       title.setValue(trip.title)
-      budget.setValue(trip.budget)
+      budgetAmount.setValue(trip.budget.amount)
+      budgetCurrency.setValue(trip.budget.currency)
     }
   }, [trip, countries])
 
@@ -90,7 +92,7 @@ const EditTripForm = () => {
     const updatedTrip = {
       ...trip,
       title: title.value,
-      budget: budget.value,
+      budget: { amount: budgetAmount.value, currency: budgetCurrency.value },
       locations: updatedLocations,
       users: users.map(u => typeof u === 'object' ? u.id : u)
     }
@@ -278,11 +280,20 @@ const EditTripForm = () => {
         <div className='editcostDiv'>
           <label>Total budget</label>
           <input
-            type={budget.type}
-            value={budget.value}
-            onChange={budget.onChange}
+            type={budgetAmount.type}
+            value={budgetAmount.value}
+            onChange={budgetAmount.onChange}
           />
         </div>
+        <select
+          value={budgetCurrency.value}
+          onChange={budgetCurrency.onChange}
+        >
+          <option value="EUR">€ EUR</option>
+          <option value="USD">$ USD</option>
+          <option value="GBP">£ GBP</option>
+          <option value="JPY">¥ JPY</option>
+        </select>
 
       </div>
       <button type="submit">Save</button>

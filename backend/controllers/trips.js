@@ -84,7 +84,20 @@ tripsRouter.put('/:id', async (request, response) => {
 
   if (body.title !== undefined) trip.title = body.title
   if (body.locations !== undefined) trip.locations = body.locations
-  if (body.budget !== undefined) trip.budget = body.budget
+
+  if (body.budget !== undefined) {
+    if (body.budget.amount !== undefined) {
+      trip.budget.amount = body.budget.amount
+    }
+
+    if (body.budget.currency !== undefined) {
+      trip.budget.currency = body.budget.currency
+    }
+
+    if (!trip.budget.currency) {
+      trip.budget.currency = 'EUR'
+    }
+  }
 
   if (body.users !== undefined) {
     trip.users = body.users.map(u =>

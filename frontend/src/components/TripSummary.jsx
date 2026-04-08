@@ -43,7 +43,11 @@ const TripSummary = ({ trip }) => {
 
         <div className="summaryBox">
           <span>Budget</span>
-          <strong>${trip.budget ?? 0}</strong>
+          <strong>
+            {trip.budget?.currency === 'EUR' && '€'}
+            {trip.budget?.currency === 'USD' && '$'}
+            {trip.budget?.currency === 'GBP' && '£'}
+            {trip.budget?.currency === 'JPY' && '¥'} {trip.budget.amount ?? 0}</strong>
         </div>
       </div>
 

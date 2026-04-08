@@ -24,8 +24,11 @@ const tripSchema = new mongoose.Schema({
   },
   locations: [locationSchema],
   budget: {
-    type: Number,
-    required: false
+    amount: Number,
+    currency: {
+      type: String,
+      default: 'EUR'
+    }
   },
   users: [
     {
