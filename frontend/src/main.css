@@ -111,29 +111,60 @@ a {
 }
 
 .tripFiltersDiv {
-  display: flex;
-  align-self: center;
-  gap: 5px;
-  padding: 15px 20px;
-  margin: 20px 0px;
+  gap: 12px;
   width: 600px;
-  flex-direction: row;
+  margin: 20px auto;
+  padding: 15px 20px;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.tripFiltersDiv label {
+.filtersRow label {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background-color: #f5f5f5;
   cursor: pointer;
+  font-size: 14px;
+
+  transition: all 0.2s ease;
+}
+
+.filtersRow label:hover {
+  background-color: #eaeaea;
 }
 
 .tripFiltersDiv input[type="checkbox"] {
   cursor: pointer;
   width: 16px;
   height: 16px;
+}
+
+.filtersRow {
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.searchBar {
+  width: 100%;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: #F3CFC6;
+  box-shadow: 0 0 0 2px rgba(243, 207, 198, 0.3);
 }
 
 /* TRIP DETAILS */
@@ -325,6 +356,21 @@ a {
 
 .createButtonsDiv input {
   margin: 5px;
+}
+
+.chatDiv {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  height: 300px;
+  justify-content: flex-start;
+}
+
+.chatDiv h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* EDIT TRIP */

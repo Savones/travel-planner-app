@@ -91,47 +91,48 @@ const TripList = () => {
   return (
     <>
       <div className="tripFiltersDiv">
-        <label>
-          <input
-            type="checkbox"
-            checked={filters.upcoming}
-            onChange={() => handleFilterChange('upcoming')}
-          />
-          Upcoming ({counts.upcoming})
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={filters.ongoing}
-            onChange={() => handleFilterChange('ongoing')}
-          />
-          Ongoing ({counts.ongoing})
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={filters.past}
-            onChange={() => handleFilterChange('past')}
-          />
-          Past trips ({counts.past})
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={filters.shared}
-            onChange={() => handleFilterChange('shared')}
-          />
-          Shared with me ({counts.shared})
-        </label>
-        <div
-          className='searchBar'>
+        <div className='searchBar'>
           <input type={search.type}
             value={search.value}
             onChange={search.onChange}
             placeholder='Search...' />
+        </div>
+        <div className='filtersRow'>
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.upcoming}
+              onChange={() => handleFilterChange('upcoming')}
+            />
+            Upcoming ({counts.upcoming})
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.ongoing}
+              onChange={() => handleFilterChange('ongoing')}
+            />
+            Ongoing ({counts.ongoing})
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.past}
+              onChange={() => handleFilterChange('past')}
+            />
+            Past trips ({counts.past})
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              checked={filters.shared}
+              onChange={() => handleFilterChange('shared')}
+            />
+            Shared with me ({counts.shared})
+          </label>
         </div>
       </div>
       <div className='tripListDiv'>
