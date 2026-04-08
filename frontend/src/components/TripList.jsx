@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import tripUtils from '../utils/tripUtils'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
+import { useField } from '../hooks'
 
 const images = [
   '/images/fuji.jpg',
@@ -14,6 +15,7 @@ const images = [
 const TripList = () => {
   const user = useSelector(state => state.user)
   const trips = useSelector(state => state.trips)
+  const search = useField('search')
 
   const userTrips = trips.filter(trip => trip.user?.id === user.id)
   const sharedTrips = trips.filter(trip => trip.users?.some(u => u.id === user.id))
@@ -75,6 +77,10 @@ const TripList = () => {
     return true
   })
 
+  const searched = filteredTrips.filter(trip =>
+    trip.title.toLowerCase().includes((search.value || '').toLowerCase())
+  )
+
   const handleFilterChange = (filter) => {
     setFilters(previousFilter => ({
       ...previousFilter,
@@ -85,7 +91,6 @@ const TripList = () => {
   return (
     <>
       <div className="tripFiltersDiv">
-
         <label>
           <input
             type="checkbox"
@@ -121,9 +126,16 @@ const TripList = () => {
           />
           Shared with me ({counts.shared})
         </label>
+        <div
+          className='searchBar'>
+          <input type={search.type}
+            value={search.value}
+            onChange={search.onChange}
+            placeholder='Search...' />
+        </div>
       </div>
       <div className='tripListDiv'>
-        {filteredTrips.map((trip, index) => (
+        {searched.map((trip, index) => (
           <Link key={trip.id} to={`/trips/${trip.id}`}>
             <div className='tripBannerDiv'>
               <img src={images[index % images.length]} alt={trip.title} />
