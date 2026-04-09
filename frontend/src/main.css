@@ -454,10 +454,9 @@ a {
   width: 100%;
   justify-content: space-between;
   height: 50px;
-  border-bottom: 1px grey solid;
   position: sticky;
   top: 0;
-  background-color: #ffffff;
+  background-color: #abd2fac2;
   z-index: 1000;
 }
 
@@ -471,22 +470,15 @@ a {
 .menuButtonsDiv a {
   margin: 0px 3px 0px 3px;
   text-decoration: none;
-  background-color: #F3CFC6;
+  background-color: #fff;
   color: black;
   padding: 3px 10px;
-}
-
-.menuButtonsDiv a:hover {
-  background-color: #f3cfc687;
-}
-
-.menuButtonsDiv button:hover {
-  background-color: #f3cfc687;
+  border-radius: 5px;
 }
 
 .menuButtonsDiv button {
   margin: 0px 3px 0px 3px;
-  background-color: #F3CFC6;
+  background-color: #fff;
   border: none;
   font-size: 18px;
   padding: 3px 10px;

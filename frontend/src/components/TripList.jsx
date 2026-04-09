@@ -95,7 +95,7 @@ const TripList = () => {
           <input type={search.type}
             value={search.value}
             onChange={search.onChange}
-            placeholder='Search...' />
+            placeholder='Search trip...' />
         </div>
         <div className='filtersRow'>
           <label>
@@ -135,6 +135,7 @@ const TripList = () => {
           </label>
         </div>
       </div>
+
       <div className='tripListDiv'>
         {searched.map((trip, index) => (
           <Link key={trip.id} to={`/trips/${trip.id}`}>

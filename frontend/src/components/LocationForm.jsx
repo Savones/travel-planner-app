@@ -115,44 +115,46 @@ const LocationForm = () => {
   }
 
   return (
-    <div className='newLocationDiv'>
+    <div className='editOuterSection'>
       <h3>Add new location</h3>
-
-      <form className='newLocationForm' onSubmit={handleSubmit}>
-        <LocationDropdown
-          selectedCountry={selectedCountry}
-          setSelectedCountry={setSelectedCountry}
-          selectedCity={selectedCity}
-          setSelectedCity={setSelectedCity}
-          countries={countries}
-          cities={cities}
-        />
-
-        <div>
-          <label>Notes</label>
-          <input {...notesInput} />
-        </div>
-
-        <div>
-          <label>Start date</label>
-          <input {...startDateInput} />
-        </div>
-
-        <div>
-          <label>End date</label>
-          <input {...endDateInput} />
-        </div>
-
-        <div>
-          <label>Background color</label>
-          <input
-            {...backgroundColorInput}
-            value={backgroundColor.value || '#ffffff'}
+      <form onSubmit={handleSubmit}>
+        <div className='editSection'>
+          <LocationDropdown
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+            countries={countries}
+            cities={cities}
           />
-        </div>
 
-        <input type='submit' value='Add' />
-        <input type='button' value='Cancel' onClick={handleCancel} />
+          <div className='editRow'>
+            <label>Notes</label>
+            <input {...notesInput} />
+          </div>
+
+          <div className='editRow'>
+            <label>Start date</label>
+            <input {...startDateInput} />
+          </div>
+
+          <div className='editRow'>
+            <label>End date</label>
+            <input {...endDateInput} />
+          </div>
+
+          <div className='editRow'>
+            <label>Background color</label>
+            <input
+              {...backgroundColorInput}
+              value={backgroundColor.value || '#ffffff'}
+            />
+          </div>
+        </div>
+        <div className='editRow'>
+          <input type='submit' value='Add' />
+          <input type='button' value='Cancel' onClick={handleCancel} />
+        </div>
       </form>
     </div>
   )

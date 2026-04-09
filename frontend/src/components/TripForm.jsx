@@ -45,14 +45,16 @@ const TripForm = () => {
   }
 
   return (
-    <div className='createTripDiv'>
+    <div className='editOuterSection'>
       <h2>Create a trip</h2>
-      <form className='createTripForm' onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
-          <input {...titleInput} />
+      <form onSubmit={handleSubmit}>
+        <div className='editSection'>
+          <div className='editRow'>
+            <label>Title</label>
+            <input {...titleInput} />
+          </div>
         </div>
-        <div className='createButtonsDiv'>
+        <div className='editRow'>
           <input type='submit' value='Create' />
           <input type='button' value='Cancel' onClick={handleCancellation} />
         </div>
