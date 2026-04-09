@@ -34,4 +34,7 @@
 | 27.3. | 2    | Fixed trip user removing and added user adding | 
 | 27.3. | 2    | Added users reducer and improved trip list ui | 
 | 1.4. | 1    | Added trip filter for trip list | 
-| sum | 62    |  |
+| 8.4. | 2    | Improved trip details UI | 
+| 8.4. | 2    | Added ability to change currency and search trips | 
+| 8.4. | 3    | Added trip travellers roles (owner, editor, reader) | 
+| sum | 69    |  |
