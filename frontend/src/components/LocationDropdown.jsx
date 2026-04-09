@@ -8,7 +8,7 @@ const LocationDropdown = ({
 }) => {
   return (
     <>
-      <div>
+      <div className="editRow">
         <select
           value={selectedCountry?.iso2 || ''}
           onChange={(event) => {
@@ -25,7 +25,7 @@ const LocationDropdown = ({
         </select>
 
       </div>
-      <div>
+      <div className="editRow">
         <select
           value={selectedCity}
           onChange={(event) => setSelectedCity(event.target.value)}

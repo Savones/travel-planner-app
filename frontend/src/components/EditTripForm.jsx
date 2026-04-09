@@ -156,16 +156,20 @@ const EditTripForm = () => {
 
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
-      <div className='editTitleDiv'>
-        <label>Title</label>
-        <input
-          type={title.type}
-          value={title.value}
-          onChange={title.onChange}
-        />
+      <div className='editOuterSection'>
+        <div className='editSection'>
+          <div className='editRow'>
+            <label>Title</label>
+            <input
+              type={title.type}
+              value={title.value}
+              onChange={title.onChange}
+            />
+          </div>
+        </div>
       </div>
 
-      <div>
+      <div className='editOuterSection'>
         <h3>Travellers</h3>
         <button
           type="button"
@@ -188,31 +192,66 @@ const EditTripForm = () => {
           </div>
         )}
 
-        {users.map(u => (
-          <div key={u.user.id}>
-            {u.user.username} ({u.role})
-            <select
-              value={u.role}
-              onChange={(e) => handleRoleChange(u.user.id, e.target.value)}
-            >
-              <option value="reader">Reader</option>
-              <option value="editor">Editor</option>
-            </select>
-            <button
-              type="button"
-              onClick={() => handleRemoveTraveller(u.user.id)}
-            >
-              Remove
-            </button>
+        <div className='editSection'>
+
+          <div className='editRow'>
+            <span className='travellerName'>{trip.user.username}</span>
+            Owner
           </div>
-        ))}
+          {users.map(u => (
+            <div className="editRow" key={u.user.id}>
+              <span className="travellerName">
+                {u.user.username}
+              </span>
+
+              <select
+                value={u.role}
+                onChange={(e) => handleRoleChange(u.user.id, e.target.value)}
+              >
+                <option value="reader">Reader</option>
+                <option value="editor">Editor</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => handleRemoveTraveller(u.user.id)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className='editLocationsDiv'>
+      <div className='editOuterSection'>
+        <h3>Budget</h3>
+        <button>Add cost</button>
+        <div className='editSection'>
+          <div className='editRow'>
+            <label>Total budget</label>
+            <input
+              type={budgetAmount.type}
+              value={budgetAmount.value}
+              onChange={budgetAmount.onChange}
+            />
+            <select
+              value={budgetCurrency.value}
+              onChange={budgetCurrency.onChange}
+            >
+              <option value="EUR">€ EUR</option>
+              <option value="USD">$ USD</option>
+              <option value="GBP">£ GBP</option>
+              <option value="JPY">¥ JPY</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className='editOuterSection'>
         <h3>Locations</h3>
         <button onClick={handleAddLocation}>Add location</button>
         {locations.map((location, locationIndex) => (
-          <div className='editLocationDiv' key={location.id}>
+          <div className='editSection' key={location.id}>
             <LocationDropdown
               selectedCountry={location.selectedCountry}
               setSelectedCountry={(country) => {
@@ -232,7 +271,7 @@ const EditTripForm = () => {
               cities={location.cities}
             />
 
-            <div>
+            <div className='editRow'>
               <label>Notes</label>
               <input
                 value={location.notes || ''}
@@ -243,7 +282,7 @@ const EditTripForm = () => {
                 }}
               />
             </div>
-            <div>
+            <div className='editRow'>
               <label>Start Date</label>
               <input
                 type="date"
@@ -255,7 +294,7 @@ const EditTripForm = () => {
                 }}
               />
             </div>
-            <div>
+            <div className='editRow'>
               <label>End Date</label>
               <input
                 type="date"
@@ -267,7 +306,7 @@ const EditTripForm = () => {
                 }}
               />
             </div>
-            <div>
+            <div className='editRow'>
               <label>Background color</label>
               <input
                 type='color'
@@ -279,37 +318,18 @@ const EditTripForm = () => {
                 }}
               />
             </div>
-            <button type='button' onClick={() => handleDeleteLocation(location)}>
-              Delete location
-            </button>
+            <div className='editRow'>
+              <button type='button' onClick={() => handleDeleteLocation(location)}>
+                Delete location
+              </button>
+            </div>
           </div>
         ))}
       </div>
-
-      <div className='editBudgetDiv'>
-        <h3>Budget</h3>
-        <button>Add cost</button>
-        <div className='editcostDiv'>
-          <label>Total budget</label>
-          <input
-            type={budgetAmount.type}
-            value={budgetAmount.value}
-            onChange={budgetAmount.onChange}
-          />
-        </div>
-        <select
-          value={budgetCurrency.value}
-          onChange={budgetCurrency.onChange}
-        >
-          <option value="EUR">€ EUR</option>
-          <option value="USD">$ USD</option>
-          <option value="GBP">£ GBP</option>
-          <option value="JPY">¥ JPY</option>
-        </select>
-
+      <div className='editRow'>
+        <button type="submit">Save</button>
+        <button onClick={cancel}>Cancel</button>
       </div>
-      <button type="submit">Save</button>
-      <button onClick={cancel}>Cancel</button>
     </form>
   )
 }
