@@ -19,6 +19,15 @@ const TripSummary = ({ trip }) => {
   const duration = getTripDuration(locations)
   const locationCount = locations.length
 
+  const usersWithRoles = [
+    { username: trip.user.username, role: 'owner' },
+    ...trip.users.map(u => ({ username: u.user.username, role: u.role }))
+  ]
+
+  const displayString = usersWithRoles
+    .map(u => `${u.username} (${u.role})`)
+    .join(', ')
+
   return (
     <div className="tripSummaryDiv">
       <h3>Trip summary</h3>
@@ -53,7 +62,7 @@ const TripSummary = ({ trip }) => {
       <div className="summaryTravellers">
         <span>Travellers</span>
         <strong>
-          {[trip.user.username, ...trip.users.map(u => u.user.username)].join(', ')}
+          {displayString}
         </strong>
       </div>
     </div>

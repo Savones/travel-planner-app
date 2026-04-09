@@ -145,6 +145,10 @@ const EditTripForm = () => {
     setShowDropdown(false)
   }
 
+  const handleRoleChange = (userId, role) => {
+    setUsers(users.map(u => u.user.id === userId ? { ...u, role } : u))
+  }
+
   const availableUsers = allUsers.filter(u =>
     u.id !== currentUser?.id &&
     !users.some(selected => selected.user.id === u.id)
@@ -162,6 +166,7 @@ const EditTripForm = () => {
       </div>
 
       <div>
+        <h3>Travellers</h3>
         <button
           type="button"
           onClick={() => setShowDropdown(!showDropdown)}
@@ -185,7 +190,14 @@ const EditTripForm = () => {
 
         {users.map(u => (
           <div key={u.user.id}>
-            {u.user.username}
+            {u.user.username} ({u.role})
+            <select
+              value={u.role}
+              onChange={(e) => handleRoleChange(u.user.id, e.target.value)}
+            >
+              <option value="reader">Reader</option>
+              <option value="editor">Editor</option>
+            </select>
             <button
               type="button"
               onClick={() => handleRemoveTraveller(u.user.id)}

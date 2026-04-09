@@ -17,8 +17,16 @@ const Trip = () => {
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
   )
-
+  const user = useSelector(state => state.user)
   if (!trip) return <p>Trip not found</p>
+
+  const role =
+    trip.user.id === user.id
+      ? 'owner'
+      : trip.users.find(u => {
+        const id = u.user?.id || u.user?._id || u.user
+        return id === user.id
+      })?.role
 
   const editTrip = (event) => {
     event.preventDefault()
@@ -87,8 +95,14 @@ const Trip = () => {
           <div className="tripOverlay">
             <h1>{trip.title}</h1>
             <div className="tripButtons">
-              <button onClick={editTrip}>Edit</button>
-              <button onClick={handleDeleteTrip}>Delete</button>
+              {(role === 'owner' || role === 'editor') && (
+                <button onClick={editTrip}>Edit</button>
+              )}
+
+              {role === 'owner' && (
+                <button onClick={handleDeleteTrip}>Delete</button>
+              )}
+
               <button onClick={handleDownload}>Download</button>
             </div>
           </div>
