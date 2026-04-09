@@ -78,7 +78,14 @@ tripsRouter.put('/:id', async (request, response) => {
     return response.status(404).json({ error: 'trip not found' })
   }
 
-  if (trip.user.toString() !== decodedToken.id) {
+  const isOwner = trip.user.toString() === decodedToken.id
+
+  const isEditor = trip.users.some(u => {
+    const userId = u.user.toString()
+    return userId === decodedToken.id && u.role === 'editor'
+  })
+
+  if (!isOwner && !isEditor) {
     return response.status(403).json({ error: 'not authorized' })
   }
 
