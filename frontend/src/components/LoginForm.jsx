@@ -39,22 +39,22 @@ const LoginForm = () => {
     }
   }
   return (
-    <div className='loginDiv'>
+    <div className='editOuterSection'>
       <h2>Log in</h2>
-      <form className='loginForm' onSubmit={handleLogin}>
-        <div>
+      <form className='editSection' onSubmit={handleLogin}>
+        <div className='editRow'>
           <label>
             Username
-            <input {...usernameInput} />
           </label>
+          <input {...usernameInput} />
         </div>
-        <div>
+        <div className='editRow'>
           <label>
             Password
-            <input {...passwordInput} />
           </label>
+          <input {...passwordInput} />
         </div>
-        <div className='loginButtons'>
+        <div className='editRow'>
           <button type="submit">Login</button>
           <button onClick={changeView}>Sign up</button>
         </div>

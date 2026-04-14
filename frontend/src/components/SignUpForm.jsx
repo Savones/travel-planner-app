@@ -47,22 +47,24 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='loginDiv'>
+    <div className='editOuterSection'>
       <h2>Sign Up</h2>
-      <form className='loginForm' onSubmit={createUser}>
-        <div>
+      <form className='editSection' onSubmit={createUser}>
+        <div className='editRow'>
           <label>
             Username
-            <input {...usernameInput} />
           </label>
+          <input {...usernameInput} />
+
         </div>
-        <div>
+        <div className='editRow'>
           <label>
             Password
-            <input {...passwordInput} />
           </label>
+          <input {...passwordInput} />
+
         </div>
-        <div className='loginButtons'>
+        <div className='editRow'>
           <button onClick={cancel}>Cancel</button>
           <button type="submit">Create</button>
         </div>
