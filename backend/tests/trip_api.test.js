@@ -1,10 +1,12 @@
 const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const Trip = require('../models/trip')
 const User = require('../models/user')
+const helper = require('./test_helper')
 
 const api = supertest(app)
 
@@ -50,8 +52,113 @@ test('all trips are returned', async () => {
 test('first trip title found', async () => {
   const response = await api.get('/api/trips')
 
-  const contents = response.body.map(e => e.title)
-  assert.strictEqual(contents.includes('First trip'), true)
+  const titles = response.body.map(e => e.title)
+  assert.strictEqual(titles.includes('First trip'), true)
+})
+
+test('trip can be created', async () => {
+  testUser2 = await new User({
+    username: 'TestUse2r',
+    passwordHash: 'TestPassword2'
+  }).save()
+
+  const token = helper.createToken(testUser2)
+
+  const newTrip = {
+    title: 'New trip',
+    user: testUser2
+  }
+
+  await api
+    .post('/api/trips')
+    .set('Authorization', `Bearer ${token}`)
+    .send(newTrip)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/trips')
+  const titles = response.body.map(r => r.title)
+
+  assert.strictEqual(response.body.length, 3)
+  assert(titles.includes('New trip'))
+})
+
+test('trip can not be created without valid token ', async () => {
+  testUser2 = await new User({
+    username: 'TestUse2r',
+    passwordHash: 'TestPassword2'
+  }).save()
+
+  const token = 'nonValidToken'
+
+  const newTrip = {
+    title: 'New trip',
+    user: testUser2
+  }
+
+  await api
+    .post('/api/trips')
+    .set('Authorization', `Bearer ${token}`)
+    .send(newTrip)
+    .expect(401)
+
+  const response = await api.get('/api/trips')
+  const titles = response.body.map(r => r.title)
+
+  assert.strictEqual(response.body.length, 2)
+  assert(!titles.includes('New trip'))
+})
+
+test('trip can be deleted by owner', async () => {
+  testUser2 = await new User({
+    username: 'TestUse2r',
+    passwordHash: 'TestPassword2'
+  }).save()
+
+  const trip = await new Trip({
+    title: 'Delete this',
+    user: testUser2._id
+  }).save()
+
+  const token = jwt.sign(
+    { username: testUser2.username, id: testUser2._id },
+    process.env.SECRET
+  )
+
+  await api
+    .delete(`/api/trips/${trip.id}`)
+    .set('Authorization', `Bearer ${token}`)
+
+  const response = await api.get('/api/trips')
+  const titles = response.body.map(r => r.title)
+
+  assert.strictEqual(response.body.length, 2)
+  assert(!titles.includes('Delete this'))
+})
+
+test('trip can not be deleted with invalid token', async () => {
+  testUser2 = await new User({
+    username: 'TestUse2r',
+    passwordHash: 'TestPassword2'
+  }).save()
+
+  const trip = await new Trip({
+    title: 'Do not delete',
+    user: testUser2._id
+  }).save()
+
+  const token = 'invalidToken'
+
+  await api
+    .delete(`/api/trips/${trip.id}`)
+    .set('Authorization', `Bearer ${token}`)
+    .expect(401)
+
+  const response = await api.get('/api/trips')
+  const titles = response.body.map(r => r.title)
+
+  assert.strictEqual(response.body.length, 3)
+  assert(titles.includes('Do not delete'))
 })
 
 after(async () => {
