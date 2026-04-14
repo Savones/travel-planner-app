@@ -37,4 +37,7 @@
 | 8.4. | 2    | Improved trip details UI | 
 | 8.4. | 2    | Added ability to change currency and search trips | 
 | 8.4. | 3    | Added trip travellers roles (owner, editor, reader) | 
-| sum | 69    |  |
+| 9.4. | 3    | Added ability to edit roles | 
+| 9.4. | 1    | Improved forms UI for forms | 
+| 14.4. | 3    | Tested trip API | 
+| sum | 76    |  |
