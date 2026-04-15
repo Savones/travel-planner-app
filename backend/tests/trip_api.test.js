@@ -1,6 +1,5 @@
-const { test, describe, after, beforeEach } = require('node:test')
+const { test, describe, after, beforeEach, before } = require('node:test')
 const assert = require('node:assert')
-const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -9,6 +8,13 @@ const User = require('../models/user')
 const helper = require('./test_helper')
 
 const api = supertest(app)
+
+test({ concurrency: false })
+
+before(async () => {
+  await User.deleteMany({})
+  await Trip.deleteMany({})
+})
 
 beforeEach(async () => {
   await Trip.deleteMany({})

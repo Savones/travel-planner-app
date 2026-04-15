@@ -12,6 +12,11 @@ const tripsInDb = async () => {
   return trips.map(trip => trip.toJSON())
 }
 
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(user => user.toJSON())
+}
+
 const createToken = (user) =>
   jwt.sign({ username: user.username, id: user._id }, process.env.SECRET)
 
@@ -21,4 +26,4 @@ const createUser = async (username = 'testuser') => {
     passwordHash: 'password'
   }).save()
 }
-module.exports = { createToken, tripsInDb, createUser }
+module.exports = { createToken, tripsInDb, createUser, usersInDb }
