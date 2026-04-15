@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3003/api/users'
+const baseUrl = '/api/users'
 
 const getAll = async () => {
   const request = axios.get(`${baseUrl}`)
@@ -13,7 +13,7 @@ const create = async newObject => {
 }
 
 const login = async credentials => {
-  const response = await axios.post('http://localhost:3003/api/login', credentials)
+  const response = await axios.post('/api/login', credentials)
   return response.data
 }
 

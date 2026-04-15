@@ -15,10 +15,19 @@ mongoose.connect(config.MONGODB_URI, { family: 4 })
 
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
+
 app.use('/api/trips', tripsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/locations', locationsRouter)
+
+const path = require('path')
+
+app.use(express.static('dist'))
+
+app.get('*id', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
+})
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

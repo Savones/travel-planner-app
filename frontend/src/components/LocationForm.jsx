@@ -33,13 +33,18 @@ const LocationForm = () => {
   const [selectedCity, setSelectedCity] = useState('')
 
   useEffect(() => {
+    console.log("in fetch countries effect")
     const fetchCountries = async () => {
       try {
+        console.log("trying to get countries")
         const data = await locationService.getCountries()
+        console.log("data for countries: " + data)
         setCountries(data)
       } catch (error) {
+        console.log("catched error: " + error)
         dispatch(showNotification('Failed to load countries', 5000))
       } finally {
+        console.log("finally")
         setLoadingCountries(false)
       }
     }
