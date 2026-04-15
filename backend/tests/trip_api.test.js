@@ -136,29 +136,115 @@ test('trip can be deleted by owner', async () => {
   assert(!titles.includes('Delete this'))
 })
 
-test('trip can not be deleted with invalid token', async () => {
+test('trip can be updated by owner', async () => {
   testUser2 = await new User({
     username: 'TestUse2r',
     passwordHash: 'TestPassword2'
   }).save()
 
   const trip = await new Trip({
-    title: 'Do not delete',
+    title: 'Update this',
     user: testUser2._id
   }).save()
 
-  const token = 'invalidToken'
+  const token = jwt.sign(
+    { username: testUser2.username, id: testUser2._id },
+    process.env.SECRET
+  )
+
+  const updatedTrip = {
+    title: 'Updated trip'
+  }
 
   await api
-    .delete(`/api/trips/${trip.id}`)
+    .put(`/api/trips/${trip.id}`)
     .set('Authorization', `Bearer ${token}`)
-    .expect(401)
+    .send(updatedTrip)
+    .expect(200)
 
   const response = await api.get('/api/trips')
   const titles = response.body.map(r => r.title)
 
-  assert.strictEqual(response.body.length, 3)
-  assert(titles.includes('Do not delete'))
+  assert(titles.includes('Updated trip'))
+  assert(!titles.includes('Update this'))
+})
+
+test('trip can be updated by editor', async () => {
+  testUser2 = await new User({
+    username: 'TestUser2',
+    passwordHash: 'TestPassword2'
+  }).save()
+
+  testUser3 = await new User({
+    username: 'TestUser3',
+    passwordHash: 'TestPassword3'
+  }).save()
+
+  const trip = await new Trip({
+    title: 'Update this',
+    user: testUser2._id,
+    users: [{ user: testUser3._id, role: 'editor' }]
+  }).save()
+
+  const token = jwt.sign(
+    { username: testUser3.username, id: testUser3._id },
+    process.env.SECRET
+  )
+
+  const updatedTrip = {
+    title: 'Updated trip'
+  }
+
+  await api
+    .put(`/api/trips/${trip.id}`)
+    .set('Authorization', `Bearer ${token}`)
+    .send(updatedTrip)
+    .expect(200)
+
+  const response = await api.get('/api/trips')
+  const titles = response.body.map(r => r.title)
+
+  assert(titles.includes('Updated trip'))
+  assert(!titles.includes('Update this'))
+})
+
+test.only('trip can not be updated by reader', async () => {
+  testUser2 = await new User({
+    username: 'TestUser2',
+    passwordHash: 'TestPassword2'
+  }).save()
+
+  testUser3 = await new User({
+    username: 'TestUser3',
+    passwordHash: 'TestPassword3'
+  }).save()
+
+  const trip = await new Trip({
+    title: 'Update this',
+    user: testUser2._id,
+    users: [{ user: testUser3._id, role: 'reader' }]
+  }).save()
+
+  const token = jwt.sign(
+    { username: testUser3.username, id: testUser3._id },
+    process.env.SECRET
+  )
+
+  const updatedTrip = {
+    title: 'Updated trip'
+  }
+
+  await api
+    .put(`/api/trips/${trip.id}`)
+    .set('Authorization', `Bearer ${token}`)
+    .send(updatedTrip)
+    .expect(403)
+
+  const response = await api.get('/api/trips')
+  const titles = response.body.map(r => r.title)
+
+  assert(!titles.includes('Updated trip'))
+  assert(titles.includes('Update this'))
 })
 
 after(async () => {
