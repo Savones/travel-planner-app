@@ -10,13 +10,7 @@ const userSchema = mongoose.Schema({
   passwordHash: {
     type: String,
     required: true
-  },
-  trips: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Trip'
-    }
-  ]
+  }
 })
 
 userSchema.set('toJSON', {

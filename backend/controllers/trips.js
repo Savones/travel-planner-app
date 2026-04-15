@@ -53,9 +53,6 @@ tripsRouter.post('/', async (request, response) => {
 
   const savedTrip = await trip.save()
 
-  user.trips = user.trips.concat(savedTrip._id)
-  await user.save()
-
   const populatedTrip = await Trip
     .findById(savedTrip._id)
     .populate('user', { username: 1 })
