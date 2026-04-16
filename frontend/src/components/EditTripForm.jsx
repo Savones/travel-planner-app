@@ -232,11 +232,11 @@ const EditTripForm = () => {
             <label>Total budget</label>
             <input
               type={budgetAmount.type}
-              value={budgetAmount.value}
+              value={budgetAmount.value ?? 0}
               onChange={budgetAmount.onChange}
             />
             <select
-              value={budgetCurrency.value}
+              value={budgetCurrency.value ?? 'EUR'}
               onChange={budgetCurrency.onChange}
             >
               <option value="EUR">€ EUR</option>
