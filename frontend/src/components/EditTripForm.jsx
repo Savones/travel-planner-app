@@ -273,6 +273,18 @@ const EditTripForm = () => {
             />
 
             <div className='editRow'>
+              <label>Accommodation</label>
+              <input
+                value={location.accommodation || ''}
+                onChange={(event) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].accommodation = event.target.value
+                  setLocations(newLocations)
+                }}
+              />
+            </div>
+
+            <div className='editRow'>
               <label>Notes</label>
               <input
                 value={location.notes || ''}

@@ -114,13 +114,31 @@ const Trip = () => {
               <h2>Itinerary</h2>
               {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
               {trip.locations.map(location => (
-                <div className='locationDiv' key={location.id} style={{ borderColor: location.backgroundColor }}>
-                  <div className='locationTitleDiv'>{location.city}, {location.country}</div>
-                  <div className='locationDetailDiv'>
-                    {formatDate(location.startDate)} - {formatDate(location.endDate)}
+                <div
+                  className='locationDiv'
+                  key={location.id}
+                  style={{ borderColor: location.backgroundColor }}
+                >
+                  <div className='locationTitleDiv'>
+                    {location.city}, {location.country}
                   </div>
+
+                  <div className='locationDate'>
+                    {formatDate(location.startDate)} – {formatDate(location.endDate)}
+                  </div>
+
+                  {location.accommodation && (
+                    <div className='locationSection'>
+                      <div className='locationLabel'>Accommodation</div>
+                      <div className='locationValue'>{location.accommodation}</div>
+                    </div>
+                  )}
+
                   {location.notes && (
-                    <div className='locationDetailDiv'>Notes: {location.notes}</div>
+                    <div className='locationSection'>
+                      <div className='locationLabel'>Notes</div>
+                      <div className='locationValue'>{location.notes}</div>
+                    </div>
                   )}
                 </div>
               ))}

@@ -4,6 +4,7 @@ const locationSchema = new mongoose.Schema({
   country: String,
   city: String,
   notes: String,
+  accommodation: String,
   startDate: Date,
   endDate: Date,
   backgroundColor: {
