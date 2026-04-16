@@ -169,63 +169,64 @@ const EditTripForm = () => {
         </div>
       </div>
 
-      <div className='editOuterSection'>
-        <h3>Travellers</h3>
-        <button
-          type="button"
-          onClick={() => setShowDropdown(!showDropdown)}
-        >
-          Add traveller
-        </button>
+      {trip.user.username === currentUser.username && (
+        <div className='editOuterSection'>
+          <h3>Travellers</h3>
+          <button
+            type="button"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            Add traveller
+          </button>
 
-        {showDropdown && (
-          <div className="dropdown">
-            {availableUsers.map(user => (
-              <div
-                key={user.id}
-                className="dropdownItem"
-                onClick={() => handleAddTraveller(user)}
-              >
-                {user.username}
+          {showDropdown && (
+            <div className="dropdown">
+              {availableUsers.map(user => (
+                <div
+                  key={user.id}
+                  className="dropdownItem"
+                  onClick={() => handleAddTraveller(user)}
+                >
+                  {user.username}
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className='editSection'>
+
+            <div className='editRow'>
+              <span className='travellerName'>{trip.user.username}</span>
+              Owner
+            </div>
+            {users.map(u => (
+              <div className="editRow" key={u.user.id}>
+                <span className="travellerName">
+                  {u.user.username}
+                </span>
+
+                <select
+                  value={u.role}
+                  onChange={(e) => handleRoleChange(u.user.id, e.target.value)}
+                >
+                  <option value="reader">Reader</option>
+                  <option value="editor">Editor</option>
+                </select>
+
+                <button
+                  type="button"
+                  onClick={() => handleRemoveTraveller(u.user.id)}
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </div>
-        )}
-
-        <div className='editSection'>
-
-          <div className='editRow'>
-            <span className='travellerName'>{trip.user.username}</span>
-            Owner
-          </div>
-          {users.map(u => (
-            <div className="editRow" key={u.user.id}>
-              <span className="travellerName">
-                {u.user.username}
-              </span>
-
-              <select
-                value={u.role}
-                onChange={(e) => handleRoleChange(u.user.id, e.target.value)}
-              >
-                <option value="reader">Reader</option>
-                <option value="editor">Editor</option>
-              </select>
-
-              <button
-                type="button"
-                onClick={() => handleRemoveTraveller(u.user.id)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
         </div>
-      </div>
+      )}
 
       <div className='editOuterSection'>
         <h3>Budget</h3>
-        <button>Add cost</button>
         <div className='editSection'>
           <div className='editRow'>
             <label>Total budget</label>

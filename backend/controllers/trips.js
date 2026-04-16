@@ -103,9 +103,11 @@ tripsRouter.put('/:id', async (request, response) => {
     }
   }
 
-  if (body.users !== undefined) {
+  if (body.users !== undefined && isOwner) {
     trip.users = body.users.map(u => ({
-      user: typeof u.user === 'object' ? (u.user._id || u.user.id) : u.user,
+      user: typeof u.user === 'object'
+        ? (u.user._id || u.user.id)
+        : u.user,
       role: u.role || 'reader'
     }))
   }
