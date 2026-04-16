@@ -42,7 +42,7 @@ const LocationForm = () => {
         setCountries(data)
       } catch (error) {
         console.log("catched error: " + error)
-        dispatch(showNotification('Failed to load countries', 5000))
+        dispatch(showNotification('Failed to load countries', 5000, 'error'))
       } finally {
         console.log("finally")
         setLoadingCountries(false)
@@ -60,7 +60,7 @@ const LocationForm = () => {
         const data = await locationService.getCities(selectedCountry.iso2)
         setCities(data)
       } catch (error) {
-        dispatch(showNotification(`Failed to fetch countries. Error: ${error.response.data.error}`))
+        dispatch(showNotification(`Failed to fetch countries. Error: ${error.response.data.error}`, 5000, 'error'))
       }
     }
 
@@ -71,17 +71,17 @@ const LocationForm = () => {
     event.preventDefault()
 
     if (!selectedCountry || !selectedCity) {
-      dispatch(showNotification('Select country and city.', 5000))
+      dispatch(showNotification('Select country and city.', 5000, 'info'))
       return
     }
 
     if (!startDate.value || !endDate.value) {
-      dispatch(showNotification('Select start and end dates.', 5000))
+      dispatch(showNotification('Select start and end dates.', 5000, 'info'))
       return
     }
 
     if (new Date(startDate.value) > new Date(endDate.value)) {
-      dispatch(showNotification('Start date must be before end date.', 5000))
+      dispatch(showNotification('Start date must be before end date.', 5000, 'info'))
       return
     }
 
@@ -103,10 +103,10 @@ const LocationForm = () => {
 
     try {
       await dispatch(editTrip(updatedTrip))
-      dispatch(showNotification(`Added location "${newLocation.city}"`, 5000))
+      dispatch(showNotification(`Added location "${newLocation.city}"`, 5000, 'success'))
       navigate(`/trips/${trip.id}`)
     } catch (error) {
-      dispatch(showNotification(`Failed to add a location "${newLocation.city}". Error: ${error.response.data.error}`))
+      dispatch(showNotification(`Failed to add a location "${newLocation.city}". Error: ${error.response.data.error}`), 5000, 'error')
     }
   }
 

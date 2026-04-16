@@ -18,12 +18,12 @@ const SignUpForm = () => {
     event.preventDefault()
 
     if (username.value.length < 3 || username.value.length > 20) {
-      dispatch(showNotification(`Username invalid. Username has to have 3-20 characters.`, 5000))
+      dispatch(showNotification(`Username invalid. Username has to have 3-20 characters.`, 5000, 'info'))
       return
     }
 
     if (password.value.length < 8 || password.value.length > 15) {
-      dispatch(showNotification(`Password invalid. Password has to have 8-15 characters.`, 5000))
+      dispatch(showNotification(`Password invalid. Password has to have 8-15 characters.`, 5000, 'info'))
       return
     }
 
@@ -33,11 +33,11 @@ const SignUpForm = () => {
         password: password.value
       })
 
-      dispatch(showNotification(`Created user "${username.value}"`, 5000))
+      dispatch(showNotification(`Created user "${username.value}"`, 5000, 'success'))
       navigate('/login')
 
     } catch (error) {
-      dispatch(showNotification(`Error: ${error.response.data.error}`, 5000))
+      dispatch(showNotification(`Error: ${error.response.data.error}`, 5000, 'error'))
     }
   }
 

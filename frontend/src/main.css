@@ -522,9 +522,27 @@ a {
 /* NOTIFICATION */
 
 .notificationDiv {
-  background-color: lightgrey;
-  padding: 25px;
-  align-items: center;
+  position: fixed;
+  top: 0px;
+  align-self: center;
+  background: #ffffff;
+  padding: 14px 40px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  z-index: 1000;
+}
+
+.info {
+  border-left: 5px solid #aaa;
+}
+
+.success {
+  border-left: 5px solid #4caf50;
+}
+
+.error {
+  border-left: 5px solid rgb(206, 13, 13);
 }
 
 /* DROPDOWN */

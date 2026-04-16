@@ -42,11 +42,11 @@ const Trip = () => {
 
     try {
       await dispatch(deleteTrip(id))
-      dispatch(showNotification(`Trip "${trip.title}" has been deleted.`, 5000))
+      dispatch(showNotification(`Trip "${trip.title}" has been deleted.`, 5000, 'info'))
       navigate(`/`)
 
     } catch (error) {
-      dispatch(showNotification(`Failed to delete trip "${trip.title}". Error: ${error.response.data.error}`))
+      dispatch(showNotification(`Failed to delete trip "${trip.title}". Error: ${error.response.data.error}`, 5000, 'error'))
     }
   }
 
@@ -80,7 +80,7 @@ const Trip = () => {
       pdf.save(`${trip.title}.pdf`)
 
     } catch (error) {
-      dispatch(showNotification(`Download failed.`, 5000))
+      dispatch(showNotification(`Download failed.`, 5000, 'error'))
     }
   }
 

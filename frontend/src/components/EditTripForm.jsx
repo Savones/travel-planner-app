@@ -99,10 +99,10 @@ const EditTripForm = () => {
 
     try {
       dispatch(editTrip(updatedTrip))
-      dispatch(showNotification(`Edited trip "${trip.title}" successfully`, 5000))
+      dispatch(showNotification(`Edited trip "${trip.title}" successfully`, 5000, 'success'))
       navigate(`/trips/${trip.id}`)
     } catch (error) {
-      dispatch(showNotification(`Failed to edit trip "${trip.title}"`, 5000))
+      dispatch(showNotification(`Failed to edit trip "${trip.title}"`, 5000, 'error'))
     }
   }
 
@@ -127,10 +127,10 @@ const EditTripForm = () => {
 
     try {
       await dispatch(editTrip(updatedTrip))
-      dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000))
+      dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000, 'success'))
       navigate(`/trips/${trip.id}`)
     } catch (error) {
-      dispatch(showNotification(`Failed to delete "${location.city}."`, 5000))
+      dispatch(showNotification(`Failed to delete "${location.city}."`, 5000, 'error'))
 
     }
   }

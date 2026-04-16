@@ -16,12 +16,12 @@ const TripForm = () => {
     event.preventDefault()
 
     if (!title.value.trim()) {
-      dispatch(showNotification('Title is required.', 5000))
+      dispatch(showNotification('Title is required.', 5000, 'info'))
       return
     }
 
     if (title.value.length > 20) {
-      dispatch(showNotification('Title can have maximum 20 characters.', 5000))
+      dispatch(showNotification('Title can have maximum 20 characters.', 5000, 'info'))
       return
     }
 
@@ -32,10 +32,10 @@ const TripForm = () => {
       }
 
       const returnedTrip = await dispatch(addNewTrip(createdTrip))
-      dispatch(showNotification(`Created trip "${returnedTrip.title}"`, 5000))
+      dispatch(showNotification(`Created trip "${returnedTrip.title}"`, 5000, 'success'))
       navigate(`/trips/${returnedTrip.id}`)
     } catch {
-      dispatch(showNotification(`Something went wrong.`, 5000))
+      dispatch(showNotification(`Something went wrong.`, 5000, 'error'))
     }
   }
 

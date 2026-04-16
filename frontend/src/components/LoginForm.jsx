@@ -32,10 +32,10 @@ const LoginForm = () => {
       window.localStorage.setItem("loggedUser", JSON.stringify(user))
       dispatch(setUser(user))
       tripService.setToken(user.token)
-      dispatch(showNotification(`User "${user.username}" has logged in.`, 5000))
+      dispatch(showNotification(`User "${user.username}" has logged in.`, 5000, 'info'))
       navigate('/')
     } catch {
-      dispatch(showNotification(`Username or password incorrect.`, 5000))
+      dispatch(showNotification(`Username or password incorrect.`, 5000, 'error'))
     }
   }
   return (
