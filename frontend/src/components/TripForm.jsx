@@ -10,6 +10,7 @@ const TripForm = () => {
 
   const title = useField('text')
   const { setValue, ...titleInput } = title
+  const user = useSelector(state => state.user)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
