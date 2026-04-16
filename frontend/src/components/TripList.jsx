@@ -24,8 +24,6 @@ const TripList = () => {
     upcoming: false, ongoing: false, shared: false, past: false
   })
 
-  if (!user) return <div>testii</div>
-
   const now = new Date()
 
   const counts = {

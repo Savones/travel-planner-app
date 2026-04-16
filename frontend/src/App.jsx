@@ -8,6 +8,7 @@ import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import EditTripForm from './components/EditTripForm'
 import LocationForm from './components/LocationForm'
+import ProtectedRoute from './components/ProtectedRoute'
 import {
   BrowserRouter as Router,
   Routes, Route
@@ -54,11 +55,11 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/trips/:id" element={<Trip />} />
-          <Route path="/trips/:id/edit" element={<EditTripForm />} />
-          <Route path="/" element={<TripList />} />
-          <Route path="/create" element={<TripForm />} />
-          <Route path="/trips/:id/addLocation" element={<LocationForm />} />
+          <Route path="/trips/:id" element={<ProtectedRoute user={user}><Trip /></ProtectedRoute>} />
+          <Route path="/trips/:id/edit" element={<ProtectedRoute user={user}><EditTripForm /></ProtectedRoute>} />
+          <Route path="/" element={<ProtectedRoute user={user}><TripList /></ProtectedRoute>} />
+          <Route path="/create" element={<ProtectedRoute user={user}><TripForm /></ProtectedRoute>} />
+          <Route path="/trips/:id/addLocation" element={<ProtectedRoute user={user}><LocationForm /></ProtectedRoute>} />
         </Routes>
       </>
     </Router>
