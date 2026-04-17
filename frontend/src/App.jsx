@@ -9,6 +9,7 @@ import SignUpForm from './components/SignUpForm'
 import EditTripForm from './components/EditTripForm'
 import LocationForm from './components/LocationForm'
 import ProtectedRoute from './components/ProtectedRoute'
+import LocationEditor from './components/LocationEditor'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser, clearUser } from './reducers/userReducer'
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/" element={<ProtectedRoute><TripList /></ProtectedRoute>} />
           <Route path="/create" element={<ProtectedRoute><TripForm /></ProtectedRoute>} />
           <Route path="/trips/:id/addLocation" element={<ProtectedRoute><LocationForm /></ProtectedRoute>} />
+          <Route path="/trips/:id/locations/edit" element={<ProtectedRoute><LocationEditor /></ProtectedRoute>} />
         </Routes>
       </>
     </Router>

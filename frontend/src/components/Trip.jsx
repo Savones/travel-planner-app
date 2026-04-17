@@ -89,6 +89,11 @@ const Trip = () => {
     navigate(`/trips/${trip.id}/addLocation`)
   }
 
+  const editLocations = (event) => {
+    event.preventDefault()
+    navigate(`/trips/${trip.id}/locations/edit`)
+  }
+
   const formatDate = (date) =>
     new Date(date).toLocaleDateString('fi-FI')
 
@@ -117,10 +122,15 @@ const Trip = () => {
           <div className='tripMain'>
             <div className='locationsDiv'>
               <h2>Itinerary</h2>
-              <button onClick={handleAddLocation}>
-                Add location
-              </button>
-              {trip.locations?.length === 0 && <p>No locations yet. Click "edit" to add a location.</p>}
+              <div className='editRow'>
+                <button onClick={handleAddLocation}>
+                  Add location
+                </button>
+                <button onClick={editLocations}>
+                  Edit locations
+                </button>
+              </div>
+              {trip.locations?.length === 0 && <p>No locations yet. Click "Add location" to add a location.</p>}
               {trip.locations.map(location => (
                 <div
                   className='locationDiv'

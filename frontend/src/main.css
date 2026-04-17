@@ -258,7 +258,7 @@ a {
   color: #222;
 }
 
-.locationsDiv button {
+.locationsDiv div {
   align-self: flex-start;
 }
 
