@@ -16,11 +16,13 @@ const LocationForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const accommodation = useField('text')
   const notes = useField('text')
   const startDate = useField('date')
   const endDate = useField('date')
   const backgroundColor = useField('color')
 
+  const { setValue: setAccommodation, ...accommodationInput } = accommodation
   const { setValue: setNotes, ...notesInput } = notes
   const { setValue: setStartDate, ...startDateInput } = startDate
   const { setValue: setEndDate, ...endDateInput } = endDate
@@ -84,6 +86,7 @@ const LocationForm = () => {
       country: selectedCountry.name,
       city: selectedCity,
       notes: notes.value || '',
+      accommodation: accommodation.value || '',
       startDate: startDate.value,
       endDate: endDate.value,
       backgroundColor: backgroundColor.value || '#ffffff'
@@ -127,6 +130,11 @@ const LocationForm = () => {
             countries={countries}
             cities={cities}
           />
+
+          <div className='editRow'>
+            <label>Accommodation</label>
+            <input {...accommodationInput} />
+          </div>
 
           <div className='editRow'>
             <label>Notes</label>

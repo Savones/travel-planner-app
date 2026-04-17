@@ -258,6 +258,10 @@ a {
   color: #222;
 }
 
+.locationsDiv button {
+  align-self: flex-start;
+}
+
 .locationDate {
   font-size: 14px;
   color: black;

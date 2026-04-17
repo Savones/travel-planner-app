@@ -75,11 +75,6 @@ const EditTripForm = () => {
     return <p>Loading trip...</p>
   }
 
-  const handleAddLocation = (event) => {
-    event.preventDefault()
-    navigate(`/trips/${trip.id}/addLocation`)
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -120,7 +115,7 @@ const EditTripForm = () => {
       )
     }
 
-    const confirmation = window.confirm(`Delete trip "${location.city}"?`)
+    const confirmation = window.confirm(`Delete location "${location.city}"?`)
     if (!confirmation) {
       return
     }
@@ -248,97 +243,99 @@ const EditTripForm = () => {
         </div>
       </div>
 
-      <div className='editOuterSection'>
-        <h3>Locations</h3>
-        <button onClick={handleAddLocation}>Add location</button>
-        {locations.map((location, locationIndex) => (
-          <div className='editSection' key={location.id}>
-            <LocationDropdown
-              selectedCountry={location.selectedCountry}
-              setSelectedCountry={(country) => {
-                const newLocations = [...locations]
-                newLocations[locationIndex].selectedCountry = country
-                newLocations[locationIndex].selectedCity = ''
-                newLocations[locationIndex].cities = []
-                setLocations(newLocations)
-              }}
-              selectedCity={location.selectedCity}
-              setSelectedCity={(city) => {
-                const newLocations = [...locations]
-                newLocations[locationIndex].selectedCity = city
-                setLocations(newLocations)
-              }}
-              countries={countries}
-              cities={location.cities}
-            />
+      {locations.length > 0 && (
+        <div className='editOuterSection'>
+          <h3>Locations</h3>
+          {locations.map((location, locationIndex) => (
+            <div className='editSection' key={location.id}>
+              <LocationDropdown
+                selectedCountry={location.selectedCountry}
+                setSelectedCountry={(country) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].selectedCountry = country
+                  newLocations[locationIndex].selectedCity = ''
+                  newLocations[locationIndex].cities = []
+                  setLocations(newLocations)
+                }}
+                selectedCity={location.selectedCity}
+                setSelectedCity={(city) => {
+                  const newLocations = [...locations]
+                  newLocations[locationIndex].selectedCity = city
+                  setLocations(newLocations)
+                }}
+                countries={countries}
+                cities={location.cities}
+              />
 
-            <div className='editRow'>
-              <label>Accommodation</label>
-              <input
-                value={location.accommodation || ''}
-                onChange={(event) => {
-                  const newLocations = [...locations]
-                  newLocations[locationIndex].accommodation = event.target.value
-                  setLocations(newLocations)
-                }}
-              />
-            </div>
+              <div className='editRow'>
+                <label>Accommodation</label>
+                <input
+                  value={location.accommodation || ''}
+                  onChange={(event) => {
+                    const newLocations = [...locations]
+                    newLocations[locationIndex].accommodation = event.target.value
+                    setLocations(newLocations)
+                  }}
+                />
+              </div>
 
-            <div className='editRow'>
-              <label>Notes</label>
-              <input
-                value={location.notes || ''}
-                onChange={(event) => {
-                  const newLocations = [...locations]
-                  newLocations[locationIndex].notes = event.target.value
-                  setLocations(newLocations)
-                }}
-              />
+              <div className='editRow'>
+                <label>Notes</label>
+                <input
+                  value={location.notes || ''}
+                  onChange={(event) => {
+                    const newLocations = [...locations]
+                    newLocations[locationIndex].notes = event.target.value
+                    setLocations(newLocations)
+                  }}
+                />
+              </div>
+              <div className='editRow'>
+                <label>Start Date</label>
+                <input
+                  type="date"
+                  value={location.startDate.substring(0, 10)}
+                  onChange={(event) => {
+                    const newLocations = [...locations]
+                    newLocations[locationIndex].startDate = event.target.value
+                    setLocations(newLocations)
+                  }}
+                />
+              </div>
+              <div className='editRow'>
+                <label>End Date</label>
+                <input
+                  type="date"
+                  value={location.endDate.substring(0, 10)}
+                  onChange={(event) => {
+                    const newLocations = [...locations]
+                    newLocations[locationIndex].endDate = event.target.value
+                    setLocations(newLocations)
+                  }}
+                />
+              </div>
+              <div className='editRow'>
+                <label>Background color</label>
+                <input
+                  type='color'
+                  value={location.backgroundColor || '#ffffff'}
+                  onChange={(event) => {
+                    const newLocations = [...locations]
+                    newLocations[locationIndex].backgroundColor = event.target.value
+                    setLocations(newLocations)
+                  }}
+                />
+              </div>
+              <div className='editRow'>
+                <button type='button' onClick={() => handleDeleteLocation(location)}>
+                  Delete location
+                </button>
+              </div>
             </div>
-            <div className='editRow'>
-              <label>Start Date</label>
-              <input
-                type="date"
-                value={location.startDate.substring(0, 10)}
-                onChange={(event) => {
-                  const newLocations = [...locations]
-                  newLocations[locationIndex].startDate = event.target.value
-                  setLocations(newLocations)
-                }}
-              />
-            </div>
-            <div className='editRow'>
-              <label>End Date</label>
-              <input
-                type="date"
-                value={location.endDate.substring(0, 10)}
-                onChange={(event) => {
-                  const newLocations = [...locations]
-                  newLocations[locationIndex].endDate = event.target.value
-                  setLocations(newLocations)
-                }}
-              />
-            </div>
-            <div className='editRow'>
-              <label>Background color</label>
-              <input
-                type='color'
-                value={location.backgroundColor || '#ffffff'}
-                onChange={(event) => {
-                  const newLocations = [...locations]
-                  newLocations[locationIndex].backgroundColor = event.target.value
-                  setLocations(newLocations)
-                }}
-              />
-            </div>
-            <div className='editRow'>
-              <button type='button' onClick={() => handleDeleteLocation(location)}>
-                Delete location
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+
       <div className='editRow'>
         <button type="submit">Save</button>
         <button onClick={cancel}>Cancel</button>
