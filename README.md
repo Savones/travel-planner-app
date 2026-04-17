@@ -2,11 +2,11 @@
 
 A full-stack app for planning upcoming trips. Users can create trips, add travel locations, manage itineraries with friends and export trip plans as PDF files. 
 
-This app is deployed on Render: [https://travel-planner-app-mrz5.onrender.com].
+This app is deployed on Render: https://travel-planner-app-mrz5.onrender.com.
 
 ## Documentation
 
-- (Timesheet)[https://github.com/Savones/travel-planner-app/blob/main/documentation/timesheet.md]
+- [Timesheet](https://github.com/Savones/travel-planner-app/blob/main/documentation/timesheet.md)
 
 ## Use of AI
 
