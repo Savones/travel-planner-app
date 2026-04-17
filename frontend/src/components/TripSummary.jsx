@@ -55,7 +55,7 @@ const TripSummary = ({ trip }) => {
             {trip.budget?.currency === 'EUR' && '€'}
             {trip.budget?.currency === 'USD' && '$'}
             {trip.budget?.currency === 'GBP' && '£'}
-            {trip.budget?.currency === 'JPY' && '¥'} {trip.budget.amount ?? 0}</strong>
+            {trip.budget?.currency === 'JPY' && '¥'} {trip.budget?.amount ?? 0}</strong>
         </div>
       </div>
 
