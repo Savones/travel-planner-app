@@ -512,10 +512,10 @@ a {
 .menuButtonsDiv a {
   margin: 0px 3px 0px 3px;
   text-decoration: none;
-  background-color: #fff;
   color: black;
   padding: 3px 10px;
   border-radius: 5px;
+  background-color: #fff;
 }
 
 .menuButtonsDiv button {
@@ -525,6 +525,10 @@ a {
   font-size: 18px;
   padding: 3px 10px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.menuButtonsDiv a.activeButton {
+  background-color: #aaa;
 }
 
 /* LOGIN */

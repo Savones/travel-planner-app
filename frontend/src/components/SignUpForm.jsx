@@ -65,8 +65,8 @@ const SignUpForm = () => {
 
         </div>
         <div className='editRow'>
-          <button onClick={cancel}>Cancel</button>
           <button type="submit">Create</button>
+          <button onClick={cancel}>Cancel</button>
         </div>
       </form>
     </div>

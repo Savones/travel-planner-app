@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
 
@@ -8,14 +8,30 @@ const Menu = ({ handleLogout }) => {
 
   const logout = () => {
     handleLogout()
-    dispatch(showNotification(`User has logged out.`, 5000))
+    dispatch(showNotification('User has logged out.', 5000, 'info'))
     navigate('/login')
   }
 
   return (
     <div className="menuLinks">
-      <Link to="/">My trips</Link>
-      <Link to="/create">Create</Link>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? 'activeButton' : ''
+        }
+      >
+        My trips
+      </NavLink>
+
+      <NavLink
+        to="/create"
+        className={({ isActive }) =>
+          isActive ? 'activeButton' : ''
+        }
+      >
+        Create
+      </NavLink>
+
       <button onClick={logout}>
         Logout
       </button>

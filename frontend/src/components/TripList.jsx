@@ -135,6 +135,10 @@ const TripList = () => {
         </div>
       </div>
 
+      {userTrips.length == 0 && (
+        <div className='tripFiltersDiv'>Create your first trip by clicking the "Create" button in the top-right corner.</div>
+      )}
+
       <div className='tripListDiv'>
         {searched.map((trip, index) => (
           <Link key={trip.id} to={`/trips/${trip.id}`}>
