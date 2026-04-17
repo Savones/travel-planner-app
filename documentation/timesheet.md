@@ -40,4 +40,9 @@
 | 9.4. | 3    | Added ability to edit roles | 
 | 9.4. | 1    | Improved forms UI for forms | 
 | 14.4. | 3    | Tested trip API | 
-| sum | 76    |  |
+| 15.4. | 3    | Added tests for trip API and user API | 
+| 15.4. | 3    | Combined frontend and backend using dist and deployed app to Render | 
+| 16.4. | 2    | Protected routes meant for logged in users and fixed related bugs | 
+| 16.4. | 2    | Added notification types and removed editors ability to edit user roles | 
+| 16.4. | 1    | Added accommodation field to locations | 
+| sum | 87    |  |
