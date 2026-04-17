@@ -122,14 +122,19 @@ const Trip = () => {
           <div className='tripMain'>
             <div className='locationsDiv'>
               <h2>Itinerary</h2>
-              <div className='editRow'>
-                <button onClick={handleAddLocation}>
-                  Add location
-                </button>
-                <button onClick={editLocations}>
-                  Edit locations
-                </button>
-              </div>
+
+              {(role === 'owner' || role === 'editor') && (
+                <div className='editRow'>
+                  <button onClick={handleAddLocation}>
+                    Add location
+                  </button>
+
+                  <button onClick={editLocations}>
+                    Edit locations
+                  </button>
+                </div>
+              )}
+
               {trip.locations?.length === 0 && <p>No locations yet. Click "Add location" to add a location.</p>}
               {trip.locations.map(location => (
                 <div
