@@ -54,19 +54,19 @@ a {
 
 .tripListDiv {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  justify-content: center;
   gap: 30px;
-  justify-items: center;
   padding: 20px;
-  max-width: 1000px;
-  align-self: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .tripBannerDiv {
   border: none;
   border-radius: 12px;
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   height: 350px;
   overflow: hidden;
   background-color: #abd2fa5e;
@@ -528,7 +528,7 @@ a {
 }
 
 .menuButtonsDiv a.activeButton {
-  background-color: #aaa;
+  background-color: #eee;
 }
 
 /* LOGIN */

@@ -129,9 +129,11 @@ const Trip = () => {
                     Add location
                   </button>
 
-                  <button onClick={editLocations}>
-                    Edit locations
-                  </button>
+                  {trip.locations?.length !== 0 && (
+                    <button onClick={editLocations}>
+                      Edit locations
+                    </button>
+                  )}
                 </div>
               )}
 
