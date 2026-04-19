@@ -228,7 +228,6 @@ a {
   border: none;
 }
 
-
 .tripButtons button:hover {
   background-color: #abd2faab;
 }
@@ -385,6 +384,23 @@ a {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   padding: 20px;
   border-radius: 16px;
+}
+
+.pdfMode .tripButtons {
+  display: none;
+}
+
+.pdfMode .tripOverlay h1 {
+  border: none;
+}
+
+.pdfMode .locationsDiv .editRow button {
+  display: none;
+}
+
+.pdfMode .tripSummaryDiv,
+.pdfMode .locationsDiv {
+  border: 1px #eeeeee solid;
 }
 
 /* CREATE TRIP */

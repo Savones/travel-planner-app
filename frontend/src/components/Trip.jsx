@@ -51,18 +51,28 @@ const Trip = () => {
   }
 
   const handleDownload = async () => {
+    const element = tripRef.current
+
     try {
-      const element = tripRef.current
+      element.classList.add('pdfMode')
       const canvas = await html2canvas(element, {
-        scale: 2
+        scale: 2,
+        useCORS: true
       })
       const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF('p', 'mm', 'a4')
 
       const margin = 10
-      const imgWidth = 210 - margin * 2
-      const pageHeight = 295
-      const imgHeight = (canvas.height * imgWidth) / canvas.width
+      const pageWidth = 210 - margin * 2
+      const pageHeight = 295 - margin * 2
+
+      const ratio = Math.min(
+        pageWidth / canvas.width,
+        pageHeight / canvas.height
+      )
+
+      const imgWidth = canvas.width * ratio
+      const imgHeight = canvas.height * ratio
 
       let heightLeft = imgHeight
       let position = 0
@@ -81,6 +91,8 @@ const Trip = () => {
 
     } catch (error) {
       dispatch(showNotification(`Download failed.`, 5000, 'error'))
+    } finally {
+      element.classList.remove('pdfMode')
     }
   }
 
@@ -104,6 +116,7 @@ const Trip = () => {
           {trip.imageUrl && <img src={trip.imageUrl} alt={trip.title} />}
           <div className="tripOverlay">
             <h1>{trip.title}</h1>
+
             <div className="tripButtons">
               {(role === 'owner' || role === 'editor') && (
                 <button onClick={editTrip}>
