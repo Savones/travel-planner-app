@@ -101,7 +101,7 @@ const Trip = () => {
     <div className='tripPageDiv'>
       <div ref={tripRef}>
         <div className="tripHeading">
-          <img src={image} alt={trip.title} />
+          <img src={trip.imageUrl} alt={trip.title} />
           <div className="tripOverlay">
             <h1>{trip.title}</h1>
             <div className="tripButtons">

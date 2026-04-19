@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { editTrip } from '../reducers/tripReducer'
 import { useSelector } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
+import axios from 'axios'
 
 const EditTripForm = () => {
   const { id } = useParams()
@@ -14,6 +15,7 @@ const EditTripForm = () => {
   const title = useField('text')
   const budgetAmount = useField('number')
   const budgetCurrency = useField('text')
+  const [imageUrl, setImageUrl] = useState('')
 
   const trip = useSelector(state =>
     state.trips.find(t => t.id === id)
@@ -31,6 +33,7 @@ const EditTripForm = () => {
       title.setValue(trip.title)
       budgetAmount.setValue(trip.budget.amount)
       budgetCurrency.setValue(trip.budget.currency)
+      setImageUrl(trip.imageUrl)
     }
   }, [trip])
 
@@ -45,7 +48,8 @@ const EditTripForm = () => {
       ...trip,
       title: title.value,
       budget: { amount: budgetAmount.value, currency: budgetCurrency.value },
-      users
+      users,
+      imageUrl
     }
 
     try {
@@ -81,6 +85,20 @@ const EditTripForm = () => {
     !users.some(selected => selected.user.id === u.id)
   )
 
+  const handleUpload = async (event) => {
+    try {
+      const file = event.target.files[0]
+      const formData = new FormData()
+      formData.append('image', file)
+      const response = await axios.post('/api/upload', formData)
+      console.log(response.data)
+      setImageUrl(response.data.url)
+
+    } catch (error) {
+      console.error('upload error:', error)
+    }
+  }
+
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
       <div className='editOuterSection'>
@@ -93,6 +111,21 @@ const EditTripForm = () => {
               onChange={title.onChange}
             />
           </div>
+        </div>
+      </div>
+
+      <div className='editOuterSection'>
+        <h3>Background image</h3>
+        <div className='editSection'>
+          <label className="fileUpload">
+            Upload image
+            <input
+              type="file"
+              onChange={handleUpload}
+              style={{ display: 'none' }}
+            />
+          </label>
+          {imageUrl && <img src={imageUrl} className='backgroundImgPreview' />}
         </div>
       </div>
 

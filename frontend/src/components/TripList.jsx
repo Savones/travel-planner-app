@@ -143,7 +143,7 @@ const TripList = () => {
         {searched.map((trip, index) => (
           <Link key={trip.id} to={`/trips/${trip.id}`}>
             <div className='tripBannerDiv'>
-              <img src={images[index % images.length]} alt={trip.title} />
+              <img src={trip.imageUrl} alt={trip.title} />
               <div className='tripDetailsDiv'>
                 <div className='tripTitleDiv'>{trip.title}</div>
                 <div className='tripDatesDiv'>{tripUtils.getTripDateRange(trip.locations)}</div>

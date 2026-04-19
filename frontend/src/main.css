@@ -450,6 +450,11 @@ a {
   padding: 5px;
 }
 
+.backgroundImgPreview {
+  width: 200px;
+  margin-top: 10px;
+}
+
 .travellerRow {
   align-items: center;
   gap: 10px;
