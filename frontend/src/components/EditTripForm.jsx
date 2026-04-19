@@ -92,6 +92,7 @@ const EditTripForm = () => {
       formData.append('image', file)
       const response = await uploadService.upload(formData)
       setImageUrl(response.url)
+      event.target.value = null
 
     } catch (error) {
       dispatch(showNotification(`Failed to upload file. ${error.response?.data?.error}`, 5000, 'error'))
@@ -125,7 +126,13 @@ const EditTripForm = () => {
               style={{ display: 'none' }}
             />
           </label>
-          {imageUrl && <img src={imageUrl} className='backgroundImgPreview' />}
+          {imageUrl && (
+            <>
+              <img src={imageUrl} className='backgroundImgPreview' />
+              <br></br>
+              <button onClick={() => { setImageUrl('') }} className='cancelButton'>Remove</button>
+            </>
+          )}
         </div>
       </div>
 
