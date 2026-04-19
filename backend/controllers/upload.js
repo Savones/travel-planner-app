@@ -1,8 +1,18 @@
 const upload = require('../utils/cloudinary')
 const uploadRouter = require('express').Router()
 
-uploadRouter.post('/', upload.single('image'), (request, response) => {
-  response.json({ url: request.file.path })
+uploadRouter.post('/', (request, response) => {
+  upload.single('image')(request, response, function (error) {
+    if (error) {
+      return response.status(400).json({ error: error.message })
+    }
+
+    if (!request.file) {
+      return response.status(400).json({ error: 'No file uploaded' })
+    }
+
+    response.json({ url: request.file.path })
+  })
 })
 
 module.exports = uploadRouter

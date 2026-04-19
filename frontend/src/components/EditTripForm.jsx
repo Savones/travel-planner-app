@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { editTrip } from '../reducers/tripReducer'
 import { useSelector } from 'react-redux'
 import { showNotification } from '../reducers/notificationReducer'
-import axios from 'axios'
+import uploadService from '../services/upload'
 
 const EditTripForm = () => {
   const { id } = useParams()
@@ -90,12 +90,11 @@ const EditTripForm = () => {
       const file = event.target.files[0]
       const formData = new FormData()
       formData.append('image', file)
-      const response = await axios.post('/api/upload', formData)
-      console.log(response.data)
-      setImageUrl(response.data.url)
+      const response = await uploadService.upload(formData)
+      setImageUrl(response.url)
 
     } catch (error) {
-      console.error('upload error:', error)
+      dispatch(showNotification(`Failed to upload file. ${error.response?.data?.error}`, 5000, 'error'))
     }
   }
 
