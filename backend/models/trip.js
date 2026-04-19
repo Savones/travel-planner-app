@@ -23,6 +23,7 @@ const tripSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  imageUrl: String,
   locations: [locationSchema],
   budget: {
     amount: Number,

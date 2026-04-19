@@ -7,6 +7,7 @@ const tripsRouter = require('./controllers/trips')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const locationsRouter = require('./controllers/locations')
+const uploadRouter = require('./controllers/upload')
 
 const app = express()
 app.use(cors())
@@ -20,6 +21,7 @@ app.use('/api/trips', tripsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/locations', locationsRouter)
+app.use('/api/upload', uploadRouter)
 
 const path = require('path')
 

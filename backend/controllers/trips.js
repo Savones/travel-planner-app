@@ -87,6 +87,7 @@ tripsRouter.put('/:id', async (request, response) => {
   }
 
   if (body.title !== undefined) trip.title = body.title
+  if (body.imageUrl !== undefined) trip.imageUrl = body.imageUrl
   if (body.locations !== undefined) trip.locations = body.locations
 
   if (body.budget !== undefined) {
