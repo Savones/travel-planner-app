@@ -101,6 +101,7 @@ const EditTripForm = () => {
 
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
+      <h2>Edit trip details</h2>
       <div className='editOuterSection'>
         <div className='editSection'>
           <div className='editRow'>
@@ -174,6 +175,7 @@ const EditTripForm = () => {
                 </select>
 
                 <button
+                  className='cancelButton'
                   type="button"
                   onClick={() => handleRemoveTraveller(u.user.id)}
                 >
@@ -210,7 +212,7 @@ const EditTripForm = () => {
 
       <div className='editRow'>
         <button type="submit">Save</button>
-        <button onClick={cancel}>Cancel</button>
+        <button className='cancelButton' onClick={cancel}>Cancel</button>
       </div>
     </form>
   )

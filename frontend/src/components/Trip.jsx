@@ -3,13 +3,13 @@ import TripSummary from './TripSummary'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTrip } from '../reducers/tripReducer'
 import { showNotification } from '../reducers/notificationReducer'
+import { FaFileDownload, FaEdit, FaTrashAlt, FaPlusSquare } from "react-icons/fa"
+
 import { useRef } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
 const Trip = () => {
-  const image = '/images/nz.jpg'
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const tripRef = useRef()
@@ -101,19 +101,29 @@ const Trip = () => {
     <div className='tripPageDiv'>
       <div ref={tripRef}>
         <div className="tripHeading">
-          <img src={trip.imageUrl} alt={trip.title} />
+          {trip.imageUrl && <img src={trip.imageUrl} alt={trip.title} />}
           <div className="tripOverlay">
             <h1>{trip.title}</h1>
             <div className="tripButtons">
               {(role === 'owner' || role === 'editor') && (
-                <button onClick={editTrip}>Edit</button>
+                <button onClick={editTrip}>
+                  <FaEdit />
+                  <span>Edit</span>
+                </button>
               )}
+
+              <button onClick={handleDownload}>
+                <FaFileDownload />
+                <span>Download</span>
+              </button>
 
               {role === 'owner' && (
-                <button onClick={handleDeleteTrip}>Delete</button>
+                <button onClick={handleDeleteTrip}>
+                  <FaTrashAlt />
+                  <span>Delete</span>
+                </button>
               )}
 
-              <button onClick={handleDownload}>Download</button>
             </div>
           </div>
         </div>
@@ -126,11 +136,13 @@ const Trip = () => {
               {(role === 'owner' || role === 'editor') && (
                 <div className='editRow'>
                   <button onClick={handleAddLocation}>
-                    Add location
+                    <FaPlusSquare />
+                    <span>Add location</span>
                   </button>
 
                   {trip.locations?.length !== 0 && (
                     <button onClick={editLocations}>
+                      <FaEdit />
                       Edit locations
                     </button>
                   )}

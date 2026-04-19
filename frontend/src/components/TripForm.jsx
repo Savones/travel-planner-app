@@ -46,8 +46,8 @@ const TripForm = () => {
 
   return (
     <div className='editOuterSection'>
-      <h2>Create a trip</h2>
-      <form onSubmit={handleSubmit}>
+      <h2>Create a new trip</h2>
+      <form>
         <div className='editSection'>
           <div className='editRow'>
             <label>Title</label>
@@ -55,8 +55,8 @@ const TripForm = () => {
           </div>
         </div>
         <div className='editRow'>
-          <input type='submit' value='Create' />
-          <input type='button' value='Cancel' onClick={handleCancellation} />
+          <button onClick={handleSubmit}>Create</button>
+          <button onClick={handleCancellation} className='cancelButton'>Cancel</button>
         </div>
       </form>
     </div>

@@ -4,14 +4,6 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useField } from '../hooks'
 
-const images = [
-  '/images/fuji.jpg',
-  '/images/japan.jpg',
-  '/images/norway.jpg',
-  '/images/paris.jpg',
-  '/images/nz.jpg'
-]
-
 const TripList = () => {
   const user = useSelector(state => state.user)
   const trips = useSelector(state => state.trips)
@@ -143,7 +135,7 @@ const TripList = () => {
         {searched.map((trip, index) => (
           <Link key={trip.id} to={`/trips/${trip.id}`}>
             <div className='tripBannerDiv'>
-              <img src={trip.imageUrl} alt={trip.title} />
+              {trip.imageUrl && <img src={trip.imageUrl} alt={trip.title} />}
               <div className='tripDetailsDiv'>
                 <div className='tripTitleDiv'>{trip.title}</div>
                 <div className='tripDatesDiv'>{tripUtils.getTripDateRange(trip.locations)}</div>

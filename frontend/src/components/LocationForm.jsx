@@ -119,8 +119,8 @@ const LocationForm = () => {
 
   return (
     <div className='editOuterSection'>
-      <h3>Add new location</h3>
-      <form onSubmit={handleSubmit}>
+      <h2>Add a new location</h2>
+      <form>
         <div className='editSection'>
           <LocationDropdown
             selectedCountry={selectedCountry}
@@ -160,8 +160,8 @@ const LocationForm = () => {
           </div>
         </div>
         <div className='editRow'>
-          <input type='submit' value='Add' />
-          <input type='button' value='Cancel' onClick={handleCancel} />
+          <button onClick={handleSubmit}>Add</button>
+          <button className='cancelButton' onClick={handleCancel}>Cancel</button>
         </div>
       </form>
     </div>

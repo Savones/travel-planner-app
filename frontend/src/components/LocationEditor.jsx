@@ -88,24 +88,24 @@ const LocationEditor = () => {
       )
     }
 
-    const confirmation = window.confirm(`Delete location "${location.city}"?`)
+    const confirmation = window.confirm(`Remove location "${location.city}"?`)
     if (!confirmation) {
       return
     }
 
     try {
       await dispatch(editTrip(updatedTrip))
-      dispatch(showNotification(`Deleted location "${location.city}" successfully`, 5000, 'success'))
+      dispatch(showNotification(`Removed location "${location.city}" successfully`, 5000, 'success'))
       navigate(`/trips/${trip.id}`)
     } catch (error) {
-      dispatch(showNotification(`Failed to delete "${location.city}."`, 5000, 'error'))
+      dispatch(showNotification(`Failed to remove "${location.city}."`, 5000, 'error'))
     }
   }
 
   return (
     <form className='editTripForm' onSubmit={handleSubmit}>
       <div className='editOuterSection'>
-        <h3>Locations</h3>
+        <h2>Edit locations</h2>
 
         {locations.map((location, locationIndex) => (
           <div className='editSection' key={location.id}>
@@ -192,8 +192,8 @@ const LocationEditor = () => {
             </div>
 
             <div className='editRow'>
-              <button type='button' onClick={() => handleDeleteLocation(location)}>
-                Delete location
+              <button className='cancelButton' type='button' onClick={() => handleDeleteLocation(location)}>
+                Remove
               </button>
             </div>
           </div>
@@ -202,7 +202,7 @@ const LocationEditor = () => {
 
       <div className='editRow'>
         <button type="submit">Save</button>
-        <button type="button" onClick={() => navigate(`/trips/${trip.id}`)}>
+        <button className='cancelButton' type="button" onClick={() => navigate(`/trips/${trip.id}`)}>
           Cancel
         </button>
       </div>

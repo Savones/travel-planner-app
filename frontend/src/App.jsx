@@ -51,7 +51,7 @@ const App = () => {
     <Router>
       <>
         <div className='menuButtonsDiv'>
-          <div className='headerLogo'>Travel planner</div>
+          <div className='headerLogo'>Travel planner &#9992;</div>
           {user && <Menu handleLogout={handleLogout} />}
         </div>
         <Notification />

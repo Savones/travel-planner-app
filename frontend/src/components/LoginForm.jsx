@@ -56,7 +56,7 @@ const LoginForm = () => {
         </div>
         <div className='editRow'>
           <button type="submit">Login</button>
-          <button onClick={changeView}>Sign up</button>
+          <button className='cancelButton' onClick={changeView}>Sign up</button>
         </div>
       </form>
     </div>

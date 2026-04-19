@@ -1,13 +1,7 @@
-/* UNIVERSAL */
-/*
-label {
-  margin-right: 10px;
-}
-  */
-
 input,
 select,
-button {
+button,
+.fileUpload {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 16px;
   padding: 3px 6px;
@@ -26,9 +20,25 @@ body {
   margin: 0;
 }
 
-button {
+button,
+.fileUpload {
   cursor: pointer;
   background-color: #ABD2FA;
+}
+
+button:hover,
+.fileUpload:hover,
+input:hover,
+select:hover {
+  background-color: #abd2faab;
+}
+
+.cancelButton {
+  background-color: #f5f5f5;
+}
+
+.cancelButton:hover {
+  background-color: #fefefe;
 }
 
 #root {
@@ -97,22 +107,17 @@ a {
   gap: 4px;
   border-radius: 0 0 12px 12px;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(2px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: #ffffffbf;
 }
 
 .tripTitleDiv {
   font-size: 20px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  color: black;
 }
 
 .tripDatesDiv {
   font-size: 14px;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  color: #222;
 }
 
 .tripFiltersDiv {
@@ -168,7 +173,6 @@ a {
 
 .searchBar input:focus {
   outline: none;
-  border-color: #F3CFC6;
   box-shadow: 0 0 0 2px rgba(243, 207, 198, 0.3);
 }
 
@@ -214,16 +218,19 @@ a {
 }
 
 .tripButtons button {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   padding: 6px 12px;
-  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  background-color: #fff;
+  border: none;
 }
 
+
 .tripButtons button:hover {
-  background: white;
+  background-color: #abd2faab;
 }
 
 .tripContent {
@@ -450,6 +457,15 @@ a {
   padding: 5px;
 }
 
+.editRow button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
 .backgroundImgPreview {
   width: 200px;
   margin-top: 10px;
@@ -503,8 +519,9 @@ a {
   height: 50px;
   position: sticky;
   top: 0;
-  background-color: #abd2fac2;
+  background-color: #fff;
   z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 .menuButtonsDiv div {
@@ -520,12 +537,12 @@ a {
   color: black;
   padding: 3px 10px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #abd2fa5e;
 }
 
 .menuButtonsDiv button {
   margin: 0px 3px 0px 3px;
-  background-color: #fff;
+  background-color: #abd2fa5e;
   border: none;
   font-size: 18px;
   padding: 3px 10px;
@@ -533,7 +550,12 @@ a {
 }
 
 .menuButtonsDiv a.activeButton {
-  background-color: #eee;
+  background-color: #ABD2FA;
+}
+
+.menuButtonsDiv a:hover,
+.menuButtonsDiv button:hover {
+  background-color: #abd2faab;
 }
 
 /* LOGIN */
