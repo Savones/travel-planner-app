@@ -485,6 +485,8 @@ a {
 .backgroundImgPreview {
   width: 200px;
   margin-top: 10px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .travellerRow {
