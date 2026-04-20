@@ -9,7 +9,7 @@
  Field         | Type     | Required 
 --------------|----------|----------
  _id          | ObjectId | Yes      
- username     | String   | Yes      
+ username     | String   | Yes (unique)     
  passwordHash | String   | Yes      
 
 ## Trips table
@@ -19,17 +19,31 @@
  _id        | ObjectId | Yes      
  title      | String   | Yes      
  user       | ObjectId | Yes      
- locations  | Array    | No       
+ locations  | Array    | No      
+ imageUrl  | String    | No 
+ budget  | Object (amount, currency)    | No 
+ users  | Array (user, role)    | No 
 
 ## Location array (in trips table)
 
  Field     | Type     | Required 
 ----------|----------|----------
  _id      | ObjectId | Yes      
- location | String   | Yes      
- startDate| Date     | No      
- endDate  | Date     | No      
- accommodation | String     | No  
- sights | Array     | No
+country | String   | No   
+city | String   | No
+notes | String   | No
+country | String   | No   
+accommodation | String   | No  
+startDate | Date   | No   
+endDate | Date   | No   
+backgroundColor | String   | No (default: #ffffff)
+
+
+ ## Budget object
+
+ Field      | Type     | Required 
+------------|----------|----------
+ amount        | Number | No      
+ currency        | String | No (default: EUR)     
 
  Only location (and id) required. Other information can be added later.  
