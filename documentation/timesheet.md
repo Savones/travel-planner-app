@@ -45,4 +45,11 @@
 | 16.4. | 2    | Protected routes meant for logged in users and fixed related bugs | 
 | 16.4. | 2    | Added notification types and removed editors ability to edit user roles | 
 | 16.4. | 1    | Added accommodation field to locations | 
-| sum | 87    |  |
+| 17.4. | 3    | Tested trip and trip form components | 
+| 17.4. | 2    | Refactored edit component and added ui improvements | 
+| 19.4. | 2    | Added image uploading functionality | 
+| 19.4. | 1    | Fixed pdf downloading | 
+| 20.4. | 1    | Added error handling to image uploading | 
+| 21.4. | 1    | Added documentation | 
+| 22.4. | 1    | Finished documentation and fixed user bug |
+| sum | 98    |  |
