@@ -47,7 +47,7 @@ test('does not submit if title is empty', async () => {
   const user = userEvent.setup()
   renderForm()
 
-  const button = screen.getByDisplayValue('Create')
+  const button = screen.getByText('Create')
   await user.click(button)
 
   expect(addNewTripMock).not.toHaveBeenCalled()
@@ -58,7 +58,7 @@ test('does not submit if title is too long', async () => {
   renderForm()
 
   const input = screen.getByRole('textbox')
-  const button = screen.getByDisplayValue('Create')
+  const button = screen.getByText('Create')
 
   await user.type(input, 'This is a very very very very long title')
   await user.click(button)
@@ -71,7 +71,7 @@ test('submits with valid title', async () => {
   renderForm()
 
   const input = screen.getByRole('textbox')
-  const button = screen.getByDisplayValue('Create')
+  const button = screen.getByText('Create')
 
   await user.type(input, 'New Trip')
   await user.click(button)
@@ -97,7 +97,7 @@ test('clicking cancel navigates to home', async () => {
   const user = userEvent.setup()
   renderForm()
 
-  const cancelButton = screen.getByDisplayValue('Cancel')
+  const cancelButton = screen.getByText('Cancel')
   await user.click(cancelButton)
 
   expect(navigateMock).toHaveBeenCalledWith('/')
