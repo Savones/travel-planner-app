@@ -9,6 +9,7 @@ Find instruction manual [here](https://github.com/Savones/travel-planner-app/blo
 ## Documentation
 
 - [Timesheet](https://github.com/Savones/travel-planner-app/blob/main/documentation/timesheet.md)
+- [Functionalities](https://github.com/Savones/travel-planner-app/blob/main/documentation/functionalities.md)
 - [Database planning](https://github.com/Savones/travel-planner-app/blob/main/documentation/database.md)
 
 ## Use of AI
