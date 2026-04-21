@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import userService from '../services/users'
 import { showNotification } from '../reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
+import { createNewUser } from '../reducers/usersReducer'
 
 const SignUpForm = () => {
   const navigate = useNavigate()
@@ -28,11 +29,12 @@ const SignUpForm = () => {
     }
 
     try {
-      await userService.create({
+      const createdUser = {
         username: username.value,
         password: password.value
-      })
+      }
 
+      const returnedUser = await dispatch(createNewUser(createdUser))
       dispatch(showNotification(`Created user "${username.value}"`, 5000, 'success'))
       navigate('/login')
 
